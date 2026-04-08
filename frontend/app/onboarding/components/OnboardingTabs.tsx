@@ -379,9 +379,27 @@ export const ChecklistTab = () => {
                          <span style={{ fontSize: '13px', color: '#A3AED0' }}>입사 3주차 (Onboarding)</span>
                       </div>
                    </div>
-                   <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '12px', color: '#A3AED0', fontWeight: 600, marginBottom: '4px' }}>CURRENT STATUS</div>
-                      <div style={{ padding: '6px 16px', borderRadius: '10px', background: members.find(m => m.id === activeMember)?.progress > 80 ? '#05CD99' : '#FFB800', color: '#fff', fontSize: '13px', fontWeight: 700 }}>
+                   <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center' }}>
+                      <div style={{ fontSize: '11px', color: '#A3AED0', fontWeight: 700, marginBottom: '6px', letterSpacing: '0.5px' }}>CURRENT STATUS</div>
+                      <div style={{ 
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '32px',
+                        minWidth: '100px',
+                        padding: '0 16px', 
+                        borderRadius: '32px', 
+                        background: members.find(m => m.id === activeMember)?.progress > 80 
+                          ? 'linear-gradient(135deg, #05CD99 0%, #04b386 100%)' 
+                          : 'linear-gradient(135deg, #FFB800 0%, #e6a600 100%)', 
+                        color: '#fff', 
+                        fontSize: '12px', 
+                        fontWeight: 800,
+                        boxShadow: members.find(m => m.id === activeMember)?.progress > 80 
+                          ? '0 4px 12px rgba(5, 205, 153, 0.2)' 
+                          : '0 4px 12px rgba(255, 184, 0, 0.2)',
+                        letterSpacing: '-0.2px'
+                      }}>
                         {members.find(m => m.id === activeMember)?.progress > 80 ? '임무 완수' : '진행 중'}
                       </div>
                    </div>
@@ -769,7 +787,20 @@ export const GrowthTab = () => {
         /* Conference Tab Layout - Grid 2 Column (List 7 : Chat 3) */
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: '24px', animation: 'fadeIn 0.4s ease' }}>
           {/* Left: Conference Cards */}
-          <div className={styles.glassCard} style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className={styles.glassCard} style={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+            {/* Loading Overlay */}
+            {(fetchLoading || syncLoading || loading) && (
+              <div className={styles.loadingOverlay}>
+                <div className={styles.spinnerContainer}>
+                  <div className={styles.brandSpinner}></div>
+                  <div className={styles.loadingText}>
+                    {syncLoading ? 'AI 실시간 검색 및 분석 중...' : '컨퍼런스 데이터를 가져오는 중...'}
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#a3aed0' }}>잠시만 기다려 주세요. 최신 정보를 수집하고 있습니다.</div>
+                </div>
+              </div>
+            )}
+
             <div className={styles.growthSubHeader}>
               <h4 style={{ margin: 0, color: '#1B2559' }}>글로벌/국내 컨퍼런스 (AI Search)</h4>
               <div style={{ display: 'flex', gap: '8px' }}>
@@ -957,7 +988,6 @@ export const GrowthTab = () => {
                 </div>
               )}
 
-              {loading && <div style={{ textAlign: 'center', padding: '20px', color: '#4318FF' }}>데이터 분석 및 로딩 중...</div>}
             </div>
           </div>
 
