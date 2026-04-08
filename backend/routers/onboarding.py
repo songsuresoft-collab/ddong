@@ -36,10 +36,17 @@ class EducationItem(BaseModel):
     tag: str
 
 @router.get("/onboarding/guide")
-async def get_onboarding_guide(force: bool = False):
-    """온보딩 가이드 정보를 NotebookLM에서 가져옵니다."""
+async def get_onboarding_guide(question: str = Query(None), force: bool = False):
+    """온보딩 가이드 정보를 NotebookLM에서 가져옵니다. 질문이 있으면 질문에 답합니다."""
     cache_key = "onboarding_guide"
-    prompt = "신입 사원 온보딩에 필요한 핵심 지침과 절차를 상세히 요약해서 제공해줘."
+    
+    # 질문이 없으면 기본 요약 프롬프트, 질문이 있으면 해당 질문 사용
+    if question:
+        prompt = question
+        # 질문마다 다른 결과를 위해 캐시 키를 고유화 (질문 내용 포함)
+        cache_key = f"guide_q_{hash(question) % 10000}"
+    else:
+        prompt = "신입 사원 온보딩에 필요한 핵심 지침과 절차를 상세히 요약해서 제공해줘."
     
     result = await query_notebook(
         query=prompt,
@@ -60,6 +67,48 @@ async def get_onboarding_status():
         ],
         "success": True
     }
+
+@router.get("/onboarding/guide/recommendations")
+async def get_guide_recommendations(force: bool = Query(False)):
+    """NotebookLM에서 문서 분석 기반 추천 질문 5가지를 생성합니다."""
+    prompt = "이 문서들을 분석해서 신입 사원이 가장 궁금해할 만한 핵심 질문 5가지를 '질문1, 질문2, 질문3, 질문4, 질문5' 형식으로 아주 짧고 명확하게 제안해줘. 따옴표나 숫자는 빼고 쉼표로만 구분해."
+    
+    try:
+        result = await query_notebook(
+            query=prompt,
+            cache_key="guide_recommendations",
+            notebook_id=ONBOARDING_NOTEBOOK_ID,
+            force=force
+        )
+        if result.get("success"):
+            import re
+            raw_questions = result.get("answer", "")
+            
+            # 1. 인용구 제거 ([1], [1, 2] 등)
+            cleaned = re.sub(r'\[\d+(?:,\s*\d+)*\]', '', raw_questions)
+            
+            # 2. 불필요한 기호(*, ", ', -) 제거 및 줄바꿈을 공백으로 변경
+            cleaned = cleaned.replace("*", "").replace('"', "").replace("'", "").replace("\n", " ").strip()
+            
+            # 3. 쉼표 기준으로 분리
+            questions = [q.strip() for q in cleaned.split(',') if q.strip()]
+            
+            # 4. 만약 쉼표 분리가 잘 안 된 경우 (번호 매기기 등) 추가 처리
+            if len(questions) < 2:
+                # 1. 2. 3. 또는 - 형식으로 분리 시도
+                questions = [q.strip() for q in re.split(r'\d+\.|\-', cleaned) if q.strip()]
+
+            # 상위 5개 선택
+            final_questions = questions[:5]
+            
+            if not final_questions:
+                final_questions = ["SDV실의 주요 업무", "신입 교육 기간", "사내 복지 혜택", "출퇴근 셔틀 이용", "사내 식당 메뉴"]
+                
+            return {"success": True, "recommendations": final_questions}
+    except Exception as e:
+        print(f"[RECO-ERROR] {e}")
+        
+    return {"success": False, "recommendations": ["SDV실의 주요 업무", "신입 교육 기간", "사내 복지 혜택"]}
 
 # ──────────────────────────────────────────────
 # 사내 교육 (Education)

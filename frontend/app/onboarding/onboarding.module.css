@@ -472,3 +472,190 @@ input:checked + .slider:before {
   font-size: 9px;
   opacity: 0.7;
 }
+
+/* My Progress Redesign Styles */
+.summaryCard {
+  background: linear-gradient(135deg, #ffffff 0%, #f4f7fe 100%);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 30px rgba(163, 174, 208, 0.15);
+  margin-bottom: 32px;
+}
+
+.milestoneGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.milestoneCard {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.milestoneCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(163, 174, 208, 0.2);
+  border-color: #4318FF;
+}
+
+.milestoneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.milestoneTitle {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1B2559;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.miniProgressBar {
+  height: 6px;
+  background: #f4f7fe;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.miniProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #4318FF, #707EAE);
+  border-radius: 10px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.checkItemEnhanced {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.checkItemEnhanced:hover {
+  background: rgba(67, 24, 255, 0.04);
+}
+
+.checkItemDoneEnhanced {
+  opacity: 0.6;
+}
+
+.checkedIcon {
+  color: #4318FF;
+  font-size: 22px;
+}
+
+.uncheckedIcon {
+  color: #CBD5E0;
+  font-size: 22px;
+}
+
+/* Dept Status Dashboard Styles */
+.deptDashboard {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.memberSideList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 800px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.memberSideList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.memberSideList::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 10px;
+}
+
+.memberCardEnhanced {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.memberCardEnhanced:hover {
+  border-color: #4318FF;
+  background: #F4F7FE;
+  transform: translateX(4px);
+}
+
+.memberCardActiveEnhanced {
+  background: #ffffff !important;
+  border-color: #4318FF !important;
+  box-shadow: 0 10px 20px rgba(67, 24, 255, 0.1);
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.statWidget {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: #A3AED0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statValue {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1B2559;
+}
+
+.memberDetailTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1B2559;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

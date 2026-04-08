@@ -27,6 +27,32 @@ export const GuideTab = () => {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [recoLoading, setRecoLoading] = useState(false);
+
+  // 추천 질문 가져오기
+  const fetchRecommendations = async (force = false) => {
+    setRecoLoading(true);
+    try {
+      const url = `/api/onboarding/guide/recommendations${force ? '?force=true' : ''}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data.success && data.recommendations) {
+        setRecommendations(data.recommendations);
+      } else {
+        // 폴백
+        setRecommendations(['SDV실의 주요 업무', '신입 교육 기간', '사내 복지 혜택', '출퇴근 셔틀 이용', '사내 식당 메뉴']);
+      }
+    } catch (err) {
+      setRecommendations(['SDV실의 주요 업무', '신입 교육 기간', '사내 복지 혜택', '출퇴근 셔틀 이용', '사내 식당 메뉴']);
+    } finally {
+      setRecoLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchRecommendations();
+  }, []);
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -37,7 +63,7 @@ export const GuideTab = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/onboarding/guide');
+      const res = await fetch(`/api/onboarding/guide?question=${encodeURIComponent(userMsg.content)}`);
       const data = await res.json();
       if (data.success) {
         setMessages(prev => [...prev, { role: 'bot', content: cleanMessage(data.answer) }]);
@@ -66,30 +92,66 @@ export const GuideTab = () => {
             </div>
           )}
         </div>
-        <div style={{ padding: '20px', borderTop: '1px solid rgba(198, 197, 209, 0.2)', display: 'flex', gap: '12px' }}>
-          <input 
-            type="text" 
-            className={styles.searchInput} 
-            style={{ width: '100%', padding: '12px 20px' }} 
-            placeholder="궁금한 내용을 질문해 보세요..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-          />
+        <div style={{ padding: '16px 20px', borderTop: '1px solid rgba(198, 197, 209, 0.1)', background: '#fff', display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <div style={{ position: 'relative', flex: 1 }}>
+            <input 
+              type="text" 
+              className={styles.searchInput} 
+              style={{ width: '100%', padding: '12px 16px', borderRadius: '14px', background: '#F4F7FE', border: 'none' }} 
+              placeholder="궁금한 내용을 질문해 보세요..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+            />
+          </div>
           <button 
             onClick={sendMessage}
-            style={{ padding: '0 24px', background: '#4318FF', color: '#fff', borderRadius: '12px', border: 'none', cursor: 'pointer' }}
+            className={styles.tabButton}
+            style={{ 
+              width: '45px', height: '45px', minWidth: '45px', borderRadius: '12px', 
+              background: '#4318FF', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              border: 'none', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(67, 24, 255, 0.2)'
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
           >
-            전송
+            <span className="material-symbols-outlined" style={{ fontSize: '22px' }}>send</span>
           </button>
         </div>
       </div>
       <div className={styles.glassCard} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <h4 style={{ margin: 0, color: '#1B2559' }}>추천 질문</h4>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h4 style={{ margin: 0, color: '#1B2559' }}>추천 질문</h4>
+          <button 
+            onClick={() => fetchRecommendations(true)}
+            style={{ 
+              background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center',
+              color: recoLoading ? '#a3aed0' : '#4318FF', transition: 'all 0.3s',
+              transform: recoLoading ? 'rotate(180deg)' : 'rotate(0deg)'
+            }}
+            disabled={recoLoading}
+            title="새로운 질문 추천받기"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>refresh</span>
+          </button>
+        </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <button className={styles.tabButton} style={{ width: '100%', justifyContent: 'flex-start' }} onClick={() => setInput('SDV시스템실의 주요 업무는 무엇인가요?')}>SDV실의 주요 업무</button>
-          <button className={styles.tabButton} style={{ width: '100%', justifyContent: 'flex-start' }} onClick={() => setInput('신입 사원 교육 기간은 어떻게 되나요?')}>신입 교육 기간</button>
-          <button className={styles.tabButton} style={{ width: '100%', justifyContent: 'flex-start' }} onClick={() => setInput('사내 복지 혜택에 대해 알려줘.')}>사내 복지 혜택</button>
+          {recoLoading ? (
+            <div style={{ fontSize: '12px', color: '#a3aed0', textAlign: 'center', padding: '10px' }}>질문 생성 중...</div>
+          ) : recommendations.length > 0 ? (
+            recommendations.map((q, i) => (
+              <button 
+                key={i} 
+                className={styles.tabButton} 
+                style={{ width: '100%', justifyContent: 'flex-start', textAlign: 'left', lineHeight: '1.4' }} 
+                onClick={() => setInput(q)}
+              >
+                {q}
+              </button>
+            ))
+          ) : (
+            <div style={{ fontSize: '12px', color: '#a3aed0', textAlign: 'center' }}>추천 질문이 없습니다.</div>
+          )}
         </div>
         <div style={{ marginTop: 'auto', padding: '16px', background: '#f4f7fe', borderRadius: '16px', fontSize: '13px', color: '#767680' }}>
           <span className="material-symbols-outlined" style={{ fontSize: '18px', verticalAlign: 'middle', marginRight: '8px' }}>info</span>
@@ -159,158 +221,262 @@ export const ChecklistTab = () => {
       </div>
 
       {subTab === 'my' ? (
-        /* My Onboarding View */
-        <div className={styles.glassCard} style={{ animation: 'fadeIn 0.4s ease' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
-            <div>
-              <h3 style={{ margin: 0, color: '#1B2559' }}>My Onboarding Progress</h3>
-              <p style={{ margin: '4px 0 0', color: '#a3aed0', fontSize: '14px' }}>필수 소프트웨어와 계정 설정을 완료해 주세요.</p>
+        /* My Onboarding View (Redesigned) */
+        <div style={{ animation: 'fadeIn 0.5s ease' }}>
+          {/* 1. Summary Card */}
+          <div className={styles.summaryCard}>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#4318FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span className="material-symbols-outlined" style={{ color: '#fff', fontSize: '24px' }}>stars</span>
+                </div>
+                <h3 style={{ margin: 0, color: '#1B2559', fontSize: '24px', fontWeight: 800 }}>Onboarding Journey</h3>
+              </div>
+              <p style={{ margin: 0, color: '#767680', fontSize: '15px' }}>
+                {progressPercent === 100 ? (
+                  <>
+                    <span style={{ color: '#05CD99', fontWeight: 700 }}>축하합니다!</span> 모든 온보딩 과정을 완벽하게 마치셨습니다. 🎉
+                  </>
+                ) : (
+                  <>
+                    현재 <span style={{ color: '#4318FF', fontWeight: 700 }}>{doneCount}개</span> 항목을 완료했습니다. 
+                    남은 <span style={{ fontWeight: 700 }}>{totalCount - doneCount}개</span> 과제도 힘내세요!
+                  </>
+                )}
+              </p>
+              <div style={{ marginTop: '20px', display: 'flex', gap: '32px' }}>
+                <div>
+                  <div style={{ fontSize: '12px', color: '#a3aed0', fontWeight: 600, textTransform: 'uppercase', marginBottom: '4px' }}>Total Progress</div>
+                  <div style={{ fontSize: '20px', fontWeight: 800, color: '#1B2559' }}>{progressPercent}%</div>
+                </div>
+                <div style={{ width: '1px', background: '#E2E8F0' }}></div>
+                <div>
+                  <div style={{ fontSize: '12px', color: '#a3aed0', fontWeight: 600, textTransform: 'uppercase', marginBottom: '4px' }}>Remaining Tasks</div>
+                  <div style={{ fontSize: '20px', fontWeight: 800, color: '#4318FF' }}>{totalCount - doneCount}</div>
+                </div>
+              </div>
             </div>
-            <div className={styles.progressRingContainer}>
-              <svg width="120" height="120">
-                <circle cx="60" cy="60" r="50" fill="none" stroke="#f4f7fe" strokeWidth="10" />
-                <circle cx="60" cy="60" r="50" fill="none" stroke="#4318FF" strokeWidth="10" 
-                  strokeDasharray="314.159" strokeDashoffset={314.159 * (1 - progressPercent / 100)} strokeLinecap="round" transform="rotate(-90 60 60)" />
+
+            <div className={styles.progressRingContainer} style={{ width: '140px', height: '140px' }}>
+              <svg width="140" height="140">
+                <defs>
+                  <linearGradient id="progGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#4318FF"  />
+                    <stop offset="100%" stopColor="#707EAE" />
+                  </linearGradient>
+                </defs>
+                <circle cx="70" cy="70" r="60" fill="none" stroke="#f4f7fe" strokeWidth="12" />
+                <circle cx="70" cy="70" r="60" fill="none" stroke="url(#progGradient)" strokeWidth="12" 
+                  strokeDasharray="376.99" strokeDashoffset={376.99 * (1 - progressPercent / 100)} 
+                  strokeLinecap="round" transform="rotate(-90 70 70)" style={{ transition: 'stroke-dashoffset 0.8s ease' }} />
               </svg>
-              <span className={styles.progressText}>{progressPercent}%</span>
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center' }}>
+                <span style={{ fontSize: '24px', fontWeight: 900, color: '#1B2559' }}>{progressPercent}%</span>
+              </div>
             </div>
           </div>
 
-          <div className={styles.growthGrid} style={{ gap: '40px' }}>
-            {/* 필수 프로그램 설치 */}
-            <div className={styles.categoryGroup}>
-              <div className={styles.categoryHeader}>
-                <span className="material-symbols-outlined" style={{ color: '#4318FF' }}>verified_user</span>
-                필수 프로그램 설치
-              </div>
-              {myItems.filter(item => item.category === '필수 프로그램 설치').map(item => (
-                <div 
-                  key={item.id} 
-                  className={`${styles.checkItem} ${item.done ? styles.checkItemDone : ''}`}
-                  onClick={() => toggleItem(item.id)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <span className="material-symbols-outlined" style={{ color: item.done ? '#4318FF' : '#cbd5e0' }}>
-                    {item.done ? 'check_box' : 'check_box_outline_blank'}
-                  </span>
-                  <span>{item.label}</span>
+          {/* 2. Milestone Grid */}
+          <div className={styles.milestoneGrid}>
+            {Array.from(new Set(myItems.map(item => item.category))).map(category => {
+              const categoryItems = myItems.filter(item => item.category === category);
+              const categoryDone = categoryItems.filter(i => i.done).length;
+              const categoryTotal = categoryItems.length;
+              const categoryProgress = Math.round((categoryDone / categoryTotal) * 100);
+              const isAllDone = categoryDone === categoryTotal;
+
+              return (
+                <div key={category} className={styles.milestoneCard} style={{ borderColor: isAllDone ? '#4318FF' : undefined }}>
+                  <div className={styles.milestoneHeader}>
+                    <div className={styles.milestoneTitle}>
+                      <span className="material-symbols-outlined" style={{ color: isAllDone ? '#05CD99' : '#4318FF', fontSize: '20px' }}>
+                        {isAllDone ? 'check_circle' : category === '필수 프로그램 설치' ? 'verified_user' : category === '보조 프로그램 설치' ? 'extension' : 'signature'}
+                      </span>
+                      {category}
+                    </div>
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: isAllDone ? '#05CD99' : '#4318FF' }}>{categoryProgress}%</span>
+                  </div>
+                  
+                  <div className={styles.miniProgressBar}>
+                    <div className={styles.miniProgressFill} style={{ width: `${categoryProgress}%`, background: isAllDone ? '#05CD99' : undefined }}></div>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '8px' }}>
+                    {categoryItems.map(item => (
+                      <div 
+                        key={item.id} 
+                        className={`${styles.checkItemEnhanced} ${item.done ? styles.checkItemDoneEnhanced : ''}`}
+                        onClick={() => toggleItem(item.id)}
+                      >
+                        <span className={`material-symbols-outlined ${item.done ? styles.checkedIcon : styles.uncheckedIcon}`}>
+                          {item.done ? 'check_circle' : 'circle'}
+                        </span>
+                        <span style={{ fontSize: '14px', fontWeight: 500, color: '#2B3674' }}>{item.label}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
-
-            {/* 보조 프로그램 및 기타 */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-               <div className={styles.categoryGroup}>
-                 <div className={styles.categoryHeader}>
-                   <span className="material-symbols-outlined" style={{ color: '#4318FF' }}>extension</span>
-                   보조 프로그램 설치
-                 </div>
-                 {myItems.filter(item => item.category === '보조 프로그램 설치').map(item => (
-                   <div 
-                     key={item.id} 
-                     className={`${styles.checkItem} ${item.done ? styles.checkItemDone : ''}`}
-                     onClick={() => toggleItem(item.id)}
-                     style={{ cursor: 'pointer' }}
-                   >
-                     <span className="material-symbols-outlined" style={{ color: item.done ? '#4318FF' : '#cbd5e0' }}>
-                       {item.done ? 'check_box' : 'check_box_outline_blank'}
-                     </span>
-                     <span>{item.label}</span>
-                   </div>
-                 ))}
-               </div>
-
-               <div className={styles.categoryGroup}>
-                 <div className={styles.categoryHeader}>
-                   <span className="material-symbols-outlined" style={{ color: '#4318FF' }}>signature</span>
-                   메일 서명
-                 </div>
-                 {myItems.filter(item => item.category === '메일 서명').map(item => (
-                   <div 
-                     key={item.id} 
-                     className={`${styles.checkItem} ${item.done ? styles.checkItemDone : ''}`}
-                     onClick={() => toggleItem(item.id)}
-                     style={{ cursor: 'pointer' }}
-                   >
-                     <span className="material-symbols-outlined" style={{ color: item.done ? '#4318FF' : '#cbd5e0' }}>
-                       {item.done ? 'check_box' : 'check_box_outline_blank'}
-                     </span>
-                     <span>{item.label}</span>
-                   </div>
-                 ))}
-               </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       ) : (
-        /* Dept Status View */
-        <div className={styles.checklistGrid} style={{ animation: 'fadeIn 0.4s ease' }}>
-          <div className={styles.glassCard} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <h4 style={{ margin: '0 0 16px', color: '#1B2559' }}>팀원 리스트</h4>
+        /* 1. Dept Status View */
+        <div className={styles.deptDashboard} style={{ animation: 'fadeIn 0.5s ease' }}>
+          {/* Left: Member Sidebar */}
+          <div className={styles.memberSideList}>
+            <div style={{ padding: '0 4px 12px', borderBottom: '1px solid #eee', marginBottom: '8px' }}>
+              <h4 style={{ margin: 0, color: '#1B2559', fontSize: '16px', fontWeight: 800 }}>Team Members</h4>
+              <p style={{ margin: '4px 0 0', color: '#A3AED0', fontSize: '12px' }}>총 {members.length}명의 부서원</p>
+            </div>
             {members.map(member => (
               <div 
                 key={member.id} 
-                className={`${styles.memberCard} ${activeMember === member.id ? styles.memberCardActive : ''}`}
+                className={`${styles.memberCardEnhanced} ${activeMember === member.id ? styles.memberCardActiveEnhanced : ''}`}
                 onClick={() => setActiveMember(member.id)}
               >
-                <div className={styles.avatar} style={{ background: '#4318FF', color: '#fff' }}>{member.name[0]}</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 700, color: '#1B2559' }}>{member.name}</div>
-                  <div style={{ fontSize: '12px', color: '#a3aed0' }}>{member.team}</div>
+                <div className={styles.avatar} style={{ 
+                  background: activeMember === member.id ? '#4318FF' : '#F4F7FE', 
+                  color: activeMember === member.id ? '#fff' : '#4318FF',
+                  fontWeight: 800
+                }}>
+                  {member.name[0]}
                 </div>
-                <div style={{ fontWeight: 800 }}>{member.progress}%</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 700, color: '#1B2559', fontSize: '14px' }}>{member.name}</div>
+                  <div style={{ fontSize: '11px', color: '#A3AED0' }}>{member.team}</div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#1B2559' }}>{member.progress}%</div>
+                  <div style={{ width: '40px', height: '4px', background: '#F4F7FE', borderRadius: '2px', marginTop: '4px', overflow: 'hidden' }}>
+                    <div style={{ width: `${member.progress}%`, height: '100%', background: '#4318FF' }}></div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className={styles.glassCard}>
-            <h4 style={{ margin: '0 0 24px', color: '#1B2559' }}>선택된 팀원 상세 진행 상황</h4>
+          {/* Right: Analysis Dashboard */}
+          <div style={{ minHeight: '600px', flex: 1 }}>
             {activeMember ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '20px', background: '#f4f7fe', borderRadius: '16px' }}>
-                    <div className={styles.avatar} style={{ width: '50px', height: '50px', fontSize: '20px', background: '#4318FF', color: '#fff' }}>
-                      {members.find(m => m.id === activeMember)?.name[0]}
-                    </div>
-                    <div>
-                       <div style={{ fontSize: '18px', fontWeight: 800, color: '#1B2559' }}>{members.find(m => m.id === activeMember)?.name}</div>
-                       <div style={{ color: '#767680', fontSize: '13px' }}>{members.find(m => m.id === activeMember)?.team}</div>
-                    </div>
-                 </div>
-                 
-                 <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                       <span style={{ fontSize: '14px', fontWeight: 600 }}>전체 진행률</span>
-                       <span style={{ fontSize: '14px', fontWeight: 800, color: '#4318FF' }}>{members.find(m => m.id === activeMember)?.progress}%</span>
-                    </div>
-                    <div style={{ height: '8px', background: '#f4f7fe', borderRadius: '4px' }}>
-                       <div style={{ height: '100%', width: `${members.find(m => m.id === activeMember)?.progress}%`, background: '#4318FF', borderRadius: '4px' }}></div>
-                    </div>
-                 </div>
+              <div style={{ animation: 'fadeIn 0.4s ease' }}>
+                <div className={styles.memberDetailTitle}>
+                   <span className="material-symbols-outlined" style={{ color: '#4318FF' }}>analytics</span>
+                   Member Onboarding Analytics
+                </div>
 
-                 {/* 팀원 상세 리스트 */}
-                 <div style={{ marginTop: '10px' }}>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#1B2559', marginBottom: '12px' }}>항목별 세부 현황</div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                       {[
-                          { label: '필수 프로그램 설치', status: members.find(m => m.id === activeMember)?.progress > 30 ? '완료' : '진행 중' },
-                          { label: '보조 프로그램 설치', status: members.find(m => m.id === activeMember)?.progress > 60 ? '완료' : '진행 중' },
-                          { label: '메일 서명 설정', status: members.find(m => m.id === activeMember)?.progress > 90 ? '완료' : '미완료' },
-                          { label: '사내 보안 교육 이수', status: members.find(m => m.id === activeMember)?.progress > 80 ? '완료' : '진행 중' },
-                       ].map((task, i) => (
-                          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 14px', background: '#fafbff', borderRadius: '10px', fontSize: '13px' }}>
-                             <span style={{ color: '#2D3748' }}>{task.label}</span>
-                             <span style={{ fontWeight: 700, color: task.status === '완료' ? '#27AE60' : '#FFB800' }}>
-                                {task.status}
-                             </span>
-                          </div>
-                       ))}
+                {/* Profile Header Widget */}
+                <div className={styles.glassCard} style={{ marginBottom: '24px', padding: '24px', display: 'flex', alignItems: 'center', gap: '24px', background: 'linear-gradient(135deg, #ffffff 0%, #f4f7fe 100%)' }}>
+                   <div className={styles.avatar} style={{ width: '80px', height: '80px', fontSize: '32px', background: '#4318FF', color: '#fff', boxShadow: '0 10px 20px rgba(67, 24, 255, 0.2)' }}>
+                     {members.find(m => m.id === activeMember)?.name[0]}
+                   </div>
+                   <div style={{ flex: 1 }}>
+                      <div style={{ fontSize: '24px', fontWeight: 900, color: '#1B2559', marginBottom: '4px' }}>{members.find(m => m.id === activeMember)?.name}</div>
+                      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                         <span style={{ fontSize: '14px', color: '#767680', background: '#fff', padding: '4px 12px', borderRadius: '20px', border: '1px solid #E2E8F0' }}>
+                           {members.find(m => m.id === activeMember)?.team}
+                         </span>
+                         <span style={{ fontSize: '13px', color: '#A3AED0' }}>입사 3주차 (Onboarding)</span>
+                      </div>
+                   </div>
+                   <div style={{ textAlign: 'right' }}>
+                      <div style={{ fontSize: '12px', color: '#A3AED0', fontWeight: 600, marginBottom: '4px' }}>CURRENT STATUS</div>
+                      <div style={{ padding: '6px 16px', borderRadius: '10px', background: members.find(m => m.id === activeMember)?.progress > 80 ? '#05CD99' : '#FFB800', color: '#fff', fontSize: '13px', fontWeight: 700 }}>
+                        {members.find(m => m.id === activeMember)?.progress > 80 ? '임무 완수' : '진행 중'}
+                      </div>
+                   </div>
+                </div>
+
+                {/* Stats Grid */}
+                {(() => {
+                  const member = members.find(m => m.id === activeMember);
+                  const memberProgress = member?.progress || 0;
+                  const totalTasksCount = myItems.length;
+                  const completedTasksCount = myItems.filter((_, i) => (i + 1) / totalTasksCount * 100 <= memberProgress).length;
+                  const requiredActionsCount = totalTasksCount - completedTasksCount;
+
+                  return (
+                    <div className={styles.statGrid}>
+                       <div className={styles.statWidget}>
+                          <div className={styles.statLabel}>Total Progress</div>
+                          <div className={styles.statValue} style={{ color: '#4318FF' }}>{memberProgress}%</div>
+                       </div>
+                       <div className={styles.statWidget}>
+                          <div className={styles.statLabel}>Completed Tasks</div>
+                          <div className={styles.statValue}>{completedTasksCount} / {totalTasksCount}</div>
+                       </div>
+                       <div className={styles.statWidget}>
+                          <div className={styles.statLabel}>Required Actions</div>
+                          <div className={styles.statValue} style={{ color: '#EE5D50' }}>{requiredActionsCount}</div>
+                       </div>
                     </div>
-                 </div>
+                  );
+                })()}
+
+                {/* Detailed Roadmap */}
+                <div className={styles.glassCard} style={{ padding: '24px' }}>
+                   <h4 style={{ margin: '0 0 20px', color: '#1B2559', fontSize: '16px', fontWeight: 800 }}>Detailed Task Roadmap</h4>
+                   <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                      {Array.from(new Set(myItems.map(item => item.category))).map(category => {
+                         const categoryItems = myItems.filter(item => item.category === category);
+                         const icon = category === '필수 프로그램 설치' ? 'verified_user' : 
+                                      category === '보조 프로그램 설치' ? 'extension' : 'signature';
+
+                         return (
+                           <div key={category}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                                 <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#4318FF' }}>{icon}</span>
+                                 <span style={{ fontSize: '14px', fontWeight: 800, color: '#1B2559' }}>{category}</span>
+                              </div>
+                              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '10px' }}>
+                                {categoryItems.map((task) => {
+                                  // Get original index in myItems to determine "isDone" simulation
+                                  const originalIndex = myItems.findIndex(m => m.id === task.id);
+                                  const memberProgress = members.find(m => m.id === activeMember)?.progress || 0;
+                                  const isDone = (originalIndex + 1) / myItems.length * 100 <= memberProgress;
+
+                                  return (
+                                    <div key={task.id} style={{ 
+                                      display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 16px', 
+                                      background: isDone ? 'rgba(5, 205, 153, 0.05)' : '#f8fafd', 
+                                      borderRadius: '12px', border: '1px solid',
+                                      borderColor: isDone ? 'rgba(5, 205, 153, 0.2)' : 'transparent',
+                                      transition: 'all 0.2s ease'
+                                    }}>
+                                      <div style={{ 
+                                        width: '28px', height: '28px', borderRadius: '8px', 
+                                        background: isDone ? '#05CD99' : '#E2E8F0', 
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' 
+                                      }}>
+                                        <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+                                          {isDone ? 'check' : 'pending'}
+                                        </span>
+                                      </div>
+                                      <div style={{ flex: 1 }}>
+                                        <div style={{ fontSize: '13px', fontWeight: 700, color: '#1B2559' }}>{task.label}</div>
+                                      </div>
+                                      {isDone && (
+                                        <span className="material-symbols-outlined" style={{ color: '#05CD99', fontSize: '18px' }}>check_circle</span>
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                           </div>
+                         );
+                      })}
+                   </div>
+                </div>
               </div>
             ) : (
-              <div style={{ textAlign: 'center', padding: '40px', color: '#a3aed0' }}>
-                <span className="material-symbols-outlined" style={{ fontSize: '48px', display: 'block', marginBottom: '12px' }}>person_search</span>
-                팀원을 선택하여 상세 진행도를 확인하세요.
+              <div className={styles.glassCard} style={{ textAlign: 'center', padding: '100px 40px', color: '#a3aed0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+                <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: '#F4F7FE', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '40px', color: '#4318FF' }}>person_search</span>
+                </div>
+                <div>
+                  <h4 style={{ margin: '0 0 8px', color: '#1B2559' }}>팀원을 선택해 주세요</h4>
+                  <p style={{ margin: 0, fontSize: '14px' }}>팀원을 선택하면 상세한 온보딩 분석 리포트를 확인할 수 있습니다.</p>
+                </div>
               </div>
             )}
           </div>
