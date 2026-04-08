@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-primary": "#ffffff",
+                "secondary-fixed": "#d8e2ff",
+                "outline-variant": "#c6c5d1",
+                "on-error": "#ffffff",
+                "on-secondary-fixed": "#0e1b34",
+                "on-primary-fixed": "#0b164a",
+                "on-tertiary-fixed": "#130067",
+                "secondary": "#525e7a",
+                "surface-tint": "#515b92",
+                "surface-variant": "#dfe2e9",
+                "surface": "#f7f9ff",
+                "tertiary-fixed-dim": "#c5c0ff",
+                "tertiary-fixed": "#e3dfff",
+                "outline": "#767680",
+                "inverse-primary": "#bac3ff",
+                "on-primary-container": "#848dc8",
+                "secondary-fixed-dim": "#bac6e7",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-container": "#8980ff",
+                "on-background": "#181c21",
+                "primary-fixed-dim": "#bac3ff",
+                "tertiary-container": "#1e008f",
+                "on-secondary-container": "#55617d",
+                "on-tertiary": "#ffffff",
+                "surface-dim": "#d7dae1",
+                "error": "#ba1a1a",
+                "on-tertiary-fixed-variant": "#3600e1",
+                "on-surface": "#181c21",
+                "primary": "#030e44",
+                "primary-container": "#1b2559",
+                "surface-container-highest": "#dfe2e9",
+                "on-secondary-fixed-variant": "#3b4762",
+                "tertiary": "#0e0055",
+                "on-surface-variant": "#45464f",
+                "surface-container-high": "#e5e8ef",
+                "on-error-container": "#93000a",
+                "on-primary-fixed-variant": "#394378",
+                "background": "#f7f9ff",
+                "inverse-surface": "#2d3136",
+                "primary-fixed": "#dee0ff",
+                "surface-bright": "#f7f9ff",
+                "on-secondary": "#ffffff",
+                "surface-container-low": "#f1f4fb",
+                "inverse-on-surface": "#eef1f8",
+                "error-container": "#ffdad6",
+                "secondary-container": "#d0dcfe",
+                "surface-container": "#ebeef5"
+              },
+              fontFamily: {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-ai {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(198, 197, 209, 0.2);
+        }
+        .signature-edge {
+            position: relative;
+        }
+        .signature-edge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1e008f, #8980ff);
+            border-radius: 0.75rem 0.75rem 0 0;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-[#f7f9ff] dark:bg-slate-900 flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold text-[#1B2559] dark:text-white">SURE-Intelligence Hub</span>
+<div class="hidden md:flex gap-6">
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-xs font-medium Inter" href="#">Home</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-xs font-medium Inter" href="#">Financials</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-xs font-medium Inter" href="#">Weekly Progress</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-xs font-medium Inter" href="#">Meeting Minutes</a>
+<a class="text-[#1B2559] dark:text-blue-400 font-bold border-b-2 border-[#1B2559] pb-1 text-xs font-medium Inter" href="#">Projects &amp; Risks</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-xs font-medium Inter" href="#">Resources &amp; HR</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline scale-75">search</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary-container w-64" placeholder="Search insights..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User Profile Avatar" data-alt="professional male portrait with neutral background for corporate profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmFniQb1edSdA1PvXtYvwYsldH8X9_nSbYDhC-nuEZ8pTCGRY8QSb9-Z9EzzTKKLSO2eCzkD9oHtBw8n8FRyETAgGsLLP1I-VLBsXJ2WDE_c71jH3tT4ADVi7w90itbk0dJJZDgJ-RG8iEy21B29QgjKB7LvfPqVwUogiKO--iZX0icY7qXtiFt9UjgsKmxuYCzZHHZYe7UnKyCsTfscMUavRYA5AwOD7bFQOgId-ojwX6qKw3syE10TnGxHfsPqayZxmvMC-YT60e"/>
+</div>
+</div>
+</nav>
+<main class="max-w-[1440px] mx-auto px-8 py-8 flex flex-col gap-8">
+<!-- Header Section -->
+<header class="flex justify-between items-end">
+<div>
+<p class="text-label-sm text-on-surface-variant font-medium tracking-wider mb-1 uppercase text-[10px]">Strategic Oversight</p>
+<h1 class="text-4xl font-extrabold text-primary tracking-tight">Projects &amp; Risks</h1>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 rounded-xl border border-outline-variant/30 text-primary font-semibold text-sm hover:bg-surface-container-high transition-all">Export Report</button>
+<button class="px-6 py-2.5 rounded-xl bg-primary-container text-on-primary font-semibold text-sm shadow-sm hover:opacity-90 transition-all">Add New Project</button>
+</div>
+</header>
+<!-- AI 리스크 패널 (Bento Grid) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-12 lg:col-span-12 glass-ai rounded-xl p-8 signature-edge bg-surface-container-lowest/60 relative overflow-hidden">
+<div class="absolute top-6 right-8 flex items-center gap-2 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span>AI RISK ANALYTICS</span>
+</div>
+<h2 class="text-xl font-bold text-primary mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">shield_with_heart</span>
+                    AI 리스크 패널
+                </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Risk Item 1 -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-2 text-error font-bold text-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                            고객사 피드백 대기
+                        </div>
+<p class="text-on-surface text-sm leading-relaxed font-medium">
+                            핵심 의사결정권자의 피드백이 4일째 지연되고 있습니다. <br class="hidden xl:block"/>
+<span class="text-on-surface-variant text-xs mt-1 block">다음 마일스톤 진입을 위해 에스컬레이션이 필요합니다.</span>
+</p>
+</div>
+<!-- Risk Item 2 -->
+<div class="flex flex-col gap-3 border-l border-outline-variant/20 pl-8">
+<div class="flex items-center gap-2 text-on-tertiary-container font-bold text-sm">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+                            환경 지연
+                        </div>
+<p class="text-on-surface text-sm leading-relaxed font-medium">
+                            개발 환경 서버 안정성 이슈로 배포가 일시 중단되었습니다. <br class="hidden xl:block"/>
+<span class="text-on-surface-variant text-xs mt-1 block">인프라팀에서 복구 중이며 예상 복구 시간은 6시간입니다.</span>
+</p>
+</div>
+<!-- Risk Item 3 -->
+<div class="flex flex-col gap-3 border-l border-outline-variant/20 pl-8">
+<div class="flex items-center gap-2 text-secondary font-bold text-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                            라이선스 문제
+                        </div>
+<p class="text-on-surface text-sm leading-relaxed font-medium">
+                            외부 모듈 갱신 주기가 도래하여 예산 승인이 대기 중입니다. <br class="hidden xl:block"/>
+<span class="text-on-surface-variant text-xs mt-1 block">승인 지연 시 일부 시각화 라이브러리 사용이 제한될 수 있습니다.</span>
+</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 핵심 과제 목록 Table (Full-width Bento) -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0px_20px_40px_rgba(27,37,89,0.06)] overflow-hidden">
+<div class="p-6 border-b border-surface-container-low flex justify-between items-center">
+<h2 class="text-lg font-bold text-primary">핵심 과제 목록</h2>
+<div class="flex gap-4">
+<button class="text-xs font-semibold text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filter
+                    </button>
+<button class="text-xs font-semibold text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">sort</span> Sort
+                    </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-8 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">과제명</th>
+<th class="px-8 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest text-center">상태</th>
+<th class="px-8 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest w-1/4">진행률</th>
+<th class="px-8 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">담당자</th>
+<th class="px-8 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest text-right">관리</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-primary group-hover:text-primary-container transition-colors">데이터 거버넌스 프레임워크 구축</span>
+<span class="text-[10px] text-on-surface-variant">Phase 2: Strategy Definition</span>
+</div>
+</td>
+<td class="px-8 py-6 text-center">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold">In Progress</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-1 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 65%;"></div>
+</div>
+<span class="text-xs font-bold text-primary">65%</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2">
+<img class="w-6 h-6 rounded-full border border-outline-variant" data-alt="professional female office worker smiling for avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbk7f87wD2d9SbhNzjRBHxQyV6GvKZF5VfpAhL11oQRcxhpet903ScfJcWfUCbJ4QiQKj5VOG9MMZLbE044Tq6yGanYg0sYVdSaB_NEep9kjL2MxiZ8AlWQmxhBGdcaC-7AQEwyGn4-bW5_-JSHBYCSzui0i29NXjTzjGwlzDXTfOCBf6qySFYmjgFClHgVNsCk1qtx44dNSvbcxQWH-wUWJ-e3Zx3Nb4dSltFpMA90MvUfJsOaJ-8VQzLdWFvJddnP9IjFV5DweMS"/>
+<span class="text-xs font-medium text-on-surface">김지수 팀장</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<span class="material-symbols-outlined text-outline-variant cursor-pointer hover:text-primary transition-colors">more_vert</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-primary group-hover:text-primary-container transition-colors">AI 기반 이상 징후 감지 모듈 고도화</span>
+<span class="text-[10px] text-on-surface-variant">Machine Learning Ops Integration</span>
+</div>
+</td>
+<td class="px-8 py-6 text-center">
+<span class="px-3 py-1 rounded-full bg-error-container text-error text-[11px] font-bold">Delayed</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-1 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-error" style="width: 32%;"></div>
+</div>
+<span class="text-xs font-bold text-error">32%</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2">
+<img class="w-6 h-6 rounded-full border border-outline-variant" data-alt="smiling male professional in modern workspace for corporate headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsgxmDWNu9txtWT8df7JJeTLpjlThwk_uOJSpN9ekBRiaTvgf4x1c60nKbnXkUUM0LLAMJBOxOIXQMQB40QF9rabI366-_RbXstPj7XKeVTN0xNJNKlTSrkj2fTs7Nzzkuab1LD1S_fSzyWdQi9XtscSZHo1_BG-aKY8E4fxkirR0BW6nitrssShGh6grjsuCkmisfV4SfcKG6yKPNFamMSSY0NUe7t4GItmpu0InRIH4JHZxJAke3G-1YJB2DccO32cSN7qNyRO3r"/>
+<span class="text-xs font-medium text-on-surface">이민호 선임</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<span class="material-symbols-outlined text-outline-variant cursor-pointer hover:text-primary transition-colors">more_vert</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-primary group-hover:text-primary-container transition-colors">클라우드 인프라 보안 감사</span>
+<span class="text-[10px] text-on-surface-variant">Compliance Check Q4</span>
+</div>
+</td>
+<td class="px-8 py-6 text-center">
+<span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant text-[11px] font-bold">Done</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-1 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-on-tertiary-container" style="width: 100%;"></div>
+</div>
+<span class="text-xs font-bold text-on-tertiary-container">100%</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2">
+<img class="w-6 h-6 rounded-full border border-outline-variant" data-alt="focused professional woman portrait with soft studio lighting for team avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOgAnLl7xDYMi5jTF5Mwsn8KBbmMkMVlkO3OkC82cITbCmvvVGO0ib3mnNjzD5c8z9o_fvN_1TW58hPWXZH4TqkTzS31Lr3qaegZYIvhS_e7-HRHdvRxWiiDZktQwx1hAfiMKxrmDwL70r-Kzkfv1pvnYRDhduEJJ_UU35c8RFNR881FYsIXQvPHq3GAX8snBdl605PcZbmGO8H9fw3vleBzEE5oGuenQqGqbh4htrca1iVnGZ_qHI_Rj-aUsV7_Z8beJzi3BaUljL"/>
+<span class="text-xs font-medium text-on-surface">최유리 책임</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<span class="material-symbols-outlined text-outline-variant cursor-pointer hover:text-primary transition-colors">more_vert</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-primary group-hover:text-primary-container transition-colors">차세대 ERP 인터페이스 설계</span>
+<span class="text-[10px] text-on-surface-variant">UI/UX Design Phase</span>
+</div>
+</td>
+<td class="px-8 py-6 text-center">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold">In Progress</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-1 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 48%;"></div>
+</div>
+<span class="text-xs font-bold text-primary">48%</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2">
+<img class="w-6 h-6 rounded-full border border-outline-variant" data-alt="candid professional woman in office setting for corporate profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7YTx4NqK49KpCle1vLArJrrV8NWlTzGm2cKWpVVXKP3jYmg0KWl5J0T4q7Ld42ZLWCNvcnumjTpiYrbWUNnfB9lWyXnc__yWxOaUVdLJ65mgqY5kZ5XCmBKd0Opx7rXHyamI7BALH2SfDwfLPKwo5mfmyOkxdg-M5_IerEF6w3WLqtk8i-789qAsrZpAFZ4iP2wdd0zS620_P6yYPQTSmx6Y5cSX4IgjtuwQcZRBIm2RJJ5p92ueJnO84qdkYV0v6v5BC_kzXbpJ3"/>
+<span class="text-xs font-medium text-on-surface">박수진 팀장</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<span class="material-symbols-outlined text-outline-variant cursor-pointer hover:text-primary transition-colors">more_vert</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-surface-container-low flex justify-between items-center text-xs text-on-surface-variant font-medium">
+<span>Showing 1-4 of 24 projects</span>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center bg-primary text-on-primary">1</button>
+<button class="w-8 h-8 rounded flex items-center justify-center hover:bg-surface-container-high transition-colors">2</button>
+<button class="w-8 h-8 rounded flex items-center justify-center hover:bg-surface-container-high transition-colors">3</button>
+<span class="px-2 self-center">...</span>
+<button class="w-8 h-8 rounded flex items-center justify-center hover:bg-surface-container-high transition-colors">6</button>
+</div>
+</div>
+</section>
+<!-- Summary Stats (Editorial Layout) -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-between">
+<span class="text-label-sm text-on-surface-variant font-bold uppercase tracking-widest text-[10px]">Total Active Projects</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-4xl font-extrabold text-primary">24</span>
+<span class="text-xs text-on-tertiary-container font-bold">+12% vs last month</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-between">
+<span class="text-label-sm text-on-surface-variant font-bold uppercase tracking-widest text-[10px]">Resource Allocation</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-4xl font-extrabold text-primary">88%</span>
+<span class="text-xs text-on-surface-variant font-medium">Within capacity</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-between">
+<span class="text-label-sm text-on-surface-variant font-bold uppercase tracking-widest text-[10px]">Risk Mitigation Rate</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-4xl font-extrabold text-primary">92%</span>
+<span class="text-xs text-on-tertiary-container font-bold">Excellent</span>
+</div>
+</div>
+<div class="bg-primary-container rounded-xl p-6 flex flex-col justify-between text-on-primary">
+<span class="text-label-sm opacity-70 font-bold uppercase tracking-widest text-[10px]">Next Milestone</span>
+<div class="mt-4">
+<span class="text-xl font-bold block leading-tight">Q4 Security Audit Review</span>
+<span class="text-xs opacity-70 mt-1 block">Scheduled for Oct 24, 2024</span>
+</div>
+</div>
+</section>
+</main>
+<footer class="max-w-[1440px] mx-auto px-8 py-12 border-t border-surface-container-low mt-12 mb-8">
+<div class="flex justify-between items-center text-on-surface-variant text-[11px] font-medium tracking-wide">
+<div class="flex gap-8">
+<span>© 2024 SURE-Intelligence Hub. Editorial Insights.</span>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">System Status</a>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
+<span>System Secure &amp; Operational</span>
+</div>
+</div>
+</footer>
+</body></html>

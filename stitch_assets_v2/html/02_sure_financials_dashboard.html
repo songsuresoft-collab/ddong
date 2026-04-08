@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#d8e2ff",
+                        "outline-variant": "#c6c5d1",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#0e1b34",
+                        "on-primary-fixed": "#0b164a",
+                        "on-tertiary-fixed": "#130067",
+                        "secondary": "#525e7a",
+                        "surface-tint": "#515b92",
+                        "surface-variant": "#dfe2e9",
+                        "surface": "#f7f9ff",
+                        "tertiary-fixed-dim": "#c5c0ff",
+                        "tertiary-fixed": "#e3dfff",
+                        "outline": "#767680",
+                        "inverse-primary": "#bac3ff",
+                        "on-primary-container": "#848dc8",
+                        "secondary-fixed-dim": "#bac6e7",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#8980ff",
+                        "on-background": "#181c21",
+                        "primary-fixed-dim": "#bac3ff",
+                        "tertiary-container": "#1e008f",
+                        "on-secondary-container": "#55617d",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d7dae1",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#3600e1",
+                        "on-surface": "#181c21",
+                        "primary": "#030e44",
+                        "primary-container": "#1b2559",
+                        "surface-container-highest": "#dfe2e9",
+                        "on-secondary-fixed-variant": "#3b4762",
+                        "tertiary": "#0e0055",
+                        "on-surface-variant": "#45464f",
+                        "surface-container-high": "#e5e8ef",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#394378",
+                        "background": "#f7f9ff",
+                        "inverse-surface": "#2d3136",
+                        "primary-fixed": "#dee0ff",
+                        "surface-bright": "#f7f9ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f1f4fb",
+                        "inverse-on-surface": "#eef1f8",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#d0dcfe",
+                        "surface-container": "#ebeef5"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+        }
+        .signature-edge {
+            position: relative;
+        }
+        .signature-edge::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(to right, #1e008f, #8980ff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<nav class="bg-[#f7f9ff] dark:bg-slate-900 flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold text-[#1B2559] dark:text-white font-headline">SURE-Intelligence Hub</span>
+<div class="hidden md:flex gap-6">
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs font-medium Inter" href="#">Home</a>
+<a class="text-[#1B2559] dark:text-blue-400 font-bold border-b-2 border-[#1B2559] pb-1 text-xs font-medium Inter" href="#">Financials</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs font-medium Inter" href="#">Weekly Progress</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs font-medium Inter" href="#">Meeting Minutes</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs font-medium Inter" href="#">Projects &amp; Risks</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs font-medium Inter" href="#">Resources &amp; HR</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#1B2559] cursor-pointer" data-icon="search">search</span>
+<span class="material-symbols-outlined text-[#1B2559] cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-[#1B2559] cursor-pointer" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/20">
+<img alt="User Profile Avatar" data-alt="professional male executive headshot with neutral background and soft corporate lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkbZz3YZGZlWB1aCApgQ8_NP-lq1_lBb3llAo7Z-t6hBUgflJVKrUvWG-oBjwVLuC42XIHLsVTP8jPmWJRt1N5X0yZgBtIjrNsNo7146fx2k8klYVNBVs-kUlbWdVl7E0ADXkt5PGEAcAStPagTSrv3WzYzHVyClK8PwkZu7m_XTMXoRr7OPIwlXXAohVFag-staHqipO6X_p6kBaWkONRgM0-zQ40zIOh5pYBLylGEvhsy9Hdg5ys63YKrtB7Cnx2IIJiwZ6ZRoKx"/>
+</div>
+</div>
+</nav>
+<main class="max-w-[1440px] mx-auto px-8 py-8 space-y-8">
+<!-- Page Header -->
+<header class="flex flex-col gap-1">
+<p class="text-label-sm text-on-surface-variant font-medium tracking-wider uppercase text-[10px]">Financial Intelligence</p>
+<h1 class="font-headline font-extrabold text-4xl text-primary tracking-tight">수주 및 매출 현황</h1>
+</header>
+<!-- Top Section: AI Financial Insights -->
+<section class="signature-edge glass-card rounded-xl p-8 overflow-hidden bg-surface-container-lowest/15">
+<div class="flex justify-between items-start">
+<div class="space-y-4 max-w-2xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h2 class="font-headline text-xl font-bold text-primary">AI 재무 인사이트</h2>
+</div>
+<p class="font-headline text-2xl font-bold text-primary-container leading-tight">
+                        팀별 달성률 분석 기반 목표 달성 리스크 및 조치 제안
+                    </p>
+<div class="flex gap-4 mt-4">
+<div class="bg-primary/5 rounded-lg px-4 py-3 flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">수주 달성률</span>
+<span class="text-2xl font-bold text-primary">92.4%</span>
+</div>
+<div class="bg-error/5 rounded-lg px-4 py-3 flex flex-col border-l-4 border-error">
+<span class="text-[10px] text-error font-bold uppercase tracking-widest">고위험군</span>
+<span class="text-2xl font-bold text-error">SS3 (68%)</span>
+</div>
+</div>
+</div>
+<div class="hidden lg:block">
+<button class="bg-primary-container text-on-primary px-6 py-3 rounded-xl font-bold text-sm shadow-sm flex items-center gap-2">
+                        상세 분석 리포트
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary p-2 bg-surface-container-high rounded-lg" data-icon="trending_up">trending_up</span>
+<div>
+<h4 class="text-sm font-bold text-primary">SS1/SS2 초과 달성</h4>
+<p class="text-xs text-on-surface-variant mt-1">SaaS 전환 가속화로 전년 대비 15% 성장세를 보이고 있습니다.</p>
+</div>
+</div>
+<div class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-error p-2 bg-error-container/30 rounded-lg" data-icon="warning">warning</span>
+<div>
+<h4 class="text-sm font-bold text-error">SS3 리스크 경보</h4>
+<p class="text-xs text-on-surface-variant mt-1">대형 딜 클로징 지연으로 4분기 목표 달성 가능성 '주의' 단계입니다.</p>
+</div>
+</div>
+<div class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-tertiary-container p-2 bg-tertiary-fixed rounded-lg" data-icon="lightbulb">lightbulb</span>
+<div>
+<h4 class="text-sm font-bold text-primary">권고 조치</h4>
+<p class="text-xs text-on-surface-variant mt-1">SS3 리소스 재배치 및 파이프라인 리드 긴급 수혈이 필요합니다.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Middle Section: Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Team Achievement: Bar Chart Bento Card -->
+<section class="lg:col-span-5 bg-surface-container-lowest rounded-xl p-6 flex flex-col">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline font-bold text-lg text-primary">팀별 달성률 (Target vs Actual)</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+<div class="flex-grow flex flex-col justify-around gap-6">
+<!-- SS1 -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold text-on-surface-variant">
+<span>SS1 Team</span>
+<span class="text-primary">108%</span>
+</div>
+<div class="h-8 w-full bg-surface-container rounded-lg overflow-hidden flex">
+<div class="h-full bg-primary flex items-center justify-end px-3" style="width: 75%">
+<span class="text-[10px] text-white font-bold">12.4B</span>
+</div>
+<div class="h-full bg-primary-fixed-dim/40 flex items-center justify-end px-3" style="width: 25%">
+<span class="text-[10px] text-primary font-bold">11.5B</span>
+</div>
+</div>
+</div>
+<!-- SS2 -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold text-on-surface-variant">
+<span>SS2 Team</span>
+<span class="text-primary">102%</span>
+</div>
+<div class="h-8 w-full bg-surface-container rounded-lg overflow-hidden flex">
+<div class="h-full bg-primary flex items-center justify-end px-3" style="width: 70%">
+<span class="text-[10px] text-white font-bold">10.2B</span>
+</div>
+<div class="h-full bg-primary-fixed-dim/40 flex items-center justify-end px-3" style="width: 30%">
+<span class="text-[10px] text-primary font-bold">10.0B</span>
+</div>
+</div>
+</div>
+<!-- SS3 -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold text-on-surface-variant">
+<span>SS3 Team</span>
+<span class="text-error">68%</span>
+</div>
+<div class="h-8 w-full bg-surface-container rounded-lg overflow-hidden flex">
+<div class="h-full bg-error flex items-center justify-end px-3" style="width: 45%">
+<span class="text-[10px] text-white font-bold">6.8B</span>
+</div>
+<div class="h-full bg-outline-variant/30 flex items-center justify-end px-3" style="width: 55%">
+<span class="text-[10px] text-on-surface-variant font-bold">10.0B</span>
+</div>
+</div>
+</div>
+<!-- SS4 -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold text-on-surface-variant">
+<span>SS4 Team</span>
+<span class="text-primary">94%</span>
+</div>
+<div class="h-8 w-full bg-surface-container rounded-lg overflow-hidden flex">
+<div class="h-full bg-primary flex items-center justify-end px-3" style="width: 65%">
+<span class="text-[10px] text-white font-bold">8.5B</span>
+</div>
+<div class="h-full bg-primary-fixed-dim/40 flex items-center justify-end px-3" style="width: 35%">
+<span class="text-[10px] text-primary font-bold">9.0B</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex gap-6 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant border-t border-outline-variant/10 pt-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary rounded-sm"></div> Actual
+                    </div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary-fixed-dim/40 rounded-sm"></div> Target
+                    </div>
+</div>
+</section>
+<!-- Revenue Trend: Large Combo Chart Bento Card -->
+<section class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-6 flex flex-col">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="font-headline font-bold text-lg text-primary">월별 매출 추이</h3>
+<p class="text-xs text-on-surface-variant mt-1">YTD Revenue and Growth Momentum</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface-container text-on-surface text-xs font-bold rounded-lg">Quarterly</button>
+<button class="px-3 py-1 bg-primary text-on-primary text-xs font-bold rounded-lg">Monthly</button>
+</div>
+</div>
+<!-- Abstract Chart Representation -->
+<div class="flex-grow flex items-end gap-3 h-64 relative">
+<!-- Grid Lines Overlay -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none py-2">
+<div class="border-t border-outline-variant/10 w-full h-px"></div>
+<div class="border-t border-outline-variant/10 w-full h-px"></div>
+<div class="border-t border-outline-variant/10 w-full h-px"></div>
+<div class="border-t border-outline-variant/10 w-full h-px"></div>
+</div>
+<!-- Month Columns -->
+<div class="flex-1 flex flex-col justify-end items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg h-[40%] group-hover:bg-primary/40 transition-colors relative">
+<div class="absolute -top-1 w-full h-1 bg-primary rounded-full"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">JAN</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg h-[55%] group-hover:bg-primary/40 transition-colors relative">
+<div class="absolute -top-4 w-full h-1 bg-primary rounded-full translate-y-3"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">FEB</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg h-[48%] group-hover:bg-primary/40 transition-colors relative">
+<div class="absolute -top-2 w-full h-1 bg-primary rounded-full"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">MAR</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 group">
+<div class="w-full bg-primary rounded-t-lg h-[75%] relative">
+<div class="absolute -top-6 w-full h-1 bg-primary rounded-full translate-y-2"></div>
+<div class="absolute top-0 left-0 right-0 h-12 bg-white/10 flex items-center justify-center">
+<span class="text-[10px] font-bold text-white">Peak</span>
+</div>
+</div>
+<span class="text-[10px] font-bold text-primary">APR</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg h-[62%] group-hover:bg-primary/40 transition-colors relative">
+<div class="absolute -top-3 w-full h-1 bg-primary rounded-full"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">MAY</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg h-[68%] group-hover:bg-primary/40 transition-colors relative">
+<div class="absolute -top-4 w-full h-1 bg-primary rounded-full"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">JUN</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg h-[82%] group-hover:bg-primary/40 transition-colors relative">
+<div class="absolute -top-1 w-full h-1 bg-primary rounded-full"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">JUL</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 group">
+<div class="w-full bg-surface-container-highest rounded-t-lg h-[40%] animate-pulse"></div>
+<span class="text-[10px] font-bold text-on-surface-variant/40">AUG</span>
+</div>
+</div>
+<div class="mt-8 flex justify-between items-center bg-surface-container-low p-4 rounded-xl">
+<div class="flex items-center gap-8">
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase">Avg Revenue</span>
+<span class="text-xl font-bold text-primary">₩48.2B</span>
+</div>
+<div class="flex flex-col border-l border-outline-variant/30 pl-8">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase">Growth YoY</span>
+<span class="text-xl font-bold text-on-tertiary-container">+12.4%</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-primary font-bold text-xs cursor-pointer hover:underline">
+                        전체 월간 보고서 보기
+                        <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Metric Row -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-surface-container-low rounded-xl p-5 border-l-4 border-primary shadow-sm">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Total Order Value</p>
+<div class="flex items-end justify-between mt-2">
+<span class="text-2xl font-headline font-extrabold text-primary">₩328.4B</span>
+<span class="text-xs font-bold text-on-tertiary-container bg-tertiary-fixed px-2 py-0.5 rounded-full">High</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 border-l-4 border-primary shadow-sm">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Pipeline Health</p>
+<div class="flex items-end justify-between mt-2">
+<span class="text-2xl font-headline font-extrabold text-primary">₩842.0B</span>
+<div class="w-16 h-1 bg-outline-variant/30 rounded-full mb-2 overflow-hidden">
+<div class="w-4/5 h-full bg-primary"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 border-l-4 border-primary shadow-sm">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Win Rate</p>
+<div class="flex items-end justify-between mt-2">
+<span class="text-2xl font-headline font-extrabold text-primary">24.5%</span>
+<span class="text-xs font-bold text-on-surface-variant">+1.2% pts</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 border-l-4 border-error shadow-sm">
+<p class="text-[10px] font-bold text-error uppercase tracking-widest">Accounts at Risk</p>
+<div class="flex items-end justify-between mt-2">
+<span class="text-2xl font-headline font-extrabold text-error">12</span>
+<span class="material-symbols-outlined text-error" data-icon="error">error</span>
+</div>
+</div>
+</section>
+</main>
+<!-- SideNavBar (Suppressing if horizontal navigation is active as per layout) -->
+<!-- The SideNavBar from JSON is treated as a secondary UI element in this specific destination view -->
+</body></html>

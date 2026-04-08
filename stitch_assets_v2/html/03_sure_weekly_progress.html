@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SURE-Intelligence Hub | Weekly Progress</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, .headline {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Glassmorphism utility */
+        .glass-ai {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        /* Hide scrollbar for cleaner UI */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-primary": "#ffffff",
+                "secondary-fixed": "#d8e2ff",
+                "outline-variant": "#c6c5d1",
+                "on-error": "#ffffff",
+                "on-secondary-fixed": "#0e1b34",
+                "on-primary-fixed": "#0b164a",
+                "on-tertiary-fixed": "#130067",
+                "secondary": "#525e7a",
+                "surface-tint": "#515b92",
+                "surface-variant": "#dfe2e9",
+                "surface": "#f7f9ff",
+                "tertiary-fixed-dim": "#c5c0ff",
+                "tertiary-fixed": "#e3dfff",
+                "outline": "#767680",
+                "inverse-primary": "#bac3ff",
+                "on-primary-container": "#848dc8",
+                "secondary-fixed-dim": "#bac6e7",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-container": "#8980ff",
+                "on-background": "#181c21",
+                "primary-fixed-dim": "#bac3ff",
+                "tertiary-container": "#1e008f",
+                "on-secondary-container": "#55617d",
+                "on-tertiary": "#ffffff",
+                "surface-dim": "#d7dae1",
+                "error": "#ba1a1a",
+                "on-tertiary-fixed-variant": "#3600e1",
+                "on-surface": "#181c21",
+                "primary": "#030e44",
+                "primary-container": "#1b2559",
+                "surface-container-highest": "#dfe2e9",
+                "on-secondary-fixed-variant": "#3b4762",
+                "tertiary": "#0e0055",
+                "on-surface-variant": "#45464f",
+                "surface-container-high": "#e5e8ef",
+                "on-error-container": "#93000a",
+                "on-primary-fixed-variant": "#394378",
+                "background": "#f7f9ff",
+                "inverse-surface": "#2d3136",
+                "primary-fixed": "#dee0ff",
+                "surface-bright": "#f7f9ff",
+                "on-secondary": "#ffffff",
+                "surface-container-low": "#f1f4fb",
+                "inverse-on-surface": "#eef1f8",
+                "error-container": "#ffdad6",
+                "secondary-container": "#d0dcfe",
+                "surface-container": "#ebeef5"
+              },
+              fontFamily: {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-[#f7f9ff] dark:bg-slate-900 border-b border-transparent">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold text-[#1B2559] dark:text-white">SURE-Intelligence Hub</span>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs" href="#">Home</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs" href="#">Financials</a>
+<a class="text-[#1B2559] dark:text-blue-400 font-bold border-b-2 border-[#1B2559] pb-1 text-xs" href="#">Weekly Progress</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs" href="#">Meeting Minutes</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs" href="#">Projects &amp; Risks</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs" href="#">Resources &amp; HR</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs" href="#">Innovation &amp; TFTs</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors text-xs" href="#">Assets &amp; Guidelines</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="User Profile" data-alt="professional portrait of a male executive with a warm smile and confident posture in a modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLkGF1Ot3TYoqgIqYofiqzelAEXQ0sBSEdDmP0k0fZJ9bp51o36YTrKasL0p3Fl-LaYps8zRZVGL3bGqhCwQ6lCQ251mqqFQhq9QzepNRl6zaZViVeBVoVtbThMLLa1LhDPfqNWzPxJQFVU92ogFgTMgz_w9rdgXVk2OXT0qc1OrWghyawAR03NpHu1BvXXeyZ4b4HnR5HQprkJkAkLBewiru8bm80I8zTpHiDZeJBfMe07lAjM6o4y6KiA7QrtnYB1gc0CnO4UhqT"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-8 py-8">
+<!-- Team Filter & AI Insight Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+<!-- Filter Tabs -->
+<div class="lg:col-span-4 bg-surface-container-low p-1.5 rounded-xl flex items-center justify-between">
+<button class="flex-1 py-2 px-4 rounded-lg bg-surface-container-lowest text-primary font-bold shadow-sm text-sm">SS1 Team</button>
+<button class="flex-1 py-2 px-4 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container/50 transition-colors text-sm">SS2 Team</button>
+<button class="flex-1 py-2 px-4 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container/50 transition-colors text-sm">SS3 Team</button>
+<button class="flex-1 py-2 px-4 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container/50 transition-colors text-sm">SS4 Team</button>
+</div>
+<!-- AI Comment Card -->
+<div class="lg:col-span-8 relative overflow-hidden bg-surface-container-lowest rounded-xl p-6 flex items-center gap-6 border-l-4 border-tertiary-container shadow-sm group">
+<div class="flex-shrink-0 w-12 h-12 bg-tertiary-container/10 rounded-full flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-[10px] uppercase tracking-wider font-bold text-tertiary-container">AI Progress Assessment</span>
+<div class="h-[1px] flex-grow bg-outline-variant/20"></div>
+</div>
+<p class="text-on-surface text-sm leading-relaxed">
+                        SS1 Team has achieved <span class="font-bold text-primary">92%</span> of this week's milestones. However, the "Cloud Architecture Review" is currently <span class="text-error font-medium">delayed by 2 days</span> due to pending external vendor feedback. Recommendation: Reallocate DevOps resources for catch-up.
+                    </p>
+</div>
+<!-- Glassmorphic accent -->
+<div class="absolute -right-8 -top-8 w-24 h-24 bg-tertiary-fixed-dim/20 rounded-full blur-2xl group-hover:bg-tertiary-fixed-dim/30 transition-all"></div>
+</div>
+</section>
+<!-- Smart Kanban Board -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Column 1: This Week Done -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<h3 class="headline text-sm font-bold text-primary uppercase tracking-tight">This Week Done</h3>
+</div>
+<span class="text-[10px] font-bold bg-surface-container-high px-2 py-0.5 rounded-full text-on-surface-variant">4</span>
+</div>
+<div class="flex flex-col gap-4 bg-surface-container-low/40 p-3 rounded-xl min-h-[600px]">
+<!-- Task Card 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-lg shadow-sm border border-transparent hover:border-primary-container/20 transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-primary-fixed-variant bg-primary-fixed/30 px-2 py-0.5 rounded">INFRA</span>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<h4 class="text-sm font-bold text-primary mb-2">Backend API Load Testing</h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 mb-4">Completed stress tests for the new intelligence engine with 5k concurrent users.</p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-surface" data-alt="close-up of a smiling man with glasses, professional corporate avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWMUnQ5VHKff6KggxaCBrxZTLUsiEp6dOPtwmRl1yZsWP_OlOHZZoprccqq0Ovkw3H7YEngWKRiO4qw172WFhpgw-ZE0m4sDnqi4MKFEcnSjrBnvEiTBmPWM7_ouERtWFT7TQuHns30NV3N4hOyRFtpfxx2FjbmZCp8_V83Iw64kg7zKkJN6p2JI7Xuf_j88MEIvYjH28EGrbfFOR_Pfz1M2qGm1i1Z6dc3jZHDeLKAnvem936ZKxRQ8S1RMDrTeJ_6Tj8DjakWDMY"/>
+<img class="w-6 h-6 rounded-full border-2 border-surface" data-alt="professional portrait of a woman in a clean, minimalist setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMCFW3auAENUZ3UCBeh5hnMxdtQ5yRy56Fx6ClRoyuPqLQ_FTzuYPCxsTzCt952FPGEZOxrrMO6vjv-MGxrjeLRbLy_155X2vM69nY217XMtRTNYyKqMRBCsp-6IVuU-PCYhq73fFzBD7TdvTgfMkuOXFLr1xC72veGT03epAvrPKHyWS8U27sAsIyLqLFX4hFYKZvM1ROzZXGLDyVxX7IvOWx6zH-m-GlUNbm-cXNd7cqxAMB3oOTRHGc2mXQ7HznJbcME4P7ElbJ"/>
+</div>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="calendar_today">calendar_today</span> Oct 12
+                            </span>
+</div>
+</div>
+<!-- Task Card 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-lg shadow-sm border border-transparent hover:border-primary-container/20 transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-on-tertiary-fixed-variant bg-tertiary-fixed/40 px-2 py-0.5 rounded">DESIGN</span>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<h4 class="text-sm font-bold text-primary mb-2">Bento Grid UI Finalization</h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 mb-4">Visual design system for the intelligence dashboard consolidated.</p>
+<div class="flex items-center justify-between mt-auto">
+<img class="w-6 h-6 rounded-full border-2 border-surface" data-alt="modern portrait of a creative professional woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg_XlcrepPvCL3hw0qPhxUb22-VeoOAur7Vzb6wFAegvZnPq4FmNlB38E9fcxrSC365Gf_3JwwCqivpVrMeVvH_m-Xw2eojW-__wknGH4ADbjA0L2hXxS_7hBFKLiJll8fux11aCtalt9aF-ivplFFOnlTV7Ml7u8gthXvv7uR96e_MCF699cv_r9ZMXE9zo-04q8t5TXCxpVtyKdNQswM_XOTfa0RNKYPGLpkn2MiKD_2wU0w6GwQINNJKSBDcOThbHcYVRXkwgPK"/>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="calendar_today">calendar_today</span> Oct 11
+                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 2: Next Week Plan -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<h3 class="headline text-sm font-bold text-primary uppercase tracking-tight">Next Week Plan</h3>
+</div>
+<span class="text-[10px] font-bold bg-surface-container-high px-2 py-0.5 rounded-full text-on-surface-variant">3</span>
+</div>
+<div class="flex flex-col gap-4 bg-surface-container-low/40 p-3 rounded-xl min-h-[600px]">
+<!-- Plan Card 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-lg shadow-sm border border-transparent hover:border-primary-container/20 transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-primary-fixed-variant bg-primary-fixed/30 px-2 py-0.5 rounded">AI CORE</span>
+</div>
+<h4 class="text-sm font-bold text-primary mb-2">LLM Model Fine-tuning</h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 mb-4">Initial training of the RAG pipeline with proprietary dataset SS-402.</p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-surface" data-alt="professional male portrait with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-ipGlf0xEmAoygfy8K12Lee92Th8r25f6wCanswCzwrBpbuBAOM8fks4Xc0FmJkfDAvj52-ftn_RPIU3lsr1FuF34yF-e5dGcFmL3jvWn5Vw4u9RdbxvB4mIChkbKQJR-pg2Es4SPI7VCKppAo6HMhOvrHzssMcZbnfSbYM8c8SMYrg-pSfb7aZDPkvIDJoONPWNreSc_neQN6Q9ciHs2iL6ryN4TYsqdvVZMCXP4oxuKBsfcODk4yRCaz-Z1AMW44cc-pwfu1juA"/>
+</div>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="calendar_today">calendar_today</span> Oct 18
+                            </span>
+</div>
+</div>
+<!-- Plan Card 2 (Delayed Border Style) -->
+<div class="bg-surface-container-lowest p-5 rounded-lg shadow-sm border-2 border-error/20 hover:border-error/40 transition-all cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 p-1">
+<span class="material-symbols-outlined text-error text-xs" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-error bg-error-container/40 px-2 py-0.5 rounded">RE-PLAN</span>
+</div>
+<h4 class="text-sm font-bold text-primary mb-2">Cloud Architecture Review</h4>
+<p class="text-xs text-error font-medium mb-4">Carryover from W41. Blocked by vendor security clearance.</p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-surface" data-alt="close-up of a smiling man with glasses, professional corporate avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWUi2fX2ABMlRQ6u2P2-BOjigxM7BX9neEe9KjpyQbvwxiOxrLMg7dch4ZRD-7OP62otkrU-99vsQ_om8eA8LiFp2vKTpEx8vbF_bva2zJRFtocZpjo5F7HyMGT3VH19SMuRwI5oiJgRCIWM1O9j_ZOKJ7ltUuL-7pxxHnTv9pNhuNHie9vnX4qgJ21oGubUPoZpqozjH0TsqQeXlb9Ubd5qLw-BTXW1QSjLICAOKsGAwVdTmwITYoy7ze4qTr1T8B4AptziGHUbyS"/>
+</div>
+<span class="text-[10px] text-error font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span> Delayed
+                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 3: Issues -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<h3 class="headline text-sm font-bold text-primary uppercase tracking-tight">Issues</h3>
+</div>
+<span class="text-[10px] font-bold bg-surface-container-high px-2 py-0.5 rounded-full text-on-surface-variant">2</span>
+</div>
+<div class="flex flex-col gap-4 bg-surface-container-low/40 p-3 rounded-xl min-h-[600px]">
+<!-- Issue Card 1: At Risk -->
+<div class="bg-surface-container-lowest p-5 rounded-lg shadow-sm border-2 border-error hover:border-error/80 transition-all cursor-pointer relative">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-on-error bg-error px-2 py-0.5 rounded">AT RISK</span>
+<span class="text-[10px] font-bold text-primary-fixed-variant bg-primary-fixed/30 px-2 py-0.5 rounded">SECURITY</span>
+</div>
+<span class="material-symbols-outlined text-error text-sm" data-icon="priority_high">priority_high</span>
+</div>
+<h4 class="text-sm font-bold text-primary mb-2">Vulnerability in Node 42.1</h4>
+<p class="text-xs text-on-surface-variant line-clamp-3 mb-4">Critical security patch failed during staging. Potential delay to the entire Hub release if not fixed by Tuesday.</p>
+<div class="h-1 w-full bg-outline-variant/20 rounded-full mb-4">
+<div class="h-1 w-3/4 bg-error rounded-full"></div>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2">
+<img class="w-6 h-6 rounded-full border-2 border-surface" data-alt="professional portrait of a confident female engineer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG3K8TfDwQbAaeDnXCImloC46yd6nkCUtA6y9cFc02lFNEbkF4pviMsmlEencjA-xdfXecJSrX34iS2gaw6FKRIVgZSk8j3EDyG3wtPiEyy8sdXpv4EJJVxfhBB9byUB2rodICpWgbp2HShF9syWP3GtddqYSsN0oL9rQ4CIvGbI1oq-ZMB4PANKRbjZhtn6EjNMAPs7Zu8AVOVBAP0IhbYart4EftfPtz8xapSjuuo5xMGoFDBffAbUru3IwirhSsjBV6q2Cg6Qie"/>
+<span class="text-[10px] font-medium text-on-surface">Kim S. (Lead)</span>
+</div>
+<span class="text-[10px] text-error font-bold">P1 Block</span>
+</div>
+</div>
+<!-- Issue Card 2: Medium Priority -->
+<div class="bg-surface-container-lowest p-5 rounded-lg shadow-sm border border-transparent hover:border-primary-container/20 transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded">DEPENDENCY</span>
+</div>
+<h4 class="text-sm font-bold text-primary mb-2">Translation Queue Latency</h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 mb-4">NLP engine reporting higher than usual response times for Korean-English pairs.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="text-[10px] text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Low Impact</span>
+<span class="text-[10px] text-on-surface-variant">Aug 14</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) - Contextual to Home/Dashboard -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary-container text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform group">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span class="absolute right-16 bg-primary-container text-on-primary text-xs font-bold py-1.5 px-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">New Project Task</span>
+</button>
+</body></html>

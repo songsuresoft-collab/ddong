@@ -1,0 +1,88 @@
+/**
+ * [컨퍼런스 동기화용 구글 앱스 스크립트 - ID 고정 버전]
+ * 
+ * 1. 아래 "YOUR_SPREADSHEET_ID"에 시트 ID를 입력하세요.
+ * 2. [배포] -> [배포 관리] -> [수정] -> [버전: 새 버전] -> [업데이트]를 누르세요.
+ */
+
+// 여기에 시트 주소의 ID를 정확히 입력해 주세요 (예: 1abc123...)
+const SPREADSHEET_ID = "YOUR_SPREADSHEET_ID"; 
+
+function getTargetSheet() {
+  const ss = (SPREADSHEET_ID !== "YOUR_SPREADSHEET_ID") 
+             ? SpreadsheetApp.openById(SPREADSHEET_ID) 
+             : SpreadsheetApp.getActiveSpreadsheet();
+             
+  if (!ss) throw new Error("Spreadsheet not found. Please check SPREADSHEET_ID.");
+  
+  let sheet = ss.getSheetByName("Conference_List");
+  if (!sheet) {
+    sheet = ss.insertSheet("Conference_List");
+  }
+  return sheet;
+}
+
+function doGet(e) {
+  try {
+    const sheet = getTargetSheet();
+    const data = sheet.getDataRange().getValues();
+    if (data.length <= 1) return ContentService.createTextOutput("[]").setMimeType(ContentService.MimeType.JSON);
+
+    const headers = data[0];
+    const items = data.slice(1).map(row => {
+      let obj = {};
+      headers.forEach((h, i) => obj[h] = row[i]);
+      return obj;
+    });
+    return ContentService.createTextOutput(JSON.stringify(items)).setMimeType(ContentService.MimeType.JSON);
+  } catch (f) {
+    return ContentService.createTextOutput(JSON.stringify([])).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doPost(e) {
+  try {
+    const body = JSON.parse(e.postData.contents);
+    if (body.action === 'sync') {
+      const result = updateConferenceSheet(body.data);
+      return ContentService.createTextOutput(result).setMimeType(ContentService.MimeType.TEXT);
+    }
+    return ContentService.createTextOutput("Unknown Action").setMimeType(ContentService.MimeType.TEXT);
+  } catch (err) {
+    return ContentService.createTextOutput("Error: " + err.toString()).setMimeType(ContentService.MimeType.TEXT);
+  }
+}
+
+function updateConferenceSheet(eventData) {
+  const sheet = getTargetSheet();
+  
+  sheet.clear(); 
+  const headers = [["region", "name", "keywords", "date", "location", "search_date"]];
+  sheet.getRange(1, 1, 1, 6).setValues(headers).setBackground("#f3f3f3").setFontWeight("bold");
+
+  let list = [];
+  if (Array.isArray(eventData)) {
+    list = eventData;
+  } else if (eventData && typeof eventData === 'object') {
+    for (let key in eventData) {
+      if (Array.isArray(eventData[key])) { list = eventData[key]; break; }
+    }
+    if (list.length === 0 && eventData.name) list = [eventData];
+  }
+
+  if (list.length === 0) return "Success: No events found";
+
+  const rows = list.map(ev => [
+    ev.region || "Korea",
+    ev.name || "Untitled",
+    ev.keywords || "",
+    ev.date || "TBD",
+    ev.location || ev.place || "N/A",
+    new Date()
+  ]);
+
+  sheet.getRange(2, 1, rows.length, 6).setValues(rows);
+  sheet.autoResizeColumns(1, 6);
+
+  return "Success: Synced " + rows.length + " rows in " + sheet.getName();
+}

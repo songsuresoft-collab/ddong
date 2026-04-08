@@ -1,0 +1,524 @@
+/* ================================================================
+   finance-dashboard.module.css
+   원본: Antigravity-Dashboard/src/index.css 완전 이식
+   스코프: CSS Module (기존 앱 스타일과 완전 격리)
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@400;600;700;800&family=Inter:wght@400;600;800&display=swap');
+
+/* ── 루트 컨테이너 (CSS 변수 정의) ── */
+.root {
+  /* 원본 :root 팔레트 */
+  --bg-color:       #0A0B10;
+  --panel-bg:       rgba(12, 14, 20, 0.75);
+  --neon-cyan:      #00FFFF;
+  --neon-cyan-glow: rgba(0, 255, 255, 0.5);
+  --neon-cyan-dim:  rgba(0, 255, 255, 0.1);
+  --amber:          #FFBF00;
+  --amber-glow:     rgba(255, 191, 0, 0.5);
+  --amber-dim:      rgba(255, 191, 0, 0.1);
+  --crimson:        #DC143C;
+  --crimson-glow:   rgba(220, 20, 60, 0.5);
+  --crimson-dim:    rgba(220, 20, 60, 0.1);
+  --neon-pink:      #FF007F;
+  --neon-pink-glow: rgba(255, 0, 127, 0.5);
+  --neon-pink-dim:  rgba(255, 0, 127, 0.1);
+  --green:          #39FF14;
+  --green-glow:     rgba(57, 255, 20, 0.5);
+  --green-dim:      rgba(57, 255, 20, 0.1);
+  --text-main:      #E0E2EB;
+  --text-muted:     #8A8D98;
+  --glass-border:   1px solid rgba(0, 255, 255, 0.15);
+
+  /* 최상위 컨테이너 */
+  display: flex;
+  width: 100%;
+  /* TopNavBar 56px 제외 */
+  height: calc(100vh - 56px);
+  overflow: hidden;
+  background: var(--bg-color);
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(0,255,255,0.03), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(220,20,60,0.03), transparent 25%);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* ── app-container: 3단 Flex 레이아웃 ── */
+/* 원본: padding:1.5rem; gap:1.5rem */
+.appContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ================================================================
+   GLASS PANEL (공통)
+   원본: .glass-panel
+   ================================================================ */
+.glassPanel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: var(--glass-border);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,255,255,0.02);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.glassPanel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  opacity: 0.3;
+}
+.glassPanel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,255,255,0.1), inset 0 0 20px rgba(0,255,255,0.05);
+}
+
+/* ================================================================
+   3단 패널
+   ================================================================ */
+
+/* LEFT — 원본: flex: 0 0 24%; min-width:320px; max-width:440px */
+.panelLeft {
+  flex: 0 0 24%;
+  min-width: 320px;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* CENTER — 원본: flex:1; min-width:380px */
+.panelCenter {
+  flex: 1;
+  min-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: hidden;
+}
+
+/* RIGHT — 원본: flex: 0 0 22%; min-width:300px; max-width:400px */
+.panelRight {
+  flex: 0 0 22%;
+  min-width: 300px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ================================================================
+   공통 UI 토큰
+   ================================================================ */
+
+/* .section-title */
+.sectionTitle {
+  font-family: 'Jura', sans-serif;
+  font-size: 1.1rem;
+  color: var(--neon-cyan);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 0 8px var(--neon-cyan-glow);
+  flex-shrink: 0;
+}
+
+/* .quantum-toggle */
+.quantumToggle {
+  display: flex;
+  background: rgba(0,0,0,0.6);
+  border-radius: 8px;
+  border: 1px solid rgba(0,255,255,0.2);
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-bottom: 0.6rem;
+}
+
+/* .q-btn */
+.qBtn {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: 0.4s;
+  font-family: 'Jura', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+.qBtn:hover { color: var(--text-main); }
+.qBtnActive {
+  color: #000;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 20px var(--neon-cyan-glow);
+  text-shadow: none;
+}
+
+/* 스크롤 내부 */
+.scrollInner {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.scrollInner::-webkit-scrollbar { width: 4px; }
+.scrollInner::-webkit-scrollbar-track { background: transparent; }
+.scrollInner::-webkit-scrollbar-thumb { background: rgba(0,255,255,0.15); border-radius: 2px; }
+
+/* CENTER 헤더 */
+.centerHeader {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* 탭 바 */
+.centerTabs {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+.tabBtn {
+  background: transparent;
+  border: none;
+  padding: 0.8rem 1rem;
+  color: var(--text-muted);
+  font-family: 'Jura', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: -1px;
+}
+.tabBtn:hover:not(.tabBtnActive) { color: #fff; }
+.tabBtnActive {
+  color: var(--neon-cyan);
+  border-bottom: 2px solid var(--neon-cyan);
+  text-shadow: 0 0 8px var(--neon-cyan-glow);
+}
+
+/* SYNC 버튼 */
+.syncBtn {
+  font-family: 'Jura', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  padding: 6px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.06) 100%);
+  border: 1.5px solid rgba(255,255,255,0.75);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(255,255,255,0.2), inset 0 0 8px rgba(255,255,255,0.05);
+  text-shadow: 0 0 10px rgba(255,255,255,0.7);
+  transition: all 0.3s;
+  animation: syncPulse 2.4s ease-in-out infinite;
+}
+.syncBtn:disabled {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.3);
+  box-shadow: none; text-shadow: none;
+  animation: none; cursor: not-allowed;
+}
+@keyframes syncPulse {
+  0%,100% { box-shadow: 0 0 14px rgba(255,255,255,0.18), inset 0 0 8px rgba(255,255,255,0.04); }
+  50%      { box-shadow: 0 0 24px rgba(255,255,255,0.35), inset 0 0 12px rgba(255,255,255,0.08); }
+}
+
+/* 차트/콘텐츠 영역 */
+.contentArea {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* LED Badge */
+.ledBadge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.ledBadge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+  background: currentColor;
+}
+.ledCyan    { color: var(--neon-cyan); border: 1px solid var(--neon-cyan-glow); background: var(--neon-cyan-dim); }
+.ledAmber   { color: var(--amber);     border: 1px solid var(--amber-glow);     background: var(--amber-dim); }
+.ledCrimson { color: var(--crimson);   border: 1px solid var(--crimson-glow);   background: var(--crimson-dim); }
+.ledGray    { color: #888; border: 1px solid #555; background: rgba(255,255,255,0.05); }
+
+/* team-grid */
+.teamGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+/* team-card */
+.teamCard {
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px;
+  padding: 0.7rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: 0.3s;
+  overflow: hidden;
+}
+.teamCard:hover {
+  border-color: rgba(0,255,255,0.25);
+  box-shadow: 0 0 18px rgba(0,255,255,0.08);
+}
+
+/* data-table */
+.dataTable { width: 100%; border-collapse: collapse; }
+.dataTable th {
+  text-align: left; padding: 1rem;
+  font-size: 0.8rem; color: var(--text-muted);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.dataTable td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.9rem; font-weight: 600;
+}
+.dataTable tr:hover td { background: rgba(0,255,255,0.03); }
+
+/* timeline */
+.timeline {
+  border-left: 2px solid rgba(255,255,255,0.1);
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.timelineItem { position: relative; }
+.timelineDot {
+  position: absolute;
+  left: -1.5rem; top: 0;
+  transform: translateX(-50%);
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--bg-color);
+  border: 2px solid;
+}
+.dotCyan    { border-color: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan-glow); }
+.dotAmber   { border-color: var(--amber);     box-shadow: 0 0 10px var(--amber-glow); }
+.dotCrimson { border-color: var(--crimson);   box-shadow: 0 0 10px var(--crimson-glow); }
+.timelineContent {
+  background: rgba(0,0,0,0.3);
+  padding: 1rem; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.timelineContent h4 { font-size: 0.9rem; margin-bottom: 0.4rem; }
+.timelineContent p  { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+/* 우측 요약 */
+.summaryArea {
+  flex: 1;
+  padding-top: 0.3rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  overflow-y: auto;
+}
+
+/* fade-in */
+.fadeIn { animation: fadeIn 0.4s ease-out; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* wave 애니메이션 */
+.waveSwitch1, .waveSwitch2 {
+  animation: waveAnim 0.65s cubic-bezier(0.1,0.9,0.2,1) forwards;
+  will-change: opacity, transform, filter;
+}
+@keyframes waveAnim {
+  0%   { opacity:0;   transform:translateY(20px) scaleY(0.9); filter:blur(5px) brightness(1.8); }
+  45%  { opacity:0.9; transform:translateY(-2px) scaleY(1.02); filter:blur(1px) brightness(1.1); }
+  100% { opacity:1;   transform:translateY(0) scaleY(1);       filter:blur(0) brightness(1); }
+}
+
+/* glitch 애니메이션 */
+.glitch1, .glitch2 {
+  animation: initGlitch 1.2s cubic-bezier(0.2,0.8,0.2,1) forwards;
+}
+@keyframes initGlitch {
+  0%   { opacity:0.4; filter:brightness(2.5) hue-rotate(90deg) blur(4px); transform:scale(0.96); }
+  15%  { opacity:0.8; filter:brightness(1.8) hue-rotate(-30deg) blur(2px); transform:scale(1.01); }
+  35%  { opacity:0.95; filter:brightness(1.2) hue-rotate(10deg) blur(0); transform:scale(0.99); }
+  100% { opacity:1;   filter:brightness(1) hue-rotate(0deg) blur(0); transform:scale(1); }
+}
+
+/* scrollbar 전역 */
+.root *::-webkit-scrollbar { width: 6px; height: 6px; }
+.root *::-webkit-scrollbar-track { background: transparent; }
+.root *::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.root *::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan-glow); }
+
+/* ================================================================
+   REAL-TIME CLOCK WIDGET
+   ================================================================ */
+.clockWidget {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 1.4rem;
+  background: linear-gradient(135deg,
+    rgba(0, 20, 60, 0.85) 0%,
+    rgba(0, 40, 100, 0.75) 50%,
+    rgba(0, 20, 60, 0.85) 100%
+  );
+  border: 1.5px solid rgba(0, 150, 255, 0.6);
+  border-radius: 10px;
+  box-shadow:
+    0 0 24px rgba(0, 150, 255, 0.35),
+    inset 0 0 20px rgba(0, 100, 255, 0.12),
+    0 0 60px rgba(0, 100, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+/* 스캔라인 오버레이 */
+.clockWidget::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 150, 255, 0.03) 2px,
+    rgba(0, 150, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* 좌우 네온 엣지 */
+.clockWidget::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(0, 150, 255, 0.15) 0%,
+    transparent 15%,
+    transparent 85%,
+    rgba(0, 150, 255, 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+.clockDate {
+  font-family: 'Jura', monospace;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: rgba(120, 200, 255, 0.9);
+  letter-spacing: 2px;
+  white-space: nowrap;
+  text-shadow: 0 0 8px rgba(0, 150, 255, 0.6);
+}
+
+.clockDay {
+  font-family: 'Jura', monospace;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: rgba(160, 220, 255, 0.95);
+  letter-spacing: 2px;
+  margin: 0 0.6rem;
+  white-space: nowrap;
+  text-shadow: 0 0 10px rgba(0, 180, 255, 0.8);
+}
+
+.clockTime {
+  font-family: 'Jura', monospace;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  text-shadow:
+    0 0 10px rgba(100, 200, 255, 0.9),
+    0 0 25px rgba(0, 150, 255, 0.6),
+    0 0 50px rgba(0, 100, 255, 0.3);
+}
+
+/* 숫자 2자리 고정폭 — 레이아웃 흔들림 방지 */
+.clockDigit {
+  display: inline-block;
+  width: 2ch;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.clockColon {
+  animation: colonBlink 1s step-end infinite;
+  display: inline-block;
+  color: rgba(100, 200, 255, 0.9);
+}
+
+@keyframes colonBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
+}
+
+
+/* 반응형 */
+@media (max-width: 1400px) {
+  .appContainer { gap: 1rem; padding: 1rem; }
+}
+@media (max-width: 1100px) {
+  .panelLeft  { min-width: 280px; }
+  .panelRight { min-width: 250px; }
+}

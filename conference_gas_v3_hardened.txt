@@ -1,0 +1,68 @@
+/**
+ * [컨퍼런스 동기화용 구글 앱스 스크립트 - HARDENED VERSION]
+ */
+
+function doGet(e) {
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    let sheet = ss.getSheetByName("Conference_List");
+    if (!sheet) return ContentService.createTextOutput("[]").setMimeType(ContentService.MimeType.JSON);
+
+    const data = sheet.getDataRange().getValues();
+    if (data.length <= 1) return ContentService.createTextOutput("[]").setMimeType(ContentService.MimeType.JSON);
+
+    const headers = data[0];
+    const items = data.slice(1).map(row => {
+      let obj = {};
+      headers.forEach((h, i) => obj[h] = row[i]);
+      return obj;
+    });
+    return ContentService.createTextOutput(JSON.stringify(items)).setMimeType(ContentService.MimeType.JSON);
+  } catch (f) {
+    return ContentService.createTextOutput(JSON.stringify({error: f.toString()})).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doPost(e) {
+  let output = "Error: Input process failed";
+  
+  try {
+    const jsonString = e.postData.contents;
+    const body = JSON.parse(jsonString);
+    
+    if (body.action === 'sync') {
+      output = updateConferenceSheet(body.data);
+    } else {
+      output = "Unknown Action: " + body.action;
+    }
+  } catch (err) {
+    output = "Critical Error in GAS: " + err.toString();
+  }
+  
+  return ContentService.createTextOutput(output).setMimeType(ContentService.MimeType.TEXT);
+}
+
+function updateConferenceSheet(eventData) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName("Conference_List") || ss.insertSheet("Conference_List");
+  
+  sheet.clear(); 
+  const headers = [["region", "name", "keywords", "date", "location", "search_date"]];
+  sheet.getRange(1, 1, 1, 6).setValues(headers).setBackground("#f3f3f3").setFontWeight("bold");
+
+  if (!eventData || eventData.length === 0) return "Success: No events to sync";
+
+  const rows = eventData.map(ev => [
+    ev.region || "Korea",
+    ev.name || "Untitled",
+    ev.keywords || "",
+    ev.date || "TBD",
+    ev.location || ev.place || "N/A",
+    new Date()
+  ]);
+
+  sheet.getRange(2, 1, rows.length, 6).setValues(rows);
+  sheet.autoResizeColumns(1, 6);
+
+  return "Success: Synced " + rows.length + " conferences";
+}

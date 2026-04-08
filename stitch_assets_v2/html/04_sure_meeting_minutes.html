@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SURE-Intelligence Hub | Meeting Minutes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#d8e2ff",
+              "outline-variant": "#c6c5d1",
+              "on-error": "#ffffff",
+              "on-secondary-fixed": "#0e1b34",
+              "on-primary-fixed": "#0b164a",
+              "on-tertiary-fixed": "#130067",
+              "secondary": "#525e7a",
+              "surface-tint": "#515b92",
+              "surface-variant": "#dfe2e9",
+              "surface": "#f7f9ff",
+              "tertiary-fixed-dim": "#c5c0ff",
+              "tertiary-fixed": "#e3dfff",
+              "outline": "#767680",
+              "inverse-primary": "#bac3ff",
+              "on-primary-container": "#848dc8",
+              "secondary-fixed-dim": "#bac6e7",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#8980ff",
+              "on-background": "#181c21",
+              "primary-fixed-dim": "#bac3ff",
+              "tertiary-container": "#1e008f",
+              "on-secondary-container": "#55617d",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#d7dae1",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed-variant": "#3600e1",
+              "on-surface": "#181c21",
+              "primary": "#030e44",
+              "primary-container": "#1b2559",
+              "surface-container-highest": "#dfe2e9",
+              "on-secondary-fixed-variant": "#3b4762",
+              "tertiary": "#0e0055",
+              "on-surface-variant": "#45464f",
+              "surface-container-high": "#e5e8ef",
+              "on-error-container": "#93000a",
+              "on-primary-fixed-variant": "#394378",
+              "background": "#f7f9ff",
+              "inverse-surface": "#2d3136",
+              "primary-fixed": "#dee0ff",
+              "surface-bright": "#f7f9ff",
+              "on-secondary": "#ffffff",
+              "surface-container-low": "#f1f4fb",
+              "inverse-on-surface": "#eef1f8",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d0dcfe",
+              "surface-container": "#ebeef5"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .ai-glass-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-[#f7f9ff] dark:bg-slate-900 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold text-[#1B2559] dark:text-white">SURE-Intelligence Hub</span>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors" href="#">Home</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors" href="#">Financials</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors" href="#">Weekly Progress</a>
+<a class="text-[#1B2559] dark:text-blue-400 font-bold border-b-2 border-[#1B2559] pb-1" href="#">Meeting Minutes</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors" href="#">Projects &amp; Risks</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors" href="#">Resources &amp; HR</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 rounded-full hover:bg-surface-container-high transition-colors">settings</span>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 rounded-full hover:bg-surface-container-high transition-colors">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="Close-up professional headshot of a middle-aged male executive with kind eyes and a neutral gray studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPDYlrKooJ0mg_AKx-O7rD5AWqtcBSlKb7qAs-PpQVRXFtiQh5X1Ax4CyyqVlrTQkUaEZueg6nhsJ57YAVGxLwZaFul9JJf5M16LdWv8tYbuNLg2OCDqQcHiyFPVJv0eNgEvJrmnsKzblCuHaWnadTz7KY5ecP1fc1rwr9Uk9yiuUGPU7LWypEL7IVmlST8YruGpWlaXL3zAlpKPX0hqgBFN9xOEIN2Z0I8_M1LnNZrsWr636tJBjmATpG2R6sovJFtyz-A4oMtpDM"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-8 py-8 flex gap-8">
+<!-- Left Side Navigation (Predicted from JSON) -->
+<aside class="hidden xl:flex flex-col w-64 h-fit sticky top-28 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl space-y-6">
+<div>
+<h3 class="font-headline text-lg font-bold text-[#1B2559] mb-1">Intelligence</h3>
+<p class="text-xs text-on-surface-variant/70 font-medium">Editorial Hub</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-white text-[#1B2559] rounded-lg shadow-sm transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-lg">lightbulb</span>
+<span class="font-body text-sm font-semibold">Innovation &amp; TFTs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-white/50 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-lg">inventory_2</span>
+<span class="font-body text-sm font-medium">Assets &amp; Guidelines</span>
+</a>
+</nav>
+<button class="w-full py-3 bg-primary-container text-on-primary rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add_circle</span>
+                    New Insight
+                </button>
+</div>
+<div class="mt-auto pt-6 border-t border-outline-variant/20 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:bg-white/50 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-lg">help</span>
+<span class="font-body text-sm font-medium">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:bg-white/50 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="font-body text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col gap-8">
+<!-- Filter Section (Wide) -->
+<section class="bg-surface-container-low p-2 rounded-xl flex items-center gap-4">
+<div class="flex-1 relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-transparent border-none focus:ring-0 text-sm font-body" placeholder="Search by topic, customer, or content..." type="text"/>
+</div>
+<div class="h-8 w-px bg-outline-variant/30"></div>
+<div class="flex items-center gap-2 px-2">
+<button class="flex items-center gap-2 px-4 py-2 bg-white text-sm font-medium rounded-lg border border-outline-variant/10 shadow-sm hover:bg-surface-container-high transition-colors">
+                        Customer
+                        <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-white text-sm font-medium rounded-lg border border-outline-variant/10 shadow-sm hover:bg-surface-container-high transition-colors">
+                        Topic
+                        <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary text-sm font-bold rounded-lg transition-all">
+                        Apply Filters
+                    </button>
+</div>
+</section>
+<!-- Content Grid: Meeting List & Action Items -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Meeting Minutes List (Bento-style scroll list) -->
+<div class="xl:col-span-2 space-y-6 overflow-y-auto max-h-[800px] pr-4 scrollbar-thin scrollbar-thumb-outline-variant">
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-headline text-2xl font-extrabold text-[#1B2559]">Recent Meetings</h2>
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">12 Records Found</span>
+</div>
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold rounded-full uppercase tracking-tighter mb-2 inline-block">Strategy Hub</span>
+<h3 class="text-xl font-bold text-[#1B2559] group-hover:text-primary transition-colors">Q3 AI Infrastructure Scaling &amp; Compliance</h3>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-[#1B2559]">Oct 24, 2023</p>
+<p class="text-[10px] text-on-surface-variant uppercase">14:00 - 15:30</p>
+</div>
+</div>
+<div class="flex items-center gap-2 mb-6">
+<span class="text-xs font-semibold text-on-surface-variant">Attendees:</span>
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Close-up portrait of a young professional woman smiling warmly against a blurred office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVuPFVzD82rswHzh1UU71hrswkI4WnIJsW86i1hlPAb_ooZopA8x36ciRTMmXcnMCncFEdjihW2G4jMjx4BGc_hAmvZy2BRVijfA6Wy8rUpaB_aE_7PG2C2MncSXPUyQa4dBaBxseTjfCANbJj1b68I-ranxmz-zPD954zgpSo6URlYf8dCKaMEeRQrmOQ7H6__LuRRbykWFck98CZfA1fuEU2Krvi7Wdc2CP8IzXt4Cq-_f-fskWlVGeOADENh8YdKPpEe-NMDauq"/>
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Close-up professional headshot of a smiling young man in a blue shirt with a natural outdoor background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcpUn9ZqmQIjLgW2Ldn5Zaz2do-qcE9yVXxxz-Pjit847DVglr9mwUUFPKB9bpKalnYN4p_h11dbdiFsjWR_7D_0_gqhPv8Ki3cekvMxtFofQLkktXhUfjNh5rhC0HGwM7-UyHLjpAU6O2DgWeuzxewZ4nI3qudxUvTQtV9LFgSISFlJ0SB_6G4oWj7DHn8ahtmWjkkzEKB59XTWSzlqkoteEGalcMWrECt-l0Z17u8UbPc_UdkD__pYhy8WeAkGm84rYbfXrKCMnX"/>
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Close-up portrait of a cheerful young man with short dark hair and a bright smile in daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKOTtHOhKEpTF6Fbcs03CZVLaGSGqp7JMuG53hsrnRhVU_VkqL_XXJuCFzY4lc2aqBby2cySeht_vRNbCpr3e58jaQJnFH7nJAZjvHEOGg6mlCujAhl1d-m9vpFIO6mK6oQhrP4coIjUV9b0MJZubfHZYIPttFosL2cY0IUjUKPwj4SNc3ZJ2Cxq2BAiL0_JDyYLfxc3TGpqz6ehBZHsj7VoveKCEziOr4Y5lSiM8PowgGufyOPFH6uo9qRT5OHymfmzjtp1dAjtmB"/>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+5</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-3">
+<span class="material-symbols-outlined text-tertiary-container text-sm" style="font-variation-settings: 'FILL' 1;">colors_spark</span>
+</div>
+<h4 class="text-xs font-bold text-tertiary-container uppercase tracking-widest mb-2 flex items-center gap-1">
+                                AI Summary
+                            </h4>
+<p class="text-sm text-on-surface leading-relaxed italic">
+                                1. Deployment of local GPU clusters approved for data residency compliance in EU regions.<br/>
+                                2. Preliminary budget for LLM fine-tuning increased by 15% to prioritize safety alignment.<br/>
+                                3. Final vendor selection for high-performance storage moved to next Tuesday's steering committee.
+                            </p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold rounded-full uppercase tracking-tighter mb-2 inline-block">Resource Planning</span>
+<h3 class="text-xl font-bold text-[#1B2559] group-hover:text-primary transition-colors">Quarterly HR Efficiency &amp; Talent Acquisition</h3>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-[#1B2559]">Oct 22, 2023</p>
+<p class="text-[10px] text-on-surface-variant uppercase">10:00 - 11:30</p>
+</div>
+</div>
+<div class="flex items-center gap-2 mb-6">
+<span class="text-xs font-semibold text-on-surface-variant">Attendees:</span>
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Close-up portrait of a woman looking directly at the camera with soft lighting in a modern interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO4CY5rB8h9dM0SPEyj7EpbEDJbSChtalMAa5TlpRUyUnawJy4e6jWHzpUsJ8e-sxassVKAzCgTOhgPpxsoeQECPlFGVnUZYWRlKbooHSt6v9Ibpx7KHbJgD1yk5ObrzaqAmBKCqhDInvplDGeTY7mi5bqO-xDV9MxTuEeqHopIcDUjkOoHgo1H1Z5ixgQ7qiSv6y5k_tPWDY-U7PHuTGpm4LQPsxmNbwbpdw5PyD6vtxlCRuNtkwZprs6r6sm2h0lwU6It_ApVFH2"/>
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Close-up portrait of a man with short dark hair looking slightly to the side in warm natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyQ-DHZCJoslC22ia1A_PArbN1CeYIUZlM3k7TFtSdeFuGM8-Z8tpNzEK-FueSNvwu00jQO6r2t00MCK22cBMWP2KPwgJJ_W6b34c5zJzz4kYF87WuWwUj1wJDwh6N1Ahk47HNc1Rf1vQxTi7pZ_fJuqQ8jrGsFG1aXVQLTKZcIUF9_6-lxXORSeFuZ4tMcfeGQNWxGmZ-vja1wnInnoDi37vYUiJgRsRm3y6eXZ3T8IEhITD1xGiWTbF9dDtVLwxBj1Nk5Eh1MDl9"/>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+2</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-3">
+<span class="material-symbols-outlined text-tertiary-container text-sm" style="font-variation-settings: 'FILL' 1;">colors_spark</span>
+</div>
+<h4 class="text-xs font-bold text-tertiary-container uppercase tracking-widest mb-2 flex items-center gap-1">
+                                AI Summary
+                            </h4>
+<p class="text-sm text-on-surface leading-relaxed italic">
+                                1. Global hiring freeze maintained for non-technical roles except for critical replacements.<br/>
+                                2. Remote-first policy validated for R&amp;D centers, aiming for 20% reduction in real estate costs.<br/>
+                                3. New AI-driven onboarding module for engineers scheduled for alpha testing in November.
+                            </p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden group opacity-80">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold rounded-full uppercase tracking-tighter mb-2 inline-block">Product Review</span>
+<h3 class="text-xl font-bold text-[#1B2559]">UX Redesign: Dashboard V2 Internal Review</h3>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-[#1B2559]">Oct 19, 2023</p>
+<p class="text-[10px] text-on-surface-variant uppercase">16:30 - 18:00</p>
+</div>
+</div>
+<div class="flex items-center gap-2 mb-6">
+<span class="text-xs font-semibold text-on-surface-variant">Attendees:</span>
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Close-up portrait of a smiling woman with glasses and natural light from a window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVeJ2gNiUSxoJcl1TjbFb5POAXuKbfKItPGpa1GoxX0sJZ7cuKm38htFqJtK8wVLLUp819BtuQL7JG-GxEMDq7d-VkUDeGtu9Vg4nxOLuSY5WwO-Wlhh8dBv9qCQdQyw9vnNNfCxWDZERvNPkqlV9ajwnn1fUomgZjzuO2gQovNcQCdpGO7ixPpIRxyJMsISLUBl92GbyDqPJRrKed4320aQqwZdr1fPotvwFlqLt4aX6nDfB1ZONyCkqJhRftgyUqJ1Mr-elnlXht"/>
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Close-up professional headshot of a middle-aged man in a dark suit with a confident expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtHYBtHvPa8Q3lVHXJgPsqsO1JTIplf72QRnk6rVNfSHaXVKnXJgIxxP6JjBMZX0vP7Le8TtKC75jEUE1RRPg4yWIEo75ExjMdajhbR1HD-MXBtmKKFcgqW9Y47vsRtJJ2O39wyhg2i2zgHj7uji0UX5lcdaysLSnzKUfDX5OZSGFyJy-ThHDJmaxetMSS8F0j1r70Xqo9nwke7HWnBHJ7IXGzIg3V2IqGJwENEyvs0gu8has23NNxgeC49GaWE7JU2xJaT2JCJ9TR"/>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-3">
+<span class="material-symbols-outlined text-tertiary-container text-sm" style="font-variation-settings: 'FILL' 1;">colors_spark</span>
+</div>
+<h4 class="text-xs font-bold text-tertiary-container uppercase tracking-widest mb-2 flex items-center gap-1">
+                                AI Summary
+                            </h4>
+<p class="text-sm text-on-surface leading-relaxed italic">
+                                1. Asymmetrical Bento grid layout finalized to improve information density and aesthetic trust.<br/>
+                                2. Decision made to remove 1px borders in favor of tonal background shifts across all UI components.<br/>
+                                3. Final high-fidelity prototype handoff scheduled for development team sync next Friday.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Action Items Panel -->
+<div class="flex flex-col gap-6">
+<div class="bg-primary-container p-6 rounded-xl text-on-primary shadow-xl">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline text-xl font-bold">Action Items</h2>
+<span class="bg-white/20 px-2 py-1 rounded text-[10px] font-bold">8 PENDING</span>
+</div>
+<div class="space-y-4">
+<!-- Action Item 1 (Overdue) -->
+<div class="bg-white/5 p-4 rounded-lg border-l-4 border-error flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-semibold">EU Compliance GPU Checklist</h4>
+<span class="material-symbols-outlined text-error text-lg" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-white/50 uppercase font-bold">Owner</p>
+<p class="text-xs font-medium">Sarah Jenkins</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-error font-bold uppercase">Overdue</p>
+<p class="text-xs font-medium">Oct 25</p>
+</div>
+</div>
+</div>
+<!-- Action Item 2 -->
+<div class="bg-white/5 p-4 rounded-lg border-l-4 border-secondary-fixed flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-semibold">Budget Revision Document</h4>
+<span class="material-symbols-outlined text-secondary-fixed text-lg">pending</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-white/50 uppercase font-bold">Owner</p>
+<p class="text-xs font-medium">Michael Chen</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-white/50 font-bold uppercase">Deadline</p>
+<p class="text-xs font-medium">Oct 31</p>
+</div>
+</div>
+</div>
+<!-- Action Item 3 -->
+<div class="bg-white/5 p-4 rounded-lg border-l-4 border-secondary-fixed flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-semibold">Alpha Test Engineer Recruitment</h4>
+<span class="material-symbols-outlined text-secondary-fixed text-lg">pending</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-white/50 uppercase font-bold">Owner</p>
+<p class="text-xs font-medium">Elena Rodriguez</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-white/50 font-bold uppercase">Deadline</p>
+<p class="text-xs font-medium">Nov 05</p>
+</div>
+</div>
+</div>
+<!-- Action Item 4 (Overdue) -->
+<div class="bg-white/5 p-4 rounded-lg border-l-4 border-error flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-semibold">Vendor Selection Report</h4>
+<span class="material-symbols-outlined text-error text-lg" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-white/50 uppercase font-bold">Owner</p>
+<p class="text-xs font-medium">David Kwak</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-error font-bold uppercase">Overdue</p>
+<p class="text-xs font-medium">Oct 26</p>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border border-white/20 rounded-lg text-sm font-bold hover:bg-white/10 transition-colors">
+                            View All Actions
+                        </button>
+</div>
+<!-- Side Stats/Insight Card -->
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10">
+<h3 class="font-headline text-sm font-bold text-[#1B2559] mb-4 uppercase tracking-widest">Meeting Insights</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium text-on-surface-variant">Avg. Duration</span>
+<span class="text-sm font-bold">64m</span>
+</div>
+<div class="w-full bg-outline-variant/20 h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium text-on-surface-variant">Action Completion</span>
+<span class="text-sm font-bold">72%</span>
+</div>
+<div class="w-full bg-outline-variant/20 h-1 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full w-[72%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB (Suppressed on Details/Transactional, but kept here for Task Context as suggested by guidelines if applicable to core navigation) -->
+<!-- Suppressed based on "Task-Focused" rule but technically useful for minutes. Will follow suppression rule for "Details" style screens -->
+</body></html>

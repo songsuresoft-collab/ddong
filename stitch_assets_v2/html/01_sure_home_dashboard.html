@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SURE-Intelligence Hub | Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#d8e2ff",
+              "outline-variant": "#c6c5d1",
+              "on-error": "#ffffff",
+              "on-secondary-fixed": "#0e1b34",
+              "on-primary-fixed": "#0b164a",
+              "on-tertiary-fixed": "#130067",
+              "secondary": "#525e7a",
+              "surface-tint": "#515b92",
+              "surface-variant": "#dfe2e9",
+              "surface": "#f7f9ff",
+              "tertiary-fixed-dim": "#c5c0ff",
+              "tertiary-fixed": "#e3dfff",
+              "outline": "#767680",
+              "inverse-primary": "#bac3ff",
+              "on-primary-container": "#848dc8",
+              "secondary-fixed-dim": "#bac6e7",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#8980ff",
+              "on-background": "#181c21",
+              "primary-fixed-dim": "#bac3ff",
+              "tertiary-container": "#1e008f",
+              "on-secondary-container": "#55617d",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#d7dae1",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed-variant": "#3600e1",
+              "on-surface": "#181c21",
+              "primary": "#030e44",
+              "primary-container": "#1b2559",
+              "surface-container-highest": "#dfe2e9",
+              "on-secondary-fixed-variant": "#3b4762",
+              "tertiary": "#0e0055",
+              "on-surface-variant": "#45464f",
+              "surface-container-high": "#e5e8ef",
+              "on-error-container": "#93000a",
+              "on-primary-fixed-variant": "#394378",
+              "background": "#f7f9ff",
+              "inverse-surface": "#2d3136",
+              "primary-fixed": "#dee0ff",
+              "surface-bright": "#f7f9ff",
+              "on-secondary": "#ffffff",
+              "surface-container-low": "#f1f4fb",
+              "inverse-on-surface": "#eef1f8",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d0dcfe",
+              "surface-container": "#ebeef5"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .signature-edge {
+        background: linear-gradient(to right, #1e008f, #8980ff);
+        padding: 2px;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 bg-[#f7f9ff] dark:bg-slate-900 border-none shadow-none">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold text-[#1B2559] dark:text-white font-headline">SURE-Intelligence Hub</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-[#1B2559] dark:text-blue-400 font-bold border-b-2 border-[#1B2559] pb-1 transition-all duration-200" href="#">Home</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors" href="#">Financials</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors" href="#">Weekly Progress</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors" href="#">Meeting Minutes</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors" href="#">Projects &amp; Risks</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] dark:hover:text-white transition-colors" href="#">Resources &amp; HR</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:ring-2 focus:ring-primary-container" placeholder="Search insights..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOpMQXMUS864m4Oy2j4mPbbr5yf8ApjLdqTiUo-721UcrudbrQFmQfNb1dNDIy90QHmXAycR-wuxmDdH4jS2unfldMQA2lR69pXmQK60oZcVOdyT0LhPOPe5A4474nFLz4SEZuhSeNXmTEY7f6p7cAdYF62d9BlPJLbBeNsRsRis9rU5ExLubNK8tyhCuTqG8sEKRiMY7jR2KvHC64PCaSO8vQjcVSguyhd5NsqRiQjZSAgXNvemGKeEZm6QGQAZ90exGnifHlU19b"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-8 py-8 space-y-8">
+<!-- Hero Section: AI Real-time Briefing -->
+<section class="relative">
+<div class="signature-edge rounded-xl">
+<div class="bg-surface-container-lowest glass-card p-8 rounded-[0.65rem] flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="space-y-4 max-w-2xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h2 class="font-headline text-xl font-bold text-primary">AI 실시간 브리핑</h2>
+</div>
+<p class="text-on-surface-variant font-medium">실 전체 현황 및 주요 인사이트 요약</p>
+<ul class="space-y-3">
+<li class="flex items-start gap-3 text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-2"></span>
+<span>금주 수주 목표 달성률 92.5%로 전주 대비 4.2% 상승하며 긍정적 흐름 유지 중</span>
+</li>
+<li class="flex items-start gap-3 text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-2"></span>
+<span>주요 프로젝트 12건 중 10건 정상 진행, 2건의 리스크(인력 수급) 검토 필요</span>
+</li>
+<li class="flex items-start gap-3 text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-2"></span>
+<span>기술 고도화 TFT 성과 가시화로 하반기 자산화 가이드라인 조기 수립 가능성 증대</span>
+</li>
+</ul>
+</div>
+<div class="flex-shrink-0">
+<button class="bg-primary-container text-on-primary px-8 py-3 rounded-full font-bold flex items-center gap-2 hover:opacity-90 transition-all">
+<span>전체 보고서 보기</span>
+<span class="material-symbols-outlined" data-icon="trending_flat">trending_flat</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- KPI Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- 수주 목표 대비 실적 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm space-y-6">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-lg font-bold text-primary">수주 목표 대비 실적</h3>
+<span class="text-xs font-medium text-on-surface-variant bg-surface-container px-3 py-1 rounded-full uppercase tracking-wider">Q3 Analysis</span>
+</div>
+<div class="flex items-center justify-center py-4">
+<div class="relative w-48 h-48">
+<!-- Custom SVG Donut -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-outline-variant/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="3"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="92, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-headline font-extrabold text-primary">92%</span>
+<span class="text-xs text-on-surface-variant font-medium">Achievement</span>
+</div>
+</div>
+</div>
+<div class="flex justify-around text-center border-t border-outline-variant/20 pt-6">
+<div>
+<p class="text-xs text-on-surface-variant font-medium mb-1">Target</p>
+<p class="font-bold text-primary">₩24.5B</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-medium mb-1">Actual</p>
+<p class="font-bold text-primary">₩22.6B</p>
+</div>
+</div>
+</div>
+<!-- 매출 목표 대비 실적 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm space-y-6">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-lg font-bold text-primary">매출 목표 대비 실적</h3>
+<span class="text-xs font-medium text-on-surface-variant bg-surface-container px-3 py-1 rounded-full uppercase tracking-wider">Annual Forecast</span>
+</div>
+<div class="flex items-center justify-center py-4">
+<div class="relative w-48 h-48">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-outline-variant/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="3"></path>
+<path class="text-on-primary-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="78, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-headline font-extrabold text-primary">78%</span>
+<span class="text-xs text-on-surface-variant font-medium">Achievement</span>
+</div>
+</div>
+</div>
+<div class="flex justify-around text-center border-t border-outline-variant/20 pt-6">
+<div>
+<p class="text-xs text-on-surface-variant font-medium mb-1">Target</p>
+<p class="font-bold text-primary">₩18.2B</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-medium mb-1">Actual</p>
+<p class="font-bold text-primary">₩14.1B</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Issues Tracker -->
+<section class="bg-surface-container-lowest p-8 rounded-xl shadow-sm">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="font-headline text-lg font-bold text-primary">긴급 이슈 트래커</h3>
+<p class="text-sm text-on-surface-variant mt-1">실시간 시스템 및 프로젝트 우선순위 알림</p>
+</div>
+<button class="text-primary font-bold text-sm hover:underline">모든 이슈 보기</button>
+</div>
+<div class="space-y-4">
+<!-- High Priority Item -->
+<div class="flex items-center justify-between p-4 rounded-lg bg-surface-container-low border-l-4 border-error hover:shadow-md transition-shadow">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-error" data-icon="error">error</span>
+<div>
+<h4 class="font-bold text-primary">VDI 접속 오류</h4>
+<p class="text-sm text-on-surface-variant">개발 인프라망 외부 접속 차단 이슈 발생</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-xs text-on-surface-variant">Detected</p>
+<p class="text-sm font-medium">15m ago</p>
+</div>
+<span class="bg-error-container text-on-error-container px-4 py-1.5 rounded-full text-xs font-bold">High Priority</span>
+</div>
+</div>
+<!-- Medium Priority Item -->
+<div class="flex items-center justify-between p-4 rounded-lg bg-surface-container-low border-l-4 border-primary hover:shadow-md transition-shadow">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="bug_report">bug_report</span>
+<div>
+<h4 class="font-bold text-primary">STATIC 도구 오탐</h4>
+<p class="text-sm text-on-surface-variant">정적 분석 도구 보안 취약점 대량 오탐 보고</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-xs text-on-surface-variant">Detected</p>
+<p class="text-sm font-medium">2h ago</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full text-xs font-bold">Medium</span>
+</div>
+</div>
+<!-- Low Priority Item -->
+<div class="flex items-center justify-between p-4 rounded-lg bg-surface-container-low border-l-4 border-outline hover:shadow-md transition-shadow">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline" data-icon="info">info</span>
+<div>
+<h4 class="font-bold text-primary">라이선스 갱신 안내</h4>
+<p class="text-sm text-on-surface-variant">IntelliJ IDE 통합 라이선스 30일 내 만료 예정</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-xs text-on-surface-variant">Detected</p>
+<p class="text-sm font-medium">5h ago</p>
+</div>
+<span class="bg-surface-container-highest text-on-surface-variant px-4 py-1.5 rounded-full text-xs font-bold">Low</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Side Navigation Menu (Hidden on mobile) -->
+<aside class="fixed left-0 top-0 hidden lg:flex flex-col h-screen w-64 p-4 bg-[#f1f4fb] dark:bg-slate-950 border-r border-transparent z-40 mt-[72px]">
+<div class="mb-8 px-4 py-6">
+<h1 class="text-lg font-bold text-[#1B2559] font-headline">Intelligence</h1>
+<p class="text-xs text-slate-500">Editorial Hub</p>
+</div>
+<nav class="flex-grow space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-white/50 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="lightbulb">lightbulb</span>
+<span class="font-medium">Innovation &amp; TFTs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-white/50 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="inventory_2">inventory_2</span>
+<span class="font-medium">Assets &amp; Guidelines</span>
+</a>
+<div class="pt-8 px-4">
+<button class="w-full bg-primary-container text-on-primary py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-md">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+<span>New Insight</span>
+</button>
+</div>
+</nav>
+<div class="border-t border-outline-variant/20 pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-white/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-medium text-sm">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-white/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-medium text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Layout Adjustment for Sidebar -->
+<style>
+        @media (min-width: 1024px) {
+            header .max-w-\[1440px\], main.max-w-\[1440px\] {
+                margin-left: 16rem; /* Matches sidebar width */
+                width: calc(100% - 16rem);
+            }
+        }
+    </style>
+</body></html>

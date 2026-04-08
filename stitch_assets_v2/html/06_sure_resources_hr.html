@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SURE-Intelligence Hub | Resources &amp; HR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#d8e2ff",
+              "outline-variant": "#c6c5d1",
+              "on-error": "#ffffff",
+              "on-secondary-fixed": "#0e1b34",
+              "on-primary-fixed": "#0b164a",
+              "on-tertiary-fixed": "#130067",
+              "secondary": "#525e7a",
+              "surface-tint": "#515b92",
+              "surface-variant": "#dfe2e9",
+              "surface": "#f7f9ff",
+              "tertiary-fixed-dim": "#c5c0ff",
+              "tertiary-fixed": "#e3dfff",
+              "outline": "#767680",
+              "inverse-primary": "#bac3ff",
+              "on-primary-container": "#848dc8",
+              "secondary-fixed-dim": "#bac6e7",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#8980ff",
+              "on-background": "#181c21",
+              "primary-fixed-dim": "#bac3ff",
+              "tertiary-container": "#1e008f",
+              "on-secondary-container": "#55617d",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#d7dae1",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed-variant": "#3600e1",
+              "on-surface": "#181c21",
+              "primary": "#030e44",
+              "primary-container": "#1b2559",
+              "surface-container-highest": "#dfe2e9",
+              "on-secondary-fixed-variant": "#3b4762",
+              "tertiary": "#0e0055",
+              "on-surface-variant": "#45464f",
+              "surface-container-high": "#e5e8ef",
+              "on-error-container": "#93000a",
+              "on-primary-fixed-variant": "#394378",
+              "background": "#f7f9ff",
+              "inverse-surface": "#2d3136",
+              "primary-fixed": "#dee0ff",
+              "surface-bright": "#f7f9ff",
+              "on-secondary": "#ffffff",
+              "surface-container-low": "#f1f4fb",
+              "inverse-on-surface": "#eef1f8",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d0dcfe",
+              "surface-container": "#ebeef5"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      body { font-family: 'Inter', sans-serif; }
+      .font-headline { font-family: 'Manrope', sans-serif; }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-[#f7f9ff] dark:bg-slate-900 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold text-[#1B2559] dark:text-white font-headline">SURE-Intelligence Hub</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-sm" href="#">Home</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-sm" href="#">Financials</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-sm" href="#">Weekly Progress</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-sm" href="#">Meeting Minutes</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-sm" href="#">Projects &amp; Risks</a>
+<a class="text-[#1B2559] dark:text-blue-400 font-bold border-b-2 border-[#1B2559] pb-1 text-sm" href="#">Resources &amp; HR</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-surface-container-low px-3 py-1.5 rounded-full border-none">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs w-48" placeholder="Search insights..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">settings</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="User Profile Avatar" data-alt="close-up portrait of a professional woman with a confident expression in a brightly lit modern office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5F_z1pfOdi77blTsd_vwVyjgpgmHJgXbxTFh1HCvZYfyxdd_a4NiAFf9MnVynto0YrfW4UQYkUPlH2tPskxMfCAepeVf9f6kt9_zwJ6cHt_STt-qncgDXtR6TtNBylYYyIg45sw_TlqxHzV1zIgXbnZ82L-BCRzsrumrZBjHfExNQ0kgoFw9gOkyFa_LmmmWb6so8kWPqK31xRcRD4LEiZghTkrjcernrFVsIrjAzzMutzQWInMUoUPDSr-Xwj1OtXD-UM5yAIwtT"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-8 py-8 flex gap-8">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-[calc(100vh-120px)] w-64 bg-[#f1f4fb] dark:bg-slate-950 p-4 rounded-xl sticky top-24">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<div>
+<p class="text-lg font-bold text-[#1B2559] font-headline">Intelligence</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-medium">Editorial Hub</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-white/50 rounded-lg transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">lightbulb</span>
+<span class="font-medium text-sm">Innovation &amp; TFTs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#ffffff] dark:bg-slate-800 text-[#1B2559] dark:text-blue-300 rounded-lg shadow-sm transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-bold text-sm">Assets &amp; Guidelines</span>
+</a>
+</nav>
+<button class="mt-4 mb-8 bg-primary-container text-on-primary w-full py-3 rounded-xl font-bold text-sm shadow-md hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Insight
+            </button>
+<div class="pt-4 border-t border-outline-variant/20 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-primary text-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">help</span>
+                    Support
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-error text-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">logout</span>
+                    Logout
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<section class="flex-1">
+<header class="mb-8">
+<h1 class="text-4xl font-extrabold text-primary font-headline tracking-tight mb-2">리소스 &amp; 인력 매니지먼트</h1>
+<p class="text-on-surface-variant max-w-2xl">데이터 기반의 팀 가용성 분석과 AI를 통한 전략적 인력 배치 제안을 확인하세요.</p>
+</header>
+<!-- Section 1: AI 리소스 제안 (Bento Grid) -->
+<div class="mb-12">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-tertiary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h2 class="text-xl font-bold text-primary font-headline">AI 리소스 제안</h2>
+</div>
+<div class="grid grid-cols-12 gap-6">
+<!-- Left: 가용/투입 공수 차트 -->
+<div class="col-span-12 md:col-span-7 bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col gap-4 border border-outline-variant/10">
+<div class="flex justify-between items-center">
+<h3 class="font-bold text-on-surface text-lg">가용/투입 공수 차트</h3>
+<div class="flex items-center gap-4 text-xs font-medium text-on-surface-variant">
+<div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span> 투입</div>
+<div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary-container"></span> 가용</div>
+</div>
+</div>
+<div class="flex-1 flex items-end justify-between pt-4 h-48 gap-2">
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-full bg-secondary-container rounded-t-lg relative h-32">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg h-24"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">SS1 Team</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-full bg-secondary-container rounded-t-lg relative h-40">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg h-38"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">SS2 Team</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-full bg-secondary-container rounded-t-lg relative h-28">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg h-12"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">SS3 Team</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-full bg-secondary-container rounded-t-lg relative h-36">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg h-10"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">SS4 Team</span>
+</div>
+</div>
+<div class="mt-4 p-3 bg-surface-container-low rounded-lg">
+<p class="text-xs text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">info</span>
+                                현재 SS2팀의 업무 부하율이 95%로 가장 높으며, SS4팀은 28%로 여유가 있습니다.
+                            </p>
+</div>
+</div>
+<!-- Right: AI Text Proposal -->
+<div class="col-span-12 md:col-span-5 relative overflow-hidden bg-primary-container p-8 rounded-xl flex flex-col justify-center text-on-primary min-h-[300px]">
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-8 -left-8 w-32 h-32 bg-tertiary-container/30 rounded-full blur-2xl"></div>
+<div class="relative z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[10px] font-bold tracking-widest uppercase mb-6 border border-white/20">
+<span class="material-symbols-outlined text-xs">shutter_speed</span>
+                                Optimization Proposal
+                            </div>
+<h3 class="text-2xl font-bold font-headline leading-tight mb-4">인력 재배치 제안: SS2팀 부하 경감을 위해 SS4팀 가용 인원 2명 투입 권고</h3>
+<p class="text-on-primary-container text-sm leading-relaxed mb-8">
+                                데이터 분석 결과, 차주 예정된 SS2팀의 프로젝트 마감 기한을 맞추기 위해 유휴 리소스가 풍부한 SS4팀의 시니어 엔지니어 2명을 파견하는 것이 프로젝트 안정성에 가장 효과적입니다.
+                            </p>
+<button class="bg-white text-primary px-6 py-2 rounded-full font-bold text-sm hover:bg-opacity-90 transition-all flex items-center gap-2 w-fit">
+                                상세 분석 보기
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: 팀 구성 및 소통 가이드 -->
+<div>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">groups</span>
+<h2 class="text-xl font-bold text-primary font-headline">팀 구성 및 소통 가이드</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Team Card SS1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10 shadow-sm flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-primary font-headline">SS1 Team</h4>
+<p class="text-xs text-on-surface-variant">Core Infrastructure</p>
+</div>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded">12 명</span>
+</div>
+<div class="flex -space-x-2 mb-6">
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional portrait headshot of a team member in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm82-NPWZ4xs_60xnaCaU1DHmf24FiWzrrHjXk0EIDfMJbpO00dOwui1myhAKRxg53nR84r39w0-7MptX6v5o0l6YhX2SY0JgSAPTKfN8TyEkOFotWtICM8WAY3_ipdOMM55vR9Q12QV9w2rAxvxlEebKnyoutI1enHe7HGLh9fuc8f2kdXIKVhqvFXzDA71YEAbc3s1dJGVwmcfI5zJWUgF0MmUtwzjB8PA9rSgSELkJz4UOlja1_AzWesHtPUJhN8KXOfIPF628x"/>
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional portrait headshot of a team member in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3Ld-cfBzwVkL96emUq8jAaaXvfYUJFg4OJdwgN_pkoUInrP7mOTjtJs0XPBvj49Qo0gGWQXGRPtDWaDlmfd1cqxWrugjhuBs2OlrXSmzN8TRO0tH02XQsDa8TZke2FRRFhbRQk8aWyzRG9psox9jg6DEw_agRtTkcBjtr_ETi2fmdZRpn8xUjUL3OepwQ0Re1uLWnUI63lCe6ymUIvqWISfXXRaR8FIVUf0UqOgGaW6A211jDNQzS1FfwzW_-QWdrOVZLpFAI0-Pr"/>
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional portrait headshot of a team member in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAllRptxt5ehuVBFMzm6z8r0LsY866UGQ6Df60PoCL6WVsSF41Fm8zOYtl-_uDV1IYuQNBEMT2q4kscuiynbkFTCqu2ca-KGxPullLxk2868XVdDQPf0NzA8nPBB3CK7Y2K545SxZDHQTA00GF1fPkgQQ04sPB3PK4QfKL1hvzVRf3p1fJVdxO5dyYM54HiHdHmR-e7-qqx9w51_0UXDeLd8KI68XwHOzrAJLhbreA9Y742Ep4RNX8m4P5sNHsVWM9cr8452mP-PYyD"/>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant border-2 border-white">+9</div>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-1.5 mb-2">
+<span class="material-symbols-outlined text-tertiary-container text-xs" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<span class="text-[10px] font-bold text-primary uppercase">MBTI 기반 가이드</span>
+</div>
+<p class="text-xs text-on-surface leading-snug font-medium italic">"논리적이고 분석적인 ENTJ/INTJ 성향 우세. 명확한 목표 제시와 비동기식 텍스트 보고 선호."</p>
+</div>
+</div>
+<!-- Team Card SS2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10 shadow-sm flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-primary font-headline">SS2 Team</h4>
+<p class="text-xs text-on-surface-variant">Client Interaction</p>
+</div>
+<span class="px-2 py-0.5 bg-error-container text-on-error-container text-[10px] font-bold rounded">8 명</span>
+</div>
+<div class="flex -space-x-2 mb-6">
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional portrait headshot of a team member in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcDXTbPfQjJS7_gtJZSGhNsf6LE9KrNzFBST7LBZh64Dgaxu4yo227EKzwRbUL7Jd6hRf2taof3h7S-Ijs-LGsya1kEhSb3oD6lhwh77pZ4jBrtHKvArWT9fdkko68W1stbsPzHSy2Pt_e2p05cZ_DGwdYwuLH3RUlGNscLrOsRQxfmCfCkDfyQ7kvHg0qdn-MANQzfBH0z9vt64FqCn60LW0rtDNN2xB78JPez1lRqv3_yxzwk2fmIZgfOWlWPhVrdTUXZ38oOqls"/>
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional portrait headshot of a team member in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD8UoubuF83NdszCbh-0NsoNab8TphghrHSUNCSD96Y3Ay4nFiiw4pk5YPJbovv9JdX6i-E47q4dqr93kWJFp0P1sL2hPSFUhIAOraecIfOI8gR1Fa6qjrdPzKwSQmLphbBkdYRa999386vixZ_NuLVzE9jFpLV8SNSJTYVTlzTol0RCi6f4L36Jh5V4Ot1UON77y8fZ1IZHCePBAd5Rigyjwqk2sP8JLYqelCT_TwT35giBn-0cZg92L0AZeY-yCMD3PqFFBQ1qof"/>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant border-2 border-white">+6</div>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-1.5 mb-2">
+<span class="material-symbols-outlined text-tertiary-container text-xs" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<span class="text-[10px] font-bold text-primary uppercase">MBTI 기반 가이드</span>
+</div>
+<p class="text-xs text-on-surface leading-snug font-medium italic">"열정적인 ENFP/ESFJ 다수. 활발한 브레인스토밍과 감정적 공감을 통한 동기부여 효과적."</p>
+</div>
+</div>
+<!-- Team Card SS3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10 shadow-sm flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-primary font-headline">SS3 Team</h4>
+<p class="text-xs text-on-surface-variant">Global Logistics</p>
+</div>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded">15 명</span>
+</div>
+<div class="flex -space-x-2 mb-6">
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional portrait headshot of a team member in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeTQVpvtP0HTrngsu-Jn7C-dFscS1kxrKSJkyAdtUPJGjgQfz37w3v1aGcjuZFaEFgAKedOh95Rt65Ppz31qbFnhul0ZI44p9_726WtyoHXCOyZxFgWlwvZzZiFECiA7k7R-8UNCOGaDhdhUZjcNcEsaxurlnZfKZ8cEDHLIijDOf0wPZyF95mOor80_29-9Z-wzChxdfCuYxWdwXKIJKtT69Y80NSZYZCa9a_npco4UVTexNn1EkQiNwTo178RezjmEDZLUnFWzBR"/>
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional portrait headshot of a team member in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhuhyXGaCF488gPbxukOaAA8107KJqtqrOJvmEIlLnQ5LmDthhMc64h0VxMdAHJgd6OELJiPLpkSqP58FBJ_nNqCeibPScFMyp-mAa-du_hqsMTvqxvbTw2Ox5boWW3qC-0I1jkBCj9PFYhdtbl0q7J-BtgdOBegdzFm3KPAzWQcSakWORsYukx3oH9YFnPrIZOiqxbDE-4seDdd3xCZOOBWo3uqL3Yq6xwNXzgjCmmWaaI8TtR-nfv1KkEWHexPdk_LFfmHBcVw68"/>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant border-2 border-white">+13</div>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-1.5 mb-2">
+<span class="material-symbols-outlined text-tertiary-container text-xs" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<span class="text-[10px] font-bold text-primary uppercase">MBTI 기반 가이드</span>
+</div>
+<p class="text-xs text-on-surface leading-snug font-medium italic">"안정적인 ISTJ/ISFJ 중심. 체계적인 프로세스 준수와 구체적인 스케줄 기반 협업 권장."</p>
+</div>
+</div>
+<!-- Team Card SS4 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10 shadow-sm flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-primary font-headline">SS4 Team</h4>
+<p class="text-xs text-on-surface-variant">Future Lab</p>
+</div>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded">10 명</span>
+</div>
+<div class="flex -space-x-2 mb-6">
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional portrait headshot of a team member in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClueugSSWf7OTchItQR06uv0W_llmk2t5tjfnbI3bIrRm5FtXP54RIQJfJe2rtU02SUdRgkTDHWb6QYLx4TX9ZCjpt69SNx8kP1Eb3luiR5qAz3Lty5HivXOFHX-wjDJL904O6wTfnYNWkwSiucjrK_0tx09HG6ZnGlNumFyGxfibzYxGAO-fc95_Qlqk61ygrUXsjQHFMRP2vbdAUbwJm-HwrZt08ZIQ85JaCQFVeIzwM0ykODEmri5tpjs45qdDJ0M1RpCtvSfwC"/>
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional portrait headshot of a team member in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQxF1vp16t97Wwt_5Ob2INEfMJwP89oB__kIV8Yfx-u79GEQ9qnJuMT95RvM9fQO9Dpz9adaKeEdIA-3OyRMR__L1Yn-gqJRTY4RYLIlz2URtnXJmT_0wyJthSsK3Jgvn_N6qrS5PQkn3_o4Qb5OInObSjA96Ss0YYXMRk4QsezqJxqpD_Jqj2_Z_Q3rbem9IdZ3qdOGukO-16AEWor-gUvC9I6Y9Y3u-tpKyndFzlN1WhJpy6jvaOd3EO017BoLZNdDg5trDUrRWb"/>
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional portrait headshot of a team member in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYJfosPdQr_TzF-lgiyG8uxX9_EBFzDjH0bYF4cNKd_B6gRsOPwACxAJ-l9lOyUVu2VNaHuAGL9k2XIrRym5t-HyqMR9zDxIhhimB92WBTK-LKGfwqv_bA_zeemOnJ9gq9Jk-Xhyum2o3sGWMXG_BmevyP6eeLzavmFQQcZpvfgAn4qsbb9dWk8pckt9VPQ21thTYiY6-vmP5P_9ybRkvdj0xYTrCnnrH-Qp66x_cdhoX0BwR8FPDNoov3VXpK_1SMnWytgYT_FU9M"/>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant border-2 border-white">+7</div>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-1.5 mb-2">
+<span class="material-symbols-outlined text-tertiary-container text-xs" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<span class="text-[10px] font-bold text-primary uppercase">MBTI 기반 가이드</span>
+</div>
+<p class="text-xs text-on-surface leading-snug font-medium italic">"혁신적인 INTP/ENTP 성향. 자유로운 아이디어 제안과 자율적 업무 환경 제공 시 성과 극대화."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-2xl flex justify-around items-center py-3 border-t border-outline-variant/10">
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px]">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-[10px]">Financials</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">badge</span>
+<span class="text-[10px] font-bold">HR</span>
+</button>
+</nav>
+</body></html>

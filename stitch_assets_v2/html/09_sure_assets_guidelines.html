@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SURE-Intelligence Hub - Assets &amp; Guidelines</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#d8e2ff",
+                        "outline-variant": "#c6c5d1",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#0e1b34",
+                        "on-primary-fixed": "#0b164a",
+                        "on-tertiary-fixed": "#130067",
+                        "secondary": "#525e7a",
+                        "surface-tint": "#515b92",
+                        "surface-variant": "#dfe2e9",
+                        "surface": "#f7f9ff",
+                        "tertiary-fixed-dim": "#c5c0ff",
+                        "tertiary-fixed": "#e3dfff",
+                        "outline": "#767680",
+                        "inverse-primary": "#bac3ff",
+                        "on-primary-container": "#848dc8",
+                        "secondary-fixed-dim": "#bac6e7",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#8980ff",
+                        "on-background": "#181c21",
+                        "primary-fixed-dim": "#bac3ff",
+                        "tertiary-container": "#1e008f",
+                        "on-secondary-container": "#55617d",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d7dae1",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#3600e1",
+                        "on-surface": "#181c21",
+                        "primary": "#030e44",
+                        "primary-container": "#1b2559",
+                        "surface-container-highest": "#dfe2e9",
+                        "on-secondary-fixed-variant": "#3b4762",
+                        "tertiary": "#0e0055",
+                        "on-surface-variant": "#45464f",
+                        "surface-container-high": "#e5e8ef",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#394378",
+                        "background": "#f7f9ff",
+                        "inverse-surface": "#2d3136",
+                        "primary-fixed": "#dee0ff",
+                        "surface-bright": "#f7f9ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f1f4fb",
+                        "inverse-on-surface": "#eef1f8",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#d0dcfe",
+                        "surface-container": "#ebeef5"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex">
+<!-- SideNavBar (from JSON) -->
+<aside class="hidden md:flex flex-col h-screen p-4 border-r border-transparent bg-[#f1f4fb] dark:bg-slate-950 w-64 fixed left-0 top-0 z-50">
+<div class="flex items-center gap-3 px-2 mb-10">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="lightbulb">lightbulb</span>
+</div>
+<div>
+<h1 class="text-lg font-bold text-[#1B2559] leading-tight">Intelligence</h1>
+<p class="text-[10px] text-slate-500 font-medium">Editorial Hub</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<div class="text-slate-500 dark:text-slate-400 p-2 flex items-center gap-3 transition-all ease-in-out duration-200 hover:bg-white/50 dark:hover:bg-slate-800/50 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined" data-icon="lightbulb">lightbulb</span>
+<span class="font-body text-sm font-medium">Innovation &amp; TFTs</span>
+</div>
+<div class="bg-[#ffffff] dark:bg-slate-800 text-[#1B2559] dark:text-blue-300 rounded-lg shadow-sm p-2 flex items-center gap-3 transition-all ease-in-out duration-200 cursor-default">
+<span class="material-symbols-outlined" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-body text-sm font-bold">Assets &amp; Guidelines</span>
+</div>
+</nav>
+<div class="mb-6 px-2">
+<button class="w-full bg-primary-container text-on-primary py-3 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-primary-container/20">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Insight
+            </button>
+</div>
+<footer class="space-y-2 pt-4 border-t border-outline-variant/20">
+<div class="text-slate-500 dark:text-slate-400 p-2 flex items-center gap-3 hover:bg-white/50 rounded-lg cursor-pointer transition-all">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-sm font-medium">Support</span>
+</div>
+<div class="text-slate-500 dark:text-slate-400 p-2 flex items-center gap-3 hover:bg-white/50 rounded-lg cursor-pointer transition-all">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</div>
+</footer>
+</aside>
+<!-- Main Content Shell -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar (from JSON) -->
+<header class="bg-[#f7f9ff] dark:bg-slate-900 flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto sticky top-0 z-40">
+<div class="flex items-center gap-8">
+<div class="text-xl font-extrabold text-[#1B2559] dark:text-white">SURE-Intelligence Hub</div>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-xs" href="#">Home</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-xs" href="#">Financials</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-xs" href="#">Weekly Progress</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-xs" href="#">Meeting Minutes</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-xs" href="#">Projects &amp; Risks</a>
+<a class="text-[#1B2559] dark:text-blue-400 font-bold border-b-2 border-[#1B2559] pb-1 text-xs" href="#">Resources &amp; HR</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<input class="bg-[#f1f4fb] border-none rounded-full px-4 py-2 text-sm w-64 focus:ring-2 ring-primary-container/20" placeholder="Search resources..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUpS7ZCXySN8aJjOVebA5sPZk89djgk91Y7SEURzlpkKneissrq3uGXnMHeXCfuU8tD_JKGhiMQK1UWPpKGflCYJHzl9-_KLfPsVkRG7_CJJjIuztWtZwYLSpPwWt_hD-mxh9LU68ySVpmP3F1IrsAIgfB6MAmaPKucrjm88tgyijS8lI1NGFSJTTJNwz302NKgdnH3dTiguHYPJQ5Ix_yCavtiQssL3B-TkDCHj5pxjaxQTu2cTWxm_5svJyOWnrrAlUfPVNaOCs4"/>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 max-w-[1440px] mx-auto w-full space-y-8">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-3xl font-extrabold text-primary tracking-tight">Assets &amp; Guidelines</h2>
+<p class="text-on-surface-variant mt-1 font-medium">통합 자산 관리 및 전사 가이드라인 허브</p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 rounded-full bg-surface-container-high text-primary font-semibold text-sm hover:bg-surface-container-highest transition-colors">
+                        Asset Export
+                    </button>
+<button class="px-5 py-2.5 rounded-full bg-primary-container text-on-primary font-semibold text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="update">update</span>
+                        Check Compliance
+                    </button>
+</div>
+</div>
+<!-- Bento Top Section: Asset Alerts -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Alert Card -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/20 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-9xl text-error" data-icon="warning">warning</span>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-lg bg-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-error font-bold" data-icon="notifications_active">notifications_active</span>
+</div>
+<h3 class="text-xl font-bold text-primary">[에셋 경고] 주요 도구 라이선스 만료 예정일 시각화</h3>
+</div>
+<p class="text-on-surface-variant text-sm mb-8 leading-relaxed max-w-xl">
+                        현재 활성화된 서비스 중 라이선스 갱신이 시급한 항목들이 감지되었습니다. 원활한 업무 협업을 위해 만료일 이전에 갱신 절차를 진행해 주시기 바랍니다.
+                    </p>
+<div class="space-y-6">
+<!-- License Item: Jira -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="font-bold text-primary flex items-center gap-2">
+<img alt="Jira" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-kTcHuvRSaKynnL27_XpWceYXV3YbzdpkU76vD289ipGWPyLF1jQnvRQVu2TsShELYkYb-cbhRjG8kagfSG41q7nxzk1Q0CiKNEf4-h5IxvU1TZmdZZYsgohWc5S46T7yTyrKSrKreLS1UzDBOtJh3Uy-rvF93Ac3FlLrffGmWfagZtl5p9CCwVjBJm943RcX13T78AUf7yAmIos-bufqYSGy6QipnJ394JnJpBtJv4YAlcBvb1cYo5pdMG-A6-IMzLxU9rpyEdK9"/>
+                                    Atlassian Jira Software (Enterprise)
+                                </span>
+<span class="font-medium text-error">D-5일 남음</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 95%;"></div>
+</div>
+</div>
+<!-- License Item: Slack -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="font-bold text-primary flex items-center gap-2">
+<img alt="Slack" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZRL7TUTWtgKkqV6qlN67f1-SkhRgvAaeOJXqbKzYEy7CjGNT9--pfxQnrGZRq9JbOvPS4x39qbl-Vriv94L7g3CfBuEEsDMQvgSHQUxSJ8FJP_ymRpeU-KVopjkcqwxSRxQNF7z5HE2tc9i1NLXpcVpc0YGZmUZZgQiqKAvTRbVW-9uqPFt3j9Cj8CgQfZkTOTgIbCZSIPdGBwGRGAZfBkFOOq1deSyNWr3p94KR07aCOvgLB-og1MwxfwyNuYYvbLHyOVcynSihh"/>
+                                    Slack Pro Plan (Team)
+                                </span>
+<span class="font-medium text-on-surface-variant">D-14일 남음</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 70%;"></div>
+</div>
+</div>
+<!-- License Item: AWS -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="font-bold text-primary flex items-center gap-2">
+<img alt="AWS" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6Bah5utmU1KyhkRUEUI9IFTv-e5dnzhIvAV172pFbgxRbxzokZl9H8M89bmkdnXar193BSm80FFxCyUTbcuT7b66-tt-0wh4Lj-KK-5nxThuYbg0l5Jg76ubGsacdl84mfsKLQvbEA_8Ey4P1F25zO4HqV7OX7BpyIy0BRDUr0oOTakumHDbaMgJtZn7No4-sRfnJSv9YCihPe5r3-wgihi2JoxQrDumxxiWKyyBDYMEXweqsoFRBTrMvtLpk8ASldp0tMf5xJXwE"/>
+                                    AWS Cloud Services (Production)
+                                </span>
+<span class="font-medium text-on-surface-variant">D-28일 남음</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 45%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-end">
+<button class="text-primary font-bold text-sm flex items-center gap-1 group">
+                            상세 라이선스 관리 이동
+                            <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Secondary Summary Card -->
+<div class="bg-primary-container rounded-xl p-8 text-white flex flex-col justify-between">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary-fixed-dim">Asset Health Score</span>
+<div class="mt-4 flex items-center gap-4">
+<span class="text-5xl font-black">92</span>
+<div class="text-xs text-primary-fixed-dim leading-tight">
+                                Overall infrastructure<br/>compliance level
+                            </div>
+</div>
+</div>
+<div class="py-6">
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-medium">Compliance Target</span>
+<span class="text-xs opacity-70">Goal: 95+</span>
+</div>
+<div class="flex gap-1 h-8 items-end">
+<div class="bg-primary-fixed-dim/20 w-full h-[60%] rounded-sm"></div>
+<div class="bg-primary-fixed-dim/20 w-full h-[70%] rounded-sm"></div>
+<div class="bg-primary-fixed-dim/20 w-full h-[85%] rounded-sm"></div>
+<div class="bg-primary-fixed-dim/20 w-full h-[80%] rounded-sm"></div>
+<div class="bg-on-primary w-full h-[92%] rounded-sm"></div>
+</div>
+</div>
+<button class="w-full bg-white/10 hover:bg-white/20 border border-white/20 py-3 rounded-xl text-xs font-bold transition-all">
+                        Request System Audit
+                    </button>
+</div>
+</section>
+<!-- Bento Bottom Section: Guidelines -->
+<section class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+<!-- Large Bento Accordion UI -->
+<div class="lg:col-span-3 bg-surface-container-low rounded-xl p-8">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="assignment">assignment</span>
+</div>
+<h3 class="text-xl font-bold text-primary">[지침 게시판]</h3>
+</div>
+<div class="space-y-4">
+<!-- Accordion Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden">
+<button class="w-full flex items-center justify-between p-6 text-left group">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="font-bold text-primary">보안 지침 (2024 Ver.)</span>
+<span class="bg-error-container text-error text-[10px] font-black px-2 py-0.5 rounded uppercase">Essential</span>
+</div>
+<span class="material-symbols-outlined transition-transform group-hover:rotate-180" data-icon="expand_more">expand_more</span>
+</button>
+<div class="px-12 pb-6 text-sm text-on-surface-variant leading-relaxed">
+<p class="mb-4">모든 임직원은 사내 보안 규정을 준수해야 하며, 데이터 유출 방지를 위해 다음의 규칙을 따릅니다.</p>
+<ul class="list-disc list-inside space-y-2">
+<li>이중 인증(2FA) 필수 활성화</li>
+<li>공용 네트워크에서의 VPN 사용 의무</li>
+<li>기밀 자료 외부 공유 시 사전 승인 절차</li>
+</ul>
+<div class="mt-4 flex gap-4">
+<a class="text-primary underline font-medium" href="#">Full PDF Download</a>
+<a class="text-primary underline font-medium" href="#">Compliance Check</a>
+</div>
+</div>
+</div>
+<!-- Accordion Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden opacity-80 hover:opacity-100 transition-opacity">
+<button class="w-full flex items-center justify-between p-6 text-left group">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="font-bold text-primary">공용석 관리 가이드</span>
+</div>
+<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+<!-- Accordion Item 3 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden opacity-80 hover:opacity-100 transition-opacity">
+<button class="w-full flex items-center justify-between p-6 text-left group">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="font-bold text-primary">인프라 신청 가이드</span>
+</div>
+<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- AI Sidebar / Sidebar Insight -->
+<div class="lg:col-span-1 bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/10 flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">AI Curation</span>
+</div>
+<h4 class="text-lg font-bold text-primary mb-4 leading-snug">Most Accessed Guidelines this week</h4>
+<div class="space-y-4 mb-8">
+<div class="p-3 bg-surface-container rounded-lg flex items-start gap-3">
+<div class="text-xl font-black text-primary/20">01</div>
+<div>
+<p class="text-xs font-bold text-primary leading-tight">Remote Work Security Policy</p>
+<p class="text-[10px] text-on-surface-variant mt-1">124 views</p>
+</div>
+</div>
+<div class="p-3 bg-surface-container rounded-lg flex items-start gap-3">
+<div class="text-xl font-black text-primary/20">02</div>
+<div>
+<p class="text-xs font-bold text-primary leading-tight">Travel Expense Reimbursement</p>
+<p class="text-[10px] text-on-surface-variant mt-1">98 views</p>
+</div>
+</div>
+</div>
+<div class="mt-auto">
+<div class="p-4 bg-tertiary-fixed rounded-xl border-2 border-white/50 shadow-inner">
+<p class="text-xs font-medium text-on-tertiary-fixed leading-relaxed">
+                                ✨ <strong>Pro Tip:</strong> All guidelines are searchable via the top bar or by asking the AI chatbot.
+                            </p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only from JSON) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-2xl z-50 flex justify-around items-center py-3 border-t border-outline-variant/10">
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-[#1B2559]">
+<span class="material-symbols-outlined" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="text-[10px] font-bold">Assets</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</div>
+</nav>
+</body></html>

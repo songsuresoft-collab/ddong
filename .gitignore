@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+frontend/.next/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# Cache
+backend/cache/*.json
+
+# NotebookLM / MCP 인증 쿠키 (절대 커밋 금지)
+*.cookies.json
+notebooklm_cookies*.json
+cookies.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Misc
+*.log
+npm-debug.log*
+
+# Next.js build output
+frontend/out/
+frontend/dist/

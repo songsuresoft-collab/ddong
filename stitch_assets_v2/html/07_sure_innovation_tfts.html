@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#d8e2ff",
+              "outline-variant": "#c6c5d1",
+              "on-error": "#ffffff",
+              "on-secondary-fixed": "#0e1b34",
+              "on-primary-fixed": "#0b164a",
+              "on-tertiary-fixed": "#130067",
+              "secondary": "#525e7a",
+              "surface-tint": "#515b92",
+              "surface-variant": "#dfe2e9",
+              "surface": "#f7f9ff",
+              "tertiary-fixed-dim": "#c5c0ff",
+              "tertiary-fixed": "#e3dfff",
+              "outline": "#767680",
+              "inverse-primary": "#bac3ff",
+              "on-primary-container": "#848dc8",
+              "secondary-fixed-dim": "#bac6e7",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#8980ff",
+              "on-background": "#181c21",
+              "primary-fixed-dim": "#bac3ff",
+              "tertiary-container": "#1e008f",
+              "on-secondary-container": "#55617d",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#d7dae1",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed-variant": "#3600e1",
+              "on-surface": "#181c21",
+              "primary": "#030e44",
+              "primary-container": "#1b2559",
+              "surface-container-highest": "#dfe2e9",
+              "on-secondary-fixed-variant": "#3b4762",
+              "tertiary": "#0e0055",
+              "on-surface-variant": "#45464f",
+              "surface-container-high": "#e5e8ef",
+              "on-error-container": "#93000a",
+              "on-primary-fixed-variant": "#394378",
+              "background": "#f7f9ff",
+              "inverse-surface": "#2d3136",
+              "primary-fixed": "#dee0ff",
+              "surface-bright": "#f7f9ff",
+              "on-secondary": "#ffffff",
+              "surface-container-low": "#f1f4fb",
+              "inverse-on-surface": "#eef1f8",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d0dcfe",
+              "surface-container": "#ebeef5"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9ff; color: #181c21; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-ai-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(198, 197, 209, 0.2);
+        }
+        .timeline-line {
+            background: linear-gradient(to bottom, transparent, #c6c5d1 10%, #c6c5d1 90%, transparent);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen p-4 border-r border-transparent bg-[#f1f4fb] dark:bg-slate-950 w-64 shrink-0 sticky top-0">
+<div class="flex items-center gap-3 mb-10 px-2">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+</div>
+<div>
+<h1 class="text-lg font-bold text-[#1B2559] leading-tight font-headline">Intelligence</h1>
+<p class="text-[10px] text-slate-500 font-medium tracking-wider uppercase">Editorial Hub</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-[#ffffff] dark:bg-slate-800 text-[#1B2559] dark:text-blue-300 rounded-lg shadow-sm transition-all ease-in-out duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="lightbulb">lightbulb</span>
+<span class="font-medium">Innovation &amp; TFTs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 rounded-lg transition-all ease-in-out duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="inventory_2">inventory_2</span>
+<span class="font-medium">Assets &amp; Guidelines</span>
+</a>
+</nav>
+<div class="mb-6 px-2">
+<button class="w-full py-3 bg-primary-container text-white rounded-xl font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+<span>New Insight</span>
+</button>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+<span class="text-sm font-medium">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-[#f7f9ff] dark:bg-slate-900 sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold text-[#1B2559] dark:text-white font-headline">SURE-Intelligence Hub</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-sm" href="#">Home</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-sm" href="#">Financials</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-sm" href="#">Weekly Progress</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-sm" href="#">Meeting Minutes</a>
+<a class="text-[#1B2559] dark:text-blue-400 font-bold border-b-2 border-[#1B2559] pb-1 text-sm" href="#">Projects &amp; Risks</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1B2559] transition-colors text-sm" href="#">Resources &amp; HR</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-[20px]" data-icon="search">search</span>
+</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:ring-2 focus:ring-primary-container w-64 transition-all" placeholder="Search insights..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="professional portrait of a senior executive in a modern office setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAl01Lx3RowkZLLwbvU3AaLr8NoUUYSS4MDE2DwtNXOB5Icqcv9ClT4WrFtMeVuyKlCC8FVlw9yryycIHWjrkOypA245c8Gjv5vHpQo5cyQNexdoleqoO5K4l5TKOU9GHunbXP5NPXTpl5oE_lnxGoO6Yu4NHX1ZXEBDPjArPXEL7J1vT4GSMhtCzAwr5AYvLHFYJ-MYobjhJayyfkhF4xvtwVtOK-zNRBOkTl_UX91L8mDVsLV2a6SdWjZmDy8Sws8aDAP9JyTW9A"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 p-8 max-w-[1440px] mx-auto w-full space-y-8">
+<!-- Page Header Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="text-xs font-bold text-on-tertiary-container bg-tertiary-fixed px-3 py-1 rounded-full uppercase tracking-tighter font-label">Innovation Strategy</span>
+<h2 class="text-[2.75rem] font-extrabold text-primary font-headline mt-2 leading-none">Innovation &amp; TFTs</h2>
+<p class="text-on-surface-variant mt-3 max-w-2xl font-body">Accelerating organizational transformation through strategic Task Force Teams and cutting-edge AI integration.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 bg-surface-container-highest text-primary font-bold rounded-xl flex items-center gap-2 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+<span>Report</span>
+</button>
+<button class="px-5 py-2.5 bg-primary-container text-white font-bold rounded-xl flex items-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]" data-icon="bolt">bolt</span>
+<span>Accelerate</span>
+</button>
+</div>
+</section>
+<!-- Top Section: 혁신 KPI Bento Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- KPI Card -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-[2rem] p-8 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-xl font-bold text-primary font-headline flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-variant" data-icon="monitoring">monitoring</span>
+                                혁신 KPI
+                            </h3>
+<span class="text-sm font-semibold text-primary-container bg-primary-fixed px-3 py-1 rounded-lg">LIVE UPDATES</span>
+</div>
+<div class="space-y-8">
+<!-- Progress 1 -->
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-on-surface font-headline">Model2Doc AI Integration</span>
+<span class="text-2xl font-black text-primary font-headline">92<span class="text-sm font-medium ml-1">%</span></span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[92%] rounded-full"></div>
+</div>
+</div>
+<!-- Progress 2 -->
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-on-surface font-headline">Robot Tech R&amp;D Deployment</span>
+<span class="text-2xl font-black text-primary font-headline">78<span class="text-sm font-medium ml-1">%</span></span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[78%] rounded-full"></div>
+</div>
+</div>
+<!-- Progress 3 -->
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-on-surface font-headline">AI Hub Development Phase II</span>
+<span class="text-2xl font-black text-primary font-headline">85<span class="text-sm font-medium ml-1">%</span></span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed-variant w-[85%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative background element -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-primary-container/5 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
+</div>
+<!-- AI Insight Card -->
+<div class="glass-ai-card rounded-[2rem] p-8 flex flex-col justify-between border-tertiary-container/10">
+<div>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-sm font-bold tracking-widest text-tertiary-container uppercase font-headline">AI Curator Insight</span>
+</div>
+<p class="text-2xl font-bold text-primary font-headline leading-tight">"전체 목표 달성률 85%, 혁신 속도 양호"</p>
+<p class="text-on-surface-variant mt-4 font-body text-sm leading-relaxed">
+                            현재 데이터에 따르면 Model2Doc 프로젝트가 예정보다 2주 앞서 진행되고 있습니다. 로봇 부문의 자원 배분을 최적화하여 4분기 내 목표 100% 달성이 가능할 것으로 예측됩니다.
+                        </p>
+</div>
+<div class="mt-8">
+<div class="flex -space-x-3 mb-4">
+<img class="w-10 h-10 rounded-full border-2 border-white object-cover" data-alt="professional headshot of female engineering lead" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTVqjxcn0gnO2G3bhS_CXGIMWoI6wtW7jcCuGpA2rTDYn8mvTvK5Q2yVVQGnLcAeX_m3f5vBDJS8a9jqJstgOvpAGD6m14sh0KdznJftrDqpnVK_0RhaIYQkLTwmI8Unc0viGdAf3LSOkw1F86NdVzCC-4o5cHkJGPFOlL2IHY-oliY8o0GJvRz16yw9vgRvRPBMe94MmsdkF3g5J24aDp8leCL0LKJKUbYwvwtzZsw0P8GoBiE2ynSRBehTjTZV7pRBbyxAZ3P9lz"/>
+<img class="w-10 h-10 rounded-full border-2 border-white object-cover" data-alt="professional headshot of male software architect" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBreNFXLwGZ9hZ-DmvqwfD8J1Kpfn7aWWh9szh-6Gz2IyYjR4l8lIXi19cPffgk_cZO_c7SOOOzJS0qQryrSUG999FatWN_mdQBw3TSXPVHyDEQZbOeckU_lVVHltT9WY8is-isLgcMFUQM8L5h2QXpaICMOt_muqBD8J4wQpd19_P7YJtKf6Vkc85YjOOsKrfQ2Nr-zwnz5jf7Ef6fvkm0taLPlWzsmiPCjWPt5VkNgO0ZsinMtON9wOLLcelTonFZq2sPXPDkXdv2"/>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+12</div>
+</div>
+<button class="w-full py-3 bg-white border border-outline-variant/30 text-primary font-bold rounded-xl text-sm hover:bg-surface-container-low transition-colors">Action Plan View</button>
+</div>
+</div>
+</section>
+<!-- Bottom Section: TFT 마일스톤 Timeline -->
+<section class="bg-surface-container-lowest rounded-[2rem] p-8">
+<div class="flex items-center justify-between mb-12">
+<h3 class="text-xl font-bold text-primary font-headline flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-variant" data-icon="route">route</span>
+                        TFT 마일스톤
+                    </h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-low text-xs font-bold text-on-surface-variant rounded-full">LAST 3 MONTHS</span>
+<span class="px-3 py-1 bg-primary-fixed text-xs font-bold text-primary-container rounded-full">NEXT 1 MONTH</span>
+</div>
+</div>
+<!-- Timeline Component -->
+<div class="relative">
+<!-- The Grid Lines -->
+<div class="absolute inset-0 flex justify-between px-4 opacity-5 pointer-events-none">
+<div class="w-px bg-on-background h-full"></div>
+<div class="w-px bg-on-background h-full"></div>
+<div class="w-px bg-on-background h-full"></div>
+<div class="w-px bg-on-background h-full border-dashed border-primary border-l-2 opacity-100"></div>
+<div class="w-px bg-on-background h-full"></div>
+</div>
+<!-- Month Labels -->
+<div class="flex justify-between mb-8 px-4 text-[10px] font-black text-on-surface-variant tracking-[0.2em] uppercase">
+<span>Month -3</span>
+<span>Month -2</span>
+<span>Month -1</span>
+<span class="text-primary-container">Today</span>
+<span>Month +1</span>
+</div>
+<div class="space-y-12 pb-8">
+<!-- SDV TFT Row -->
+<div class="grid grid-cols-12 items-center gap-4 group">
+<div class="col-span-2">
+<span class="text-xs font-black text-primary font-headline tracking-tight uppercase">SDV TFT</span>
+<p class="text-[10px] text-on-surface-variant">Software Defined Vehicle</p>
+</div>
+<div class="col-span-10 relative h-12 flex items-center">
+<!-- Baseline -->
+<div class="absolute w-full h-px bg-outline-variant/20"></div>
+<!-- Milestone 1 (Past) -->
+<div class="absolute left-[10%] group-hover:-translate-y-1 transition-transform">
+<div class="w-3 h-3 rounded-full bg-primary-fixed-dim ring-4 ring-white"></div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 w-32 text-center">
+<p class="text-[9px] font-bold text-on-surface-variant leading-tight">Core OS Alpha Architecture</p>
+</div>
+</div>
+<!-- Milestone 2 (Past) -->
+<div class="absolute left-[45%] group-hover:-translate-y-1 transition-transform">
+<div class="w-3 h-3 rounded-full bg-primary-fixed-dim ring-4 ring-white"></div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 w-32 text-center">
+<p class="text-[9px] font-bold text-on-surface-variant leading-tight">Connectivity Proto-v2</p>
+</div>
+</div>
+<!-- Milestone 3 (Current/Future) -->
+<div class="absolute left-[75%] group-hover:-translate-y-1 transition-transform">
+<div class="w-5 h-5 rounded-full bg-primary ring-8 ring-primary/10"></div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 w-40 p-2 bg-primary text-white rounded-lg shadow-xl">
+<p class="text-[10px] font-bold">In-Vehicle Infotainment Beta</p>
+<div class="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-primary rotate-45"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Robot TFT Row -->
+<div class="grid grid-cols-12 items-center gap-4 group">
+<div class="col-span-2">
+<span class="text-xs font-black text-primary font-headline tracking-tight uppercase">Robot TFT</span>
+<p class="text-[10px] text-on-surface-variant">Automated Logistics</p>
+</div>
+<div class="col-span-10 relative h-12 flex items-center">
+<div class="absolute w-full h-px bg-outline-variant/20"></div>
+<div class="absolute left-[20%] group-hover:-translate-y-1 transition-transform">
+<div class="w-3 h-3 rounded-full bg-secondary-fixed-dim ring-4 ring-white"></div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 w-32 text-center">
+<p class="text-[9px] font-bold text-on-surface-variant leading-tight">SLAM Sensor Testing</p>
+</div>
+</div>
+<div class="absolute left-[65%] group-hover:-translate-y-1 transition-transform">
+<div class="w-3 h-3 rounded-full bg-secondary-fixed-dim ring-4 ring-white"></div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 w-32 text-center">
+<p class="text-[9px] font-bold text-on-surface-variant leading-tight">Fleet Mgr Deployment</p>
+</div>
+</div>
+<div class="absolute left-[85%] group-hover:-translate-y-1 transition-transform">
+<div class="w-5 h-5 rounded-full bg-tertiary-container ring-8 ring-tertiary-container/10"></div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 w-40 p-2 bg-tertiary-container text-white rounded-lg shadow-xl">
+<p class="text-[10px] font-bold">Autonomous Docking Pilot</p>
+<div class="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-tertiary-container rotate-45"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI TFT Row -->
+<div class="grid grid-cols-12 items-center gap-4 group">
+<div class="col-span-2">
+<span class="text-xs font-black text-primary font-headline tracking-tight uppercase">AI TFT</span>
+<p class="text-[10px] text-on-surface-variant">Corporate Intelligence</p>
+</div>
+<div class="col-span-10 relative h-12 flex items-center">
+<div class="absolute w-full h-px bg-outline-variant/20"></div>
+<div class="absolute left-[30%] group-hover:-translate-y-1 transition-transform">
+<div class="w-3 h-3 rounded-full bg-on-primary-container ring-4 ring-white"></div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 w-32 text-center">
+<p class="text-[9px] font-bold text-on-surface-variant leading-tight">LLM Fine-tuning Stage 1</p>
+</div>
+</div>
+<div class="absolute left-[55%] group-hover:-translate-y-1 transition-transform">
+<div class="w-3 h-3 rounded-full bg-on-primary-container ring-4 ring-white"></div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 w-32 text-center">
+<p class="text-[9px] font-bold text-on-surface-variant leading-tight">Doc Recognition API</p>
+</div>
+</div>
+<div class="absolute left-[90%] group-hover:-translate-y-1 transition-transform">
+<div class="w-5 h-5 rounded-full bg-on-tertiary-fixed-variant ring-8 ring-on-tertiary-fixed-variant/10"></div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 w-40 p-2 bg-on-tertiary-fixed-variant text-white rounded-lg shadow-xl">
+<p class="text-[10px] font-bold">Predictive Analytics Hub</p>
+<div class="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-on-tertiary-fixed-variant rotate-45"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Asymmetric Cards: Recent Success -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="lg:col-span-1 bg-primary-container text-white p-6 rounded-[1.5rem] flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-4xl opacity-50" data-icon="auto_awesome_motion">auto_awesome_motion</span>
+<div>
+<h4 class="text-2xl font-bold font-headline">7</h4>
+<p class="text-sm font-medium opacity-80">Pending Patents</p>
+</div>
+</div>
+<div class="lg:col-span-2 bg-surface-container-high p-6 rounded-[1.5rem] relative overflow-hidden flex items-end">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-30" data-alt="high-tech robotic arm assembly line in a clean laboratory environment with neon blue accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxWfwvB8mgRbz_G0M0StVQ-MV_J1PhjI2JzWs7yddjTh_8rstciCKygXewl6V7VbELg31edEIDXyUlhVOkbq1IearuTb4muSZeDterwKps0WM2W7ulNzRt3q25dRKpGNFB2oErJe5BmchwWNTfhT-SMlwLYAZVpxL3bCl6IPkyLEhjHDgfprvAC-1M2lj5gdpY2E1fMcSTw0F3dSvZfNX21eOFZX9Pq026BYrMOIzSMWFC8_TkdRnnMjZafXwuUMMvrA9WTPzdAXda"/>
+<div class="relative z-10">
+<h4 class="text-xl font-bold text-primary font-headline">Next-Gen Robotics</h4>
+<p class="text-on-surface-variant text-sm mt-1">Experimental Lab Phase Completed</p>
+</div>
+</div>
+<div class="lg:col-span-1 bg-surface-container-lowest p-6 rounded-[1.5rem] flex flex-col items-center justify-center text-center">
+<div class="w-16 h-16 rounded-full bg-tertiary-fixed flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary-container text-3xl" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<h4 class="text-lg font-bold text-primary">Certified Innovation</h4>
+<p class="text-xs text-on-surface-variant mt-2 px-4">Standardized Workflow for All TFTs deployed.</p>
+</div>
+</section>
+</div>
+</main>
+</body></html>
