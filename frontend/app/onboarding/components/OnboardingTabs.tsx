@@ -8,7 +8,7 @@ import styles from '../onboarding.module.css';
 const cleanMessage = (text: string) => {
   if (!text) return '';
   // NotebookLM citations like [1], [2], [1, 2] 제거
-  return text.replace(/\[\d+(?:,\s*\d+)*\]/g, '').trim();
+  return text.replace(/\[\d+(?:[\s,\-]*\d+)*\]/g, '').trim();
 };
 
 // ─── Sub-Component: Typing Indicator ───
@@ -38,7 +38,7 @@ export const GuideTab = () => {
       const res = await fetch(url);
       const data = await res.json();
       if (data.success && data.recommendations) {
-        setRecommendations(data.recommendations);
+        setRecommendations(data.recommendations.map(cleanMessage));
       } else {
         // 폴백
         setRecommendations(['SDV실의 주요 업무', '신입 교육 기간', '사내 복지 혜택', '출퇴근 셔틀 이용', '사내 식당 메뉴']);
@@ -137,13 +137,31 @@ export const GuideTab = () => {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {recoLoading ? (
-            <div style={{ fontSize: '12px', color: '#a3aed0', textAlign: 'center', padding: '10px' }}>질문 생성 중...</div>
+            <div style={{ animation: 'fadeIn 0.3s ease' }}>
+              <div className={styles.skeletonItem}></div>
+              <div className={styles.skeletonItem}></div>
+              <div className={styles.skeletonItem}></div>
+              <div className={styles.skeletonItem}></div>
+              <div style={{ 
+                fontSize: '11px', color: '#4318FF', fontWeight: 700, textAlign: 'center', 
+                marginTop: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' 
+              }}>
+                <span className={`material-symbols-outlined ${styles.spin}`} style={{ fontSize: '14px' }}>neurology</span>
+                가이드 문서를 바탕으로 지능형 질문 분석 및 생성 중...
+              </div>
+            </div>
           ) : recommendations.length > 0 ? (
             recommendations.map((q, i) => (
               <button 
                 key={i} 
-                className={styles.tabButton} 
-                style={{ width: '100%', justifyContent: 'flex-start', textAlign: 'left', lineHeight: '1.4' }} 
+                className={`${styles.tabButton} ${styles.recoItemEnter}`} 
+                style={{ 
+                  width: '100%', 
+                  justifyContent: 'flex-start', 
+                  textAlign: 'left', 
+                  lineHeight: '1.4',
+                  '--item-delay': i 
+                } as React.CSSProperties} 
                 onClick={() => setInput(q)}
               >
                 {q}
@@ -702,7 +720,18 @@ export const GrowthTab = () => {
       </div>
 
       {subTab === 'edu' ? (
-        <div className={styles.glassCard} style={{ animation: 'fadeIn 0.4s ease' }}>
+        <div className={styles.glassCard} style={{ animation: 'fadeIn 0.4s ease', position: 'relative', overflow: 'hidden' }}>
+          {/* Loading Overlay (Unified Design) */}
+          {loading && eduList.length > 0 && (
+            <div className={styles.loadingOverlay}>
+              <div className={styles.spinnerContainer}>
+                <div className={styles.brandSpinner}></div>
+                <div className={styles.loadingText}>사내 교육 데이터를 동기화 중...</div>
+                <div style={{ fontSize: '11px', color: '#a3aed0' }}>잠시만 기다려 주세요. 시트 데이터를 수집하고 있습니다.</div>
+              </div>
+            </div>
+          )}
+
           <div className={styles.growthSubHeader}>
             <h4 style={{ margin: 0, color: '#1B2559' }}>사내 교육 관리 (Google Sheets)</h4>
             <div style={{ display: 'flex', gap: '10px' }}>
@@ -712,7 +741,7 @@ export const GrowthTab = () => {
                 onClick={fetchEdu}
                 disabled={loading}
               >
-                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>refresh</span>
+                <span className={`material-symbols-outlined ${loading ? styles.spin : ''}`} style={{ fontSize: '18px' }}>refresh</span>
                 {loading ? '갱신 중...' : '새로고침'}
               </button>
               <button 
@@ -727,7 +756,15 @@ export const GrowthTab = () => {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', marginTop: '20px' }}>
             {loading && eduList.length === 0 ? (
-              <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px' }}>로딩 중...</div>
+              <>
+                {[1, 2, 3].map(n => (
+                  <div key={n} className={styles.skeletonEduCard}>
+                    <div className={styles.skeletonBar} style={{ width: '40px', height: '18px' }}></div>
+                    <div className={styles.skeletonBar} style={{ width: '70%', height: '24px', marginTop: '4px' }}></div>
+                    <div className={styles.skeletonBar} style={{ width: '50%', height: '16px', marginTop: 'auto' }}></div>
+                  </div>
+                ))}
+              </>
             ) : eduList.length > 0 ? (
               eduList.map((edu, idx) => (
                 <div key={idx} className={styles.eduCard} style={{ position: 'relative' }}>
