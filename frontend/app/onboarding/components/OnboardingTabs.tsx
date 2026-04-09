@@ -551,9 +551,17 @@ export const GrowthTab = () => {
   const [newEdu, setNewEdu] = useState({ title: '', date: '', instructor: '', tag: '일반' });
   const [mounted, setMounted] = useState(false);
 
+  const [showSyncMenu, setShowSyncMenu] = useState(false);
+
   useEffect(() => {
     setMounted(true);
-  }, []);
+    // 외부 클릭 시 드롭다운 닫기 로직
+    const handleClickOutside = (e: MouseEvent) => {
+      if (showSyncMenu) setShowSyncMenu(false);
+    };
+    window.addEventListener('click', handleClickOutside);
+    return () => window.removeEventListener('click', handleClickOutside);
+  }, [showSyncMenu]);
 
   const fetchEdu = async () => {
     setLoading(true);
@@ -581,11 +589,21 @@ export const GrowthTab = () => {
     }
   };
 
-  const syncConference = async () => {
-    if (!confirm('웹에서 최신 정보를 검색하여 구글 시트를 갱신하시겠습니까? (약 15~30초 소요)')) return;
+  const syncConference = async (mode: 'overwrite' | 'append') => {
+    const confirmMsg = mode === 'overwrite' 
+      ? '기존 모든 데이터를 삭제하고 처음부터 다시 검색하시겠습니까?' 
+      : '기존 데이터를 유지하면서 최신 정보를 추가적으로 검색하시겠습니까?';
+      
+    if (!confirm(confirmMsg)) return;
+    
     setSyncLoading(true);
+    setShowSyncMenu(false);
     try {
-      const res = await fetch('/api/onboarding/conference/sync', { method: 'POST' });
+      const res = await fetch('/api/onboarding/conference/sync', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mode })
+      });
       const data = await res.json();
       if (data.success) {
         alert(`${data.count}개의 새로운 컨퍼런스 정보를 수집하여 시트를 갱신했습니다.`);
@@ -857,15 +875,47 @@ export const GrowthTab = () => {
                   <span className={`material-symbols-outlined ${fetchLoading ? styles.spin : ''}`} style={{ fontSize: '18px' }}>refresh</span>
                   조회
                 </button>
-                <button 
-                  className={`${styles.tabButton} ${syncLoading ? styles.loadingButton : ''}`} 
-                  style={{ background: '#4318FF', color: '#fff', fontSize: '12px', padding: '6px 12px', display: 'flex', alignItems: 'center', gap: '4px' }}
-                  onClick={syncConference}
-                  disabled={fetchLoading || syncLoading}
-                >
-                  <span className={`material-symbols-outlined ${syncLoading ? styles.spin : ''}`} style={{ fontSize: '18px' }}>{syncLoading ? 'sync' : 'neurology'}</span>
-                  {syncLoading ? 'AI 분석 중...' : '실시간 AI 검색/갱신'}
-                </button>
+                  <div className={styles.syncDropdownContainer}>
+                    <button 
+                      className={`${styles.tabButton} ${syncLoading ? styles.loadingButton : ''}`} 
+                      style={{ background: '#4318FF', color: '#fff', fontSize: '12px', padding: '6px 12px', display: 'flex', alignItems: 'center', gap: '4px', position: 'relative' }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowSyncMenu(!showSyncMenu);
+                      }}
+                      disabled={fetchLoading || syncLoading}
+                    >
+                      <span className={`material-symbols-outlined ${syncLoading ? styles.spin : ''}`} style={{ fontSize: '18px' }}>
+                        {syncLoading ? 'sync' : 'smart_toy'}
+                      </span>
+                      {syncLoading ? 'AI 분석 중...' : 'AI 동기화 옵션'}
+                      <span className="material-symbols-outlined" style={{ fontSize: '16px', marginLeft: '2px' }}>
+                        {showSyncMenu ? 'expand_less' : 'expand_more'}
+                      </span>
+                    </button>
+
+                    {showSyncMenu && (
+                      <div className={styles.syncDropdownMenu} onClick={(e) => e.stopPropagation()}>
+                        <div className={styles.syncDropdownItem} onClick={() => syncConference('append')}>
+                          <div className={styles.syncDropdownItemTitle}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#05CD99' }}>add_circle</span>
+                            현재 내역에 추가 검색
+                          </div>
+                          <div className={styles.syncDropdownItemDesc}>기존 데이터를 유지하며 새로운 정보를 덧붙입니다.</div>
+                        </div>
+                        
+                        <div style={{ height: '1px', background: 'rgba(198, 197, 209, 0.2)', margin: '4px 0' }}></div>
+
+                        <div className={`${styles.syncDropdownItem} ${styles.syncDropdownItemDanger}`} onClick={() => syncConference('overwrite')}>
+                          <div className={styles.syncDropdownItemTitle}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>delete_forever</span>
+                            초기화 후 새롭게 검색
+                          </div>
+                          <div className={styles.syncDropdownItemDesc}>기존 데이터를 모두 지우고 처음부터 다시 검색합니다.</div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
             </div>
           </div>
 

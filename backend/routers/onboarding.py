@@ -186,15 +186,22 @@ async def get_conference_list():
     except Exception as e:
         return {"conferences": [], "success": False, "error": str(e)}
 
+class SyncRequest(BaseModel):
+    mode: str = "append" # overwrite or append
+
 @router.post("/onboarding/conference/sync")
-async def sync_conference_from_web():
-    """웹에서 정보를 검색-구조화-시트기록의 전 과정을 수행합니다."""
+async def sync_conference_from_web(req: SyncRequest = Body(...)):
+    """웹에서 정보를 검색-구조화-시트기록의 전 과정을 수행합니다. mode에 따라 초기화 여부가 결정됩니다."""
     try:
-        log_sync_debug(">>> Sync Pipeline Started")
+        mode = req.mode
+        log_sync_debug(f">>> Sync Pipeline Started (Mode: {mode})")
         
-        # 0. 이전 소스 완전 초기화 (Hard Reset)
-        log_sync_debug("Step 0: Clearing Notebook Sources...")
-        await clear_notebook_sources(CONFERENCE_NOTEBOOK_ID)
+        # 0. 이전 소스 초기화 (Overwrite 모드에서만 실행)
+        if mode == "overwrite":
+            log_sync_debug("Step 0: Clearing Notebook Sources (Overwrite Mode)...")
+            await clear_notebook_sources(CONFERENCE_NOTEBOOK_ID)
+        else:
+            log_sync_debug("Step 0: Skipping Clear (Append Mode)")
         
         # 1. Tavily 검색 + NotebookLM 구조화
         log_sync_debug("Step 1: Web Research & AI Analysis Start...")
@@ -217,6 +224,7 @@ async def sync_conference_from_web():
 
             payload = {
                 "action": "sync",
+                "mode": mode,  # 모드 정보 전달
                 "data": structured_data
             }
             
