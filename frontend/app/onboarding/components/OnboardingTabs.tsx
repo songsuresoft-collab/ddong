@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import ReactMarkdown from 'react-markdown';
 import styles from '../onboarding.module.css';
 
@@ -8,7 +9,7 @@ import styles from '../onboarding.module.css';
 const cleanMessage = (text: string) => {
   if (!text) return '';
   // NotebookLM citations like [1], [2], [1, 2] 제거
-  return text.replace(/\[\d+(?:,\s*\d+)*\]/g, '').trim();
+  return text.replace(/\[\d+(?:[\s,\-]*\d+)*\]/g, '').trim();
 };
 
 // ─── Sub-Component: Typing Indicator ───
@@ -38,7 +39,7 @@ export const GuideTab = () => {
       const res = await fetch(url);
       const data = await res.json();
       if (data.success && data.recommendations) {
-        setRecommendations(data.recommendations);
+        setRecommendations(data.recommendations.map(cleanMessage));
       } else {
         // 폴백
         setRecommendations(['SDV실의 주요 업무', '신입 교육 기간', '사내 복지 혜택', '출퇴근 셔틀 이용', '사내 식당 메뉴']);
@@ -137,13 +138,31 @@ export const GuideTab = () => {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {recoLoading ? (
-            <div style={{ fontSize: '12px', color: '#a3aed0', textAlign: 'center', padding: '10px' }}>질문 생성 중...</div>
+            <div style={{ animation: 'fadeIn 0.3s ease' }}>
+              <div className={styles.skeletonItem}></div>
+              <div className={styles.skeletonItem}></div>
+              <div className={styles.skeletonItem}></div>
+              <div className={styles.skeletonItem}></div>
+              <div style={{ 
+                fontSize: '11px', color: '#4318FF', fontWeight: 700, textAlign: 'center', 
+                marginTop: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' 
+              }}>
+                <span className={`material-symbols-outlined ${styles.spin}`} style={{ fontSize: '14px' }}>neurology</span>
+                가이드 문서를 바탕으로 지능형 질문 분석 및 생성 중...
+              </div>
+            </div>
           ) : recommendations.length > 0 ? (
             recommendations.map((q, i) => (
               <button 
                 key={i} 
-                className={styles.tabButton} 
-                style={{ width: '100%', justifyContent: 'flex-start', textAlign: 'left', lineHeight: '1.4' }} 
+                className={`${styles.tabButton} ${styles.recoItemEnter}`} 
+                style={{ 
+                  width: '100%', 
+                  justifyContent: 'flex-start', 
+                  textAlign: 'left', 
+                  lineHeight: '1.4',
+                  '--item-delay': i 
+                } as React.CSSProperties} 
                 onClick={() => setInput(q)}
               >
                 {q}
@@ -379,9 +398,27 @@ export const ChecklistTab = () => {
                          <span style={{ fontSize: '13px', color: '#A3AED0' }}>입사 3주차 (Onboarding)</span>
                       </div>
                    </div>
-                   <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '12px', color: '#A3AED0', fontWeight: 600, marginBottom: '4px' }}>CURRENT STATUS</div>
-                      <div style={{ padding: '6px 16px', borderRadius: '10px', background: members.find(m => m.id === activeMember)?.progress > 80 ? '#05CD99' : '#FFB800', color: '#fff', fontSize: '13px', fontWeight: 700 }}>
+                   <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center' }}>
+                      <div style={{ fontSize: '11px', color: '#A3AED0', fontWeight: 700, marginBottom: '6px', letterSpacing: '0.5px' }}>CURRENT STATUS</div>
+                      <div style={{ 
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '32px',
+                        minWidth: '100px',
+                        padding: '0 16px', 
+                        borderRadius: '32px', 
+                        background: members.find(m => m.id === activeMember)?.progress > 80 
+                          ? 'linear-gradient(135deg, #05CD99 0%, #04b386 100%)' 
+                          : 'linear-gradient(135deg, #FFB800 0%, #e6a600 100%)', 
+                        color: '#fff', 
+                        fontSize: '12px', 
+                        fontWeight: 800,
+                        boxShadow: members.find(m => m.id === activeMember)?.progress > 80 
+                          ? '0 4px 12px rgba(5, 205, 153, 0.2)' 
+                          : '0 4px 12px rgba(255, 184, 0, 0.2)',
+                        letterSpacing: '-0.2px'
+                      }}>
                         {members.find(m => m.id === activeMember)?.progress > 80 ? '임무 완수' : '진행 중'}
                       </div>
                    </div>
@@ -512,6 +549,19 @@ export const GrowthTab = () => {
   // 모달 상태
   const [showModal, setShowModal] = useState(false);
   const [newEdu, setNewEdu] = useState({ title: '', date: '', instructor: '', tag: '일반' });
+  const [mounted, setMounted] = useState(false);
+
+  const [showSyncMenu, setShowSyncMenu] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    // 외부 클릭 시 드롭다운 닫기 로직
+    const handleClickOutside = (e: MouseEvent) => {
+      if (showSyncMenu) setShowSyncMenu(false);
+    };
+    window.addEventListener('click', handleClickOutside);
+    return () => window.removeEventListener('click', handleClickOutside);
+  }, [showSyncMenu]);
 
   const fetchEdu = async () => {
     setLoading(true);
@@ -539,11 +589,21 @@ export const GrowthTab = () => {
     }
   };
 
-  const syncConference = async () => {
-    if (!confirm('웹에서 최신 정보를 검색하여 구글 시트를 갱신하시겠습니까? (약 15~30초 소요)')) return;
+  const syncConference = async (mode: 'overwrite' | 'append') => {
+    const confirmMsg = mode === 'overwrite' 
+      ? '기존 모든 데이터를 삭제하고 처음부터 다시 검색하시겠습니까?' 
+      : '기존 데이터를 유지하면서 최신 정보를 추가적으로 검색하시겠습니까?';
+      
+    if (!confirm(confirmMsg)) return;
+    
     setSyncLoading(true);
+    setShowSyncMenu(false);
     try {
-      const res = await fetch('/api/onboarding/conference/sync', { method: 'POST' });
+      const res = await fetch('/api/onboarding/conference/sync', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mode })
+      });
       const data = await res.json();
       if (data.success) {
         alert(`${data.count}개의 새로운 컨퍼런스 정보를 수집하여 시트를 갱신했습니다.`);
@@ -684,7 +744,18 @@ export const GrowthTab = () => {
       </div>
 
       {subTab === 'edu' ? (
-        <div className={styles.glassCard} style={{ animation: 'fadeIn 0.4s ease' }}>
+        <div className={styles.glassCard} style={{ animation: 'fadeIn 0.4s ease', position: 'relative', overflow: 'hidden' }}>
+          {/* Loading Overlay (Unified Design) */}
+          {loading && eduList.length > 0 && (
+            <div className={styles.loadingOverlay}>
+              <div className={styles.spinnerContainer}>
+                <div className={styles.brandSpinner}></div>
+                <div className={styles.loadingText}>사내 교육 데이터를 동기화 중...</div>
+                <div style={{ fontSize: '11px', color: '#a3aed0' }}>잠시만 기다려 주세요. 시트 데이터를 수집하고 있습니다.</div>
+              </div>
+            </div>
+          )}
+
           <div className={styles.growthSubHeader}>
             <h4 style={{ margin: 0, color: '#1B2559' }}>사내 교육 관리 (Google Sheets)</h4>
             <div style={{ display: 'flex', gap: '10px' }}>
@@ -694,7 +765,7 @@ export const GrowthTab = () => {
                 onClick={fetchEdu}
                 disabled={loading}
               >
-                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>refresh</span>
+                <span className={`material-symbols-outlined ${loading ? styles.spin : ''}`} style={{ fontSize: '18px' }}>refresh</span>
                 {loading ? '갱신 중...' : '새로고침'}
               </button>
               <button 
@@ -709,7 +780,15 @@ export const GrowthTab = () => {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', marginTop: '20px' }}>
             {loading && eduList.length === 0 ? (
-              <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px' }}>로딩 중...</div>
+              <>
+                {[1, 2, 3].map(n => (
+                  <div key={n} className={styles.skeletonEduCard}>
+                    <div className={styles.skeletonBar} style={{ width: '40px', height: '18px' }}></div>
+                    <div className={styles.skeletonBar} style={{ width: '70%', height: '24px', marginTop: '4px' }}></div>
+                    <div className={styles.skeletonBar} style={{ width: '50%', height: '16px', marginTop: 'auto' }}></div>
+                  </div>
+                ))}
+              </>
             ) : eduList.length > 0 ? (
               eduList.map((edu, idx) => (
                 <div key={idx} className={styles.eduCard} style={{ position: 'relative' }}>
@@ -742,10 +821,10 @@ export const GrowthTab = () => {
             )}
           </div>
 
-          {/* Add Modal */}
-          {showModal && (
-            <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-              <div className={styles.glassCard} style={{ width: '400px', padding: '32px', background: '#fff' }}>
+          {/* Add Modal - Rendered via Portal to document.body to prevent any clipping from parents */}
+          {showModal && mounted && createPortal(
+            <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+              <div className={styles.glassCard} style={{ width: '400px', padding: '32px', background: '#fff', boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}>
                 <h3 style={{ margin: '0 0 24px', color: '#1B2559' }}>신규 교육 추가</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                    <input type="text" placeholder="교육 이름" className={styles.searchInput} style={{ width: '100%', padding: '12px' }} value={newEdu.title} onChange={e => setNewEdu({...newEdu, title: e.target.value})} />
@@ -762,14 +841,28 @@ export const GrowthTab = () => {
                    <button className={styles.tabButton} style={{ flex: 1, background: '#4318FF', color: '#fff' }} onClick={addEdu} disabled={loading}>저장</button>
                 </div>
               </div>
-            </div>
+            </div>,
+            document.body
           )}
         </div>
       ) : (
         /* Conference Tab Layout - Grid 2 Column (List 7 : Chat 3) */
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: '24px', animation: 'fadeIn 0.4s ease' }}>
           {/* Left: Conference Cards */}
-          <div className={styles.glassCard} style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className={styles.glassCard} style={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+            {/* Loading Overlay */}
+            {(fetchLoading || syncLoading || loading) && (
+              <div className={styles.loadingOverlay}>
+                <div className={styles.spinnerContainer}>
+                  <div className={styles.brandSpinner}></div>
+                  <div className={styles.loadingText}>
+                    {syncLoading ? 'AI 실시간 검색 및 분석 중...' : '컨퍼런스 데이터를 가져오는 중...'}
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#a3aed0' }}>잠시만 기다려 주세요. 최신 정보를 수집하고 있습니다.</div>
+                </div>
+              </div>
+            )}
+
             <div className={styles.growthSubHeader}>
               <h4 style={{ margin: 0, color: '#1B2559' }}>글로벌/국내 컨퍼런스 (AI Search)</h4>
               <div style={{ display: 'flex', gap: '8px' }}>
@@ -782,15 +875,47 @@ export const GrowthTab = () => {
                   <span className={`material-symbols-outlined ${fetchLoading ? styles.spin : ''}`} style={{ fontSize: '18px' }}>refresh</span>
                   조회
                 </button>
-                <button 
-                  className={`${styles.tabButton} ${syncLoading ? styles.loadingButton : ''}`} 
-                  style={{ background: '#4318FF', color: '#fff', fontSize: '12px', padding: '6px 12px', display: 'flex', alignItems: 'center', gap: '4px' }}
-                  onClick={syncConference}
-                  disabled={fetchLoading || syncLoading}
-                >
-                  <span className={`material-symbols-outlined ${syncLoading ? styles.spin : ''}`} style={{ fontSize: '18px' }}>{syncLoading ? 'sync' : 'neurology'}</span>
-                  {syncLoading ? 'AI 분석 중...' : '실시간 AI 검색/갱신'}
-                </button>
+                  <div className={styles.syncDropdownContainer}>
+                    <button 
+                      className={`${styles.tabButton} ${syncLoading ? styles.loadingButton : ''}`} 
+                      style={{ background: '#4318FF', color: '#fff', fontSize: '12px', padding: '6px 12px', display: 'flex', alignItems: 'center', gap: '4px', position: 'relative' }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowSyncMenu(!showSyncMenu);
+                      }}
+                      disabled={fetchLoading || syncLoading}
+                    >
+                      <span className={`material-symbols-outlined ${syncLoading ? styles.spin : ''}`} style={{ fontSize: '18px' }}>
+                        {syncLoading ? 'sync' : 'smart_toy'}
+                      </span>
+                      {syncLoading ? 'AI 분석 중...' : 'AI 동기화 옵션'}
+                      <span className="material-symbols-outlined" style={{ fontSize: '16px', marginLeft: '2px' }}>
+                        {showSyncMenu ? 'expand_less' : 'expand_more'}
+                      </span>
+                    </button>
+
+                    {showSyncMenu && (
+                      <div className={styles.syncDropdownMenu} onClick={(e) => e.stopPropagation()}>
+                        <div className={styles.syncDropdownItem} onClick={() => syncConference('append')}>
+                          <div className={styles.syncDropdownItemTitle}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#05CD99' }}>add_circle</span>
+                            현재 내역에 추가 검색
+                          </div>
+                          <div className={styles.syncDropdownItemDesc}>기존 데이터를 유지하며 새로운 정보를 덧붙입니다.</div>
+                        </div>
+                        
+                        <div style={{ height: '1px', background: 'rgba(198, 197, 209, 0.2)', margin: '4px 0' }}></div>
+
+                        <div className={`${styles.syncDropdownItem} ${styles.syncDropdownItemDanger}`} onClick={() => syncConference('overwrite')}>
+                          <div className={styles.syncDropdownItemTitle}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>delete_forever</span>
+                            초기화 후 새롭게 검색
+                          </div>
+                          <div className={styles.syncDropdownItemDesc}>기존 데이터를 모두 지우고 처음부터 다시 검색합니다.</div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
             </div>
           </div>
 
@@ -957,7 +1082,6 @@ export const GrowthTab = () => {
                 </div>
               )}
 
-              {loading && <div style={{ textAlign: 'center', padding: '20px', color: '#4318FF' }}>데이터 분석 및 로딩 중...</div>}
             </div>
           </div>
 
