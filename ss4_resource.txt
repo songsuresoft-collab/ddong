@@ -1,0 +1,18 @@
+# 1. 교육 구글 시트
+https://docs.google.com/spreadsheets/d/1oWJ0aM-Num26Am2Ti7r3g8TbjGXE9_dNeWoi9vpScQQ/edit?gid=0#gid=0
+
+배포 ID
+AKfycbwhCrOK81RZzuar7uce65-BtW6vhw7l8HtQ0tMZRWQDkyznDJwHgqijm3dND8yClZl1
+
+# 2. 컨퍼런스 notebooklm
+https://notebooklm.google.com/notebook/f5b8549a-a90e-41be-a2e2-efdb4449c201?authuser=1
+
+notebooklm 연결 구글 시트
+https://docs.google.com/spreadsheets/d/1DzfT65lVJco7xhMgHGRAYr3MrvXvw4OfIi02ABhV1Fw/edit?gid=1705936895#gid=1705936895
+
+배포 ID
+AKfycbwvcUzTcBuEWMs7dJ-Au_cUgHdOYSKbf2eLhQEnvLKAhsFEKH7nVP2_Nu_fXOwvYx-S
+
+# 3. 온보딩 가이드 notebooklm
+https://notebooklm.google.com/notebook/2d4b0ec8-fdc4-4655-af25-b33a94d92d2b?authuser=1
+

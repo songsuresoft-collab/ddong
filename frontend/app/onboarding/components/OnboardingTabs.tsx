@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import ReactMarkdown from 'react-markdown';
 import styles from '../onboarding.module.css';
 
@@ -548,6 +549,11 @@ export const GrowthTab = () => {
   // 모달 상태
   const [showModal, setShowModal] = useState(false);
   const [newEdu, setNewEdu] = useState({ title: '', date: '', instructor: '', tag: '일반' });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const fetchEdu = async () => {
     setLoading(true);
@@ -797,10 +803,10 @@ export const GrowthTab = () => {
             )}
           </div>
 
-          {/* Add Modal */}
-          {showModal && (
-            <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-              <div className={styles.glassCard} style={{ width: '400px', padding: '32px', background: '#fff' }}>
+          {/* Add Modal - Rendered via Portal to document.body to prevent any clipping from parents */}
+          {showModal && mounted && createPortal(
+            <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+              <div className={styles.glassCard} style={{ width: '400px', padding: '32px', background: '#fff', boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}>
                 <h3 style={{ margin: '0 0 24px', color: '#1B2559' }}>신규 교육 추가</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                    <input type="text" placeholder="교육 이름" className={styles.searchInput} style={{ width: '100%', padding: '12px' }} value={newEdu.title} onChange={e => setNewEdu({...newEdu, title: e.target.value})} />
@@ -817,7 +823,8 @@ export const GrowthTab = () => {
                    <button className={styles.tabButton} style={{ flex: 1, background: '#4318FF', color: '#fff' }} onClick={addEdu} disabled={loading}>저장</button>
                 </div>
               </div>
-            </div>
+            </div>,
+            document.body
           )}
         </div>
       ) : (
