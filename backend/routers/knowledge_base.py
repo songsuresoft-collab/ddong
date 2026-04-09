@@ -1,5 +1,6 @@
 import json
 import subprocess
+import asyncio
 from fastapi import APIRouter, Query, HTTPException
 from typing import Optional
 from services.mcp_client import query_notebook
@@ -13,69 +14,76 @@ import re
 @router.get("/knowledge-base/documents")
 async def list_documents(force: bool = False):
     """지식 베이스 문서(소스) 리스트를 제공합니다."""
-    cache_key = "kb_documents_list"
-    prompt = "현재 등록된 모든 소스 문서 이름 리스트를 json 포맷으로 반환해줘. 양식: {\"source_documents\": [\"문서이름1\", \"문서이름2\"]}"
-    
-    result = await query_notebook(
-        query=prompt,
-        cache_key=cache_key,
-        force=force,
-        notebook_id=KNOWLEDGE_NOTEBOOK_ID
-    )
-    
-    if not result.get("success"):
-        raise HTTPException(status_code=500, detail="문서 목록을 불러오는 데 실패했습니다.")
-    
-    answer = result.get("answer", "")
-    sources = []
     try:
-        # JSON 블록 추출 시도
-        match = re.search(r'```(?:json)?\s*(.*?)\s*```', answer, re.DOTALL)
-        json_str = match.group(1) if match else answer
+        import sys
+        import os
+        import subprocess
         
-        # 앞뒤 불필요한 텍스트 제거하고 JSON 파싱
-        # 간혹 앞부분에 텍스트가 섞여있을 수 있으므로 {...} 또는 [...] 형태로 자름
-        start_idx = json_str.find('{')
-        if start_idx == -1: start_idx = json_str.find('[')
-        end_idx = json_str.rfind('}')
-        if end_idx == -1: end_idx = json_str.rfind(']')
+        nlm_bin = os.path.join(sys.prefix, 'Scripts', 'nlm.exe' if sys.platform == 'win32' else 'nlm')
+        
+        def _run_cmd():
+            # 윈도우에서 UTF-8 출력을 강제하기 위해 chcp 65001 사용
+            shell_cmd = f'chcp 65001 > nul && "{nlm_bin}" source list "{KNOWLEDGE_NOTEBOOK_ID}" --profile default --json'
+            return subprocess.run(
+                shell_cmd,
+                shell=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE
+            )
             
-        if start_idx != -1 and end_idx != -1:
-            json_str = json_str[start_idx:end_idx+1]
-            data = json.loads(json_str)
-            
-            doc_list = data.get("source_documents", []) if isinstance(data, dict) else (data if isinstance(data, list) else [])
-            sources = [{"id": f"doc_{i}", "title": str(name)} for i, name in enumerate(doc_list)]
+        process = await asyncio.get_event_loop().run_in_executor(None, _run_cmd)
+        stdout, stderr = process.stdout, process.stderr
+        
+        if process.returncode == 0:
+            # chcp 65001 이후에는 utf-8로 시도
+            try:
+                stdout_str = stdout.decode('utf-8')
+            except Exception:
+                stdout_str = stdout.decode('cp949', errors='replace')
+                
+            data = json.loads(stdout_str)
+            sources = [{"id": doc.get("id", f"doc_{i}"), "title": str(doc.get("title", ""))} for i, doc in enumerate(data)]
+            return {"success": True, "sources": sources, "data": data}
+        else:
+            stderr_str = stderr.decode('cp949', errors='replace')
+            raise Exception(f"Exit code: {process.returncode}, Stderr: {stderr_str}")
     except Exception as e:
-        print(f"문서 목록 파싱 오류: {e}")
-        # 폴백: 불릿 포인트 파싱
-        for i, line in enumerate(answer.split('\n')):
-            line = line.strip()
-            if line.startswith("- ") or line.startswith("* "):
-                name = line[2:].strip()
-                # 파일 확장자 또는 이름 형태인 경우만
-                if len(name) > 2:
-                    sources.append({"id": f"fallback_{i}", "title": name})
-
-    # 여전히 비어있다면, 원본 데이터를 id1 이름으로 하나라도 담아 반환 (디버깅용)
-    if not sources and len(answer) > 10:
-        sources.append({"id": "raw_1", "title": "문서 목록 형태 인지 오류 (클릭하여 테스트)"})
-
-    return {"success": True, "sources": sources}
-
+        import traceback
+        try:
+            stdout_d = stdout.decode('cp949', errors='replace')
+        except:
+            stdout_d = 'None'
+        try:
+            stderr_d = stderr.decode('cp949', errors='replace')
+        except:
+            stderr_d = 'None'
+        err_msg = f"{repr(e)} | STDOUT: {stdout_d} | STDERR: {stderr_d}"
+        print(f"문서 목록 파싱 오류: {err_msg}\n{traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=err_msg)
 
 @router.get("/knowledge-base/summary")
 async def get_document_summary(doc_title: str = Query(...), force: bool = False):
     """특정 문서에 대한 요약 정보를 NotebookLM에 요청합니다."""
     cache_key = f"kb_summary_{doc_title}"
-    prompt = f"'{doc_title}' 문서의 내용만을 상세히 분석하고 가장 중요한 핵심 내용을 3단락으로 요약해줘."
+    
+    clean_title = re.sub(r'\[.*?\]', '', doc_title)
+    clean_title = re.sub(r'(?i)\.(pdf|pptx|docx|txt)$', '', clean_title).strip()
+    prompt = f'노트북 소스 중 "{clean_title}" 관련 문서의 내용을 매우 상세하고 심층적으로 분석하여 요약해 줘. 주요 섹션별 핵심 요점을 구분하고, 전문적이고 체계적인 정보를 충분히 포함하여 정중하게 작성해 줄 것.'
     
     result = await query_notebook(
         query=prompt,
         cache_key=cache_key,
-        force=force,
+        force=True,  # 항상 캐시 무시하고 새로 가져옴
         notebook_id=KNOWLEDGE_NOTEBOOK_ID
     )
+    
+    if result.get("success"):
+        answer = result.get("answer", "")
+        answer = re.sub(r'\[\d[\d\s\-,]*\]', '', answer)
+        answer = answer.replace('**', '')
+        answer = re.sub(r'EXTREMELY IMPORTANT:[\s\S]*', '', answer)
+        result["answer"] = answer.strip()
+        
     return result
 
 
@@ -83,15 +91,37 @@ async def get_document_summary(doc_title: str = Query(...), force: bool = False)
 async def get_document_quiz(doc_title: str = Query(...), force: bool = False):
     """특정 문서에 대한 10개 퀴즈를 NotebookLM에 요청하여 생성합니다."""
     cache_key = f"kb_quiz_{doc_title}"
-    prompt = (
-        f"'{doc_title}' 문서의 내용만을 바탕으로 관련된 퀴즈 10문제를 생성해줘.\n"
-        "각 문제는 '문제 내용', '보기(4지선다형)', '정답', '해설'을 명확하게 구분해줘."
-    )
+    
+    clean_title = re.sub(r'\[.*?\]', '', doc_title)
+    clean_title = re.sub(r'(?i)\.(pdf|pptx|docx|txt)$', '', clean_title).strip()
+    prompt = f'노트북 소스 중 "{clean_title}" 관련 문서의 내용을 바탕으로 전문가 수준의 4지선다형 객관식 시험 문제 최대 10개를 내줘. 포맷은 반드시 아래와 같은 JSON 배열만 출력해, 추가 설명 필요 없고 형식만 줘: [{{"question": "문제", "options": ["보기1", "보기2", "보기3", "보기4"], "answer": 0}}]'
     
     result = await query_notebook(
         query=prompt,
         cache_key=cache_key,
-        force=force,
+        force=True,  # 항상 캐시 무시하고 새로 가져옴
         notebook_id=KNOWLEDGE_NOTEBOOK_ID
     )
+    
+    if result.get("success"):
+        answer = result.get("answer", "")
+        json_match = re.search(r'\[[\s\S]*\]', answer)
+        
+        if json_match:
+            try:
+                parsed_data = json.loads(json_match.group(0))
+                formatted_quiz = ""
+                for i, q in enumerate(parsed_data):
+                    formatted_quiz += f"Q{i+1}. {q.get('question', '')}\n"
+                    for j, opt in enumerate(q.get('options', [])):
+                        formatted_quiz += f"  {chr(65+j)}. {opt}\n"
+                    formatted_quiz += f"정답: {chr(65 + q.get('answer', 0))}\n\n"
+                
+                # 프론트엔드 인터랙티브 기능을 위해 포맷팅된 문자열이 아닌 원본 JSON 데이터를 반환
+                # result["answer"] = formatted_quiz.strip() # 기존 단순 텍스트 방식 방어용으로 주석 처리하거나 무시
+                result["data"] = parsed_data
+            except Exception as e:
+                print(f"Quiz JSON 파싱 에러: {e}")
+                pass
+                
     return result
