@@ -186,12 +186,8 @@ def _ensure_process() -> Optional[subprocess.Popen]:
             _mcp_proc = None
             _initialized = False
 
-        import sys, os
-        venv_scripts = os.path.dirname(sys.executable)
-        mcp_exe = os.path.join(venv_scripts, "notebooklm-mcp.exe" if sys.platform == "win32" else "notebooklm-mcp")
-        if not os.path.exists(mcp_exe):
-            mcp_exe = "notebooklm-mcp" # fallback
-        cmd = [mcp_exe]
+        mcp_bin = os.path.join(sys.prefix, 'Scripts', 'notebooklm-mcp.exe' if sys.platform == 'win32' else 'notebooklm-mcp')
+        cmd = [mcp_bin]
         print(f"[MCP] 서버 시작: {' '.join(cmd)}")
 
         try:
@@ -292,12 +288,8 @@ def _try_auto_reauth() -> bool:
                 _initialized = False
 
             # notebooklm-mcp-cli (nlm login) 재인증
-            import sys, os
-            venv_scripts = os.path.dirname(sys.executable)
-            nlm_exe = os.path.join(venv_scripts, "nlm.exe" if sys.platform == "win32" else "nlm")
-            if not os.path.exists(nlm_exe):
-                nlm_exe = "nlm"
-            auth_cmd = [nlm_exe, "login"]
+            auth_bin = os.path.join(sys.prefix, 'Scripts', 'nlm.exe' if sys.platform == 'win32' else 'nlm')
+            auth_cmd = [auth_bin, "login"]
             result = subprocess.run(
                 auth_cmd,
                 capture_output=True,
@@ -324,117 +316,92 @@ def _try_auto_reauth() -> bool:
             return False
 
 
-class NotebookLMClient:
-    """
-    NotebookLM MCP 도구들을 호출하기 위한 범용 클라이언트.
-    research_start, source_add, research_status 등 모든 도구를 지원합니다.
-    """
-    def __init__(self):
-        pass
-
-    def call_tool_sync(self, tool_name: str, arguments: dict, timeout: int = 120) -> dict:
-        """동기 방식으로 도구를 호출합니다."""
-        proc = _ensure_process()
-        if proc is None:
-            return {"success": False, "error": "MCP 서버를 시작할 수 없습니다."}
-
-        msg_id = _next_id()
-        _send(proc, {
-            "jsonrpc": "2.0",
-            "id": msg_id,
-            "method": "tools/call",
-            "params": {
-                "name": tool_name,
-                "arguments": arguments,
-            },
-        })
-        print(f"[MCP] 도구 호출 (id={msg_id}): {tool_name}")
-
-        response = _read_until_id(proc, msg_id, timeout=timeout)
-
-        if response is None:
-            global _mcp_proc, _initialized
-            with _mcp_lock:
-                _mcp_proc = None
-                _initialized = False
-            return {"success": False, "error": "응답 타임아웃"}
-
-        if "error" in response:
-            return {"success": False, "error": response["error"].get("message", "알 수 없는 오류")}
-
-        # 성공 시 결과 반환
-        result = response.get("result", {})
-        
-        # content가 있고 그 안에 텍스트가 있다면 answer/text로 추출하여 success와 함께 반환
-        # NotebookLM 도구들은 보통 {"content": [{"type": "text", "text": "..."}]} 형태임
-        content = result.get("content", [])
-        extracted_texts = []
-        for item in content:
-            if isinstance(item, dict) and "text" in item:
-                extracted_texts.append(item["text"])
-        
-        final_result = {"success": True, "raw": result}
-        if extracted_texts:
-            final_result["answer"] = "\n".join(extracted_texts).strip()
-            
-        # 리서치 툴(research_start)의 경우 task_id가 결과 텍스트에 포함되거나 별도 필드일 수 있음
-        # nlm-mcp-server의 특성에 맞춰 추가 필드 정규화
-        if "task_id" in str(result):
-             import re
-             tid_match = re.search(r"ID:\s*([a-f0-9\-]+)", str(result))
-             if tid_match:
-                 final_result["task_id"] = tid_match.group(1)
-        
-        # 직접 필드로 오는 경우
-        if "task_id" in result:
-             final_result["task_id"] = result["task_id"]
-
-        return final_result
-
-    async def call_tool(self, tool_name: str, arguments: dict, timeout: int = 120) -> dict:
-        """비동기 방식으로 도구를 호출합니다."""
-        loop = asyncio.get_event_loop()
-        return await loop.run_in_executor(_executor, self.call_tool_sync, tool_name, arguments, timeout)
-
-
 def _call_notebook_query_sync(query: str, _retry: bool = True, notebook_id: Optional[str] = None) -> dict:
     """동기 방식으로 MCP notebook_query를 호출합니다. 인증 만료 시 자동 재시도."""
-    client = NotebookLMClient()
+    proc = _ensure_process()
+    if proc is None:
+        return {"answer": "MCP 서버를 시작할 수 없습니다. 서버 로그를 확인하세요.", "success": False}
+    
     actual_notebook_id = notebook_id if notebook_id else NOTEBOOK_ID
-    
-    result = client.call_tool_sync("notebook_query", {
-        "notebook_id": actual_notebook_id,
-        "query": query,
+
+    msg_id = _next_id()
+    _send(proc, {
+        "jsonrpc": "2.0",
+        "id": msg_id,
+        "method": "tools/call",
+        "params": {
+            "name": "notebook_query",
+            "arguments": {
+                "notebook_id": actual_notebook_id,
+                "query": query,
+            },
+        },
     })
+    print(f"[MCP] 질의 전송 (id={msg_id}): {query[:60]}...")
 
-    if not result["success"]:
-        return {"answer": result.get("error", "오류 발생"), "success": False}
+    response = _read_until_id(proc, msg_id, timeout=120)
 
-    actual_answer = result.get("answer", "")
+    if response is None:
+        global _mcp_proc, _initialized
+        with _mcp_lock:
+            _mcp_proc = None
+            _initialized = False
+        return {"answer": "NotebookLM 응답 타임아웃. 잠시 후 다시 시도하세요.", "success": False}
+
+    if "error" in response:
+        err = response["error"]
+        print(f"[MCP] 오류 응답: {err}")
+        return {"answer": f"MCP 오류: {err.get('message', '알 수 없는 오류')}", "success": False}
+
+    # 성공 — content 배열에서 텍스트 추출
+    result = response.get("result", {})
+    content = result.get("content", [])
+
+    if not content:
+        return {"answer": "응답 내용이 비어 있습니다.", "success": False}
+
+    texts = []
     conversation_id = None
-    
-    # JSON 언래핑 (기존 로직 유지)
+    for item in content:
+        if isinstance(item, dict):
+            text_val = item.get("text", "")
+            if item.get("type") == "text":
+                texts.append(text_val)
+            elif "text" in item:
+                texts.append(text_val)
+
+    raw_answer = "\n".join(texts).strip() or str(content)
+
+    # JSON 언래핑
+    actual_answer = raw_answer
     try:
-        wrapper = json.loads(actual_answer)
+        wrapper = json.loads(raw_answer)
         if isinstance(wrapper, dict) and "answer" in wrapper:
             actual_answer = wrapper["answer"]
             conversation_id = wrapper.get("conversation_id")
+            print(f"[MCP] JSON 언래핑 성공 (conversation_id={conversation_id})")
     except (json.JSONDecodeError, TypeError):
         pass
 
-    # 인증 만료 감직 → 자동 재인증 후 1회 재시도 (기존 로직 유지)
+    # ── 인증 만료 감지 → 자동 재인증 후 1회 재시도 ──
     if _is_auth_error(actual_answer) and _retry:
         print(f"[AUTH] 인증 만료 응답 감지: {actual_answer[:80]}")
         reauthed = _try_auto_reauth()
         if reauthed:
+            print("[AUTH] 재인증 성공, 질의 재시도...")
             return _call_notebook_query_sync(query, _retry=False, notebook_id=notebook_id)
         else:
-            return {"answer": "인증 만료. 자동 복구 실패.", "success": False, "auth_expired": True}
+            return {
+                "answer": "NotebookLM 인증이 만료되었습니다. 잠시 후 자동으로 복구됩니다.",
+                "success": False,
+                "auth_expired": True,
+            }
 
-    final_resp = {"answer": actual_answer, "success": True}
+    print(f"[MCP] 응답 수신 완료: {len(actual_answer)}자")
+    resp = {"answer": actual_answer, "success": True}
     if conversation_id:
-        final_resp["conversation_id"] = conversation_id
-    return final_resp
+        resp["conversation_id"] = conversation_id
+    return resp
 
 
 # ──────────────────────────────────────────────
